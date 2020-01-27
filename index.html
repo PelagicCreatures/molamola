@@ -27,15 +27,22 @@
 			if (data.didLogout) {
 				tropicBird.pushSnackBar('info','Logged out')
 			}
-			if (data['flash-message']) {
-				tropicBird.pushSnackBar(data['flash-level'] || 'info',data['flash-message'])
+			if( data.message) {
+				tropicBird.pushSnackBar('info',data.message)
 			}
-			if (data.redirect) {
+			if (data.errors) {
+				for(let i = 0; i < data.errors.length; i++){
+					tropicBird.pushSnackBar(data['error-level'] || 'info', data.errors[i])
+				}
+			}
+			if (data.status === 'ok' && data.redirect) {
 				loadPage(data.redirect)
 			}
 		}
 
-		error (statusCode, data) {}
+		error (error, statusCode, data) {
+			tropicBird.pushSnackBar('error',error.message)
+		}
 	}
 
 	let form = new MolaMola(document.getElementById('test-form'))

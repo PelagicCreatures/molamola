@@ -48,28 +48,43 @@ class MolaMolaHelper {
 		this.form = form
 	}
 
-	pose () {}
+	// override these methods as needed
 
+	pose () {} // pose form
+
+	/*
+		about to submit this.form.payload to endpoint
+		return a promise for any async behavior (like recAPTCHA below)
+		throw an error to prevent submit
+	*/
 	submit () {}
 
-	success () {}
+	success (data) {} // 200 or 422 response all is well
 
-	error () {}
+	error (err, statusCode, data) {} // non 200 or 422 response or transport error
 
-	destroy () {}
+	destroy () {} // cleanup
 }
 
 class ReCAPTCHAv3 extends MolaMolaHelper {
+	constructor (form) {
+		super(form)
+		this.recaptcha = this.element.getAttribute('data-recaptcha')
+	}
+
 	pose () {
 		elementTools.addClass(document.body, 'show-recaptcha', this)
 	}
 
 	async submit () {
-		const token = await grecaptcha.execute(this.form.recaptcha, {
-			action: 'social'
-		})
-
-		this.form.recaptchaToken = token
+		try {
+			const token = await grecaptcha.execute(this.recaptcha, {
+				action: 'social'
+			})
+			this.form.payload['g-recaptcha-response'] = token
+		} catch (err) {
+			throw (err || new Error('reCaptchaV3 network error')) // OK google... network errors come back empty.
+		}
 	}
 
 	destroy () {
@@ -78,16 +93,46 @@ class ReCAPTCHAv3 extends MolaMolaHelper {
 }
 
 class SubmitterHandler extends MolaMolaHelper {
+	constructor (form) {
+		super(form)
+		this.submitter = this.element.querySelector(this.element.getAttribute('data-submitter'))
+		this.submitterContent = this.submitter.innerHTML
+		this.submitter.style.width = this.submitter.width
+	}
+
 	submit () {
-		this.form.disableSubmit()
+		this.disableSubmit()
+		// throw (new Error('error! errrrrrooooorr!'))
 	}
 
 	success (data) {
-		this.form.enableSubmit()
+		this.enableSubmit()
 	}
 
-	error (statusCode, data) {
-		this.form.enableSubmit()
+	error (err, statusCode, data) {
+		this.enableSubmit()
+
+		const errors = []
+		if (err) {
+			errors.push(err.message)
+		}
+		if (statusCode) {
+			errors.push('http status ' + statusCode)
+		}
+		if (data && data.status && data.message) {
+			errors.push('status ' + data.status + ' ' + data.message)
+		}
+		this.form.status.innerHTML = errors.join(',')
+	}
+
+	disableSubmit () {
+		this.submitter.setAttribute('disabled', true)
+		this.submitter.innerHTML = 'working...'
+	}
+
+	enableSubmit () {
+		this.submitter.removeAttribute('disabled')
+		this.submitter.innerHTML = this.submitterContent
 	}
 }
 
@@ -98,19 +143,13 @@ class MolaMola extends Sargasso {
 		this.formId = this.element.getAttribute('id')
 		this.endpoint = this.element.getAttribute('action')
 		this.method = this.element.getAttribute('method') || 'POST'
-		this.recaptcha = this.element.getAttribute('data-recaptcha')
 		this.status = this.element.querySelector(this.element.getAttribute('data-status'))
 
-		// set up the submitter button busy state
-		this.submitter = this.element.querySelector(this.element.getAttribute('data-submitter'))
-		this.submitterContent = this.submitter.innerHTML
-		this.submitter.style.width = this.submitter.width
-
-		if (this.recaptcha) {
+		if (this.element.getAttribute('data-recaptcha')) {
 			registerMolaMolaHelper(this.formId, new ReCAPTCHAv3(this))
 		}
 
-		if (this.submitter) {
+		if (this.element.getAttribute('data-submitter')) {
 			registerMolaMolaHelper(this.formId, new SubmitterHandler(this))
 		}
 	}
@@ -129,7 +168,7 @@ class MolaMola extends Sargasso {
 				await this.tellHelpers('submit')
 				this.submit()
 			} catch (err) {
-				this.status.innerHTML = err
+				await this.tellHelpers('error', [err])
 			}
 		}
 
@@ -138,9 +177,7 @@ class MolaMola extends Sargasso {
 		const handlers = getHelpersForEvent(this.formId, 'pose')
 		Promise.all(handlers)
 			.then(() => {})
-			.catch((error) => {
-				this.status.innerHTML = error
-			})
+			.catch((error) => {})
 	}
 
 	serializeForm () {
@@ -165,10 +202,6 @@ class MolaMola extends Sargasso {
 			}
 		}
 
-		if (this.recaptcha) {
-			this.payload['g-recaptcha-response'] = this.recaptchaToken
-		}
-
 		if (this.payload) {
 			if (this.method.match(/^(POST|PUT|PATCH)$/i)) {
 				options.body = JSON.stringify(this.payload)
@@ -179,22 +212,26 @@ class MolaMola extends Sargasso {
 			}
 		}
 
-		fetch(url, options)
-			.then((response) => {
-				if (response.status !== 200 && response.status !== 422) {
-					return Promise.reject(new Error(response.statusText), response)
-				}
-				return Promise.resolve(response)
-			})
-			.then((response) => {
-				return response.json()
-			})
-			.then(async (data) => {
-				await this.tellHelpers('success', [data])
-			})
-			.catch(async (error, response) => {
-				await this.tellHelpers('error', [error, response])
-			})
+		try {
+			fetch(url, options)
+				.then((response) => {
+					if (response.status !== 200 && response.status !== 422) {
+						return Promise.reject(new Error(response.statusText), response)
+					}
+					return Promise.resolve(response)
+				})
+				.then((response) => {
+					return response.json()
+				})
+				.then(async (data) => {
+					await this.tellHelpers('success', [data])
+				})
+				.catch(async (error, response) => {
+					await this.tellHelpers('error', [error, response])
+				})
+		} catch (err) {
+			this.tellHelpers('error', [err])
+		}
 	}
 
 	async sleep () {
@@ -206,16 +243,6 @@ class MolaMola extends Sargasso {
 	async tellHelpers (event, params) {
 		const handlers = getHelpersForEvent(this.formId, event, params)
 		return Promise.all(handlers)
-	}
-
-	disableSubmit () {
-		this.submitter.setAttribute('disabled', true)
-		this.submitter.innerHTML = 'working...'
-	}
-
-	enableSubmit () {
-		this.submitter.removeAttribute('disabled')
-		this.submitter.innerHTML = this.submitterContent
 	}
 }
 

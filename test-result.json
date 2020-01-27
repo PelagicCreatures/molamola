@@ -1,6 +1,5 @@
 {
 	"status": "ok",
-	"flash-level": "info",
-	"flash-message": "success",
+	"message": "success",
 	"redirect": "/?redirected"
 }
