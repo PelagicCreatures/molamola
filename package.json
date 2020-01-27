@@ -1,5 +1,5 @@
 {
-	"name": "@pelagiccreatures/krill",
+	"name": "@pelagiccreatures/molamola",
 	"version": "0.0.6",
 	"description": "Form Tools",
 	"main": "index.js",
@@ -9,14 +9,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/PelagicCreatures/krill.git"
+		"url": "git+https://github.com/PelagicCreatures/molamola.git"
 	},
 	"author": "Michael Rhodes",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/PelagicCreatures/krill/issues"
+		"url": "https://github.com/PelagicCreatures/molamola/issues"
 	},
-	"homepage": "https://github.com/PelagicCreatures/krill#readme",
+	"homepage": "https://github.com/PelagicCreatures/molamola#readme",
 	"dependencies": {
 		"@pelagiccreatures/sargasso": "^0.7.0"
 	},

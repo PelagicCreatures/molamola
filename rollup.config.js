@@ -6,7 +6,7 @@ export default {
 	input: './index.js',
 	output: [{
 		format: 'es',
-		file: './dist/krill.es.js'
+		file: './dist/molamola.es.js'
 	}],
 
 	plugins: [

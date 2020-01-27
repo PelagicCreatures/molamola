@@ -19,7 +19,7 @@
 	let tropicBird = new TropicBird(document.body, {})
 	tropicBird.start()
 
-	class boilerplateHandler extends KrillHelper {
+	class boilerplateHandler extends MolaMolaHelper {
 		success (data) {
 			if (data.didLogin) {
 				tropicBird.pushSnackBar('info','Logged in')
@@ -38,8 +38,15 @@
 		error (statusCode, data) {}
 	}
 
-	let form = new Krill(document.getElementById('test-form'))
-	registerKrillHelper('test-form', new boilerplateHandler(form))
+	let form = new MolaMola(document.getElementById('test-form'))
+	registerMolaMolaHelper('test-form', new boilerplateHandler(form))
 	form.start()
 
 </script>
+
+<div class="mdc-snackbar">
+	<div class="mdc-snackbar__surface">
+		<div class="mdc-snackbar__label">
+		</div>
+	</div>
+</div>

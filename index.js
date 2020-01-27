@@ -1,5 +1,5 @@
 /**
-	@PelagicCreatures/Krill
+	@PelagicCreatures/MolaMola
 
 	@author Michael Rhodes
 	@license MIT
@@ -7,7 +7,7 @@
 
 	Form ID: an application unique identifier for the form EG: 'login', 'register'
 
-	<form id="login" method="GET" action="/endpoint" data-sargasso-class="Krill" data-submitter=".submit-button" data-status=".status">
+	<form id="login" method="GET" action="/endpoint" data-sargasso-class="MolaMola" data-submitter=".submit-button" data-status=".status">
 
 	Form handlers are used for handling form events.
 
@@ -23,7 +23,7 @@
 
 const formHandlers = {}
 
-const registerKrillHelper = (formId, handler) => {
+const registerMolaMolaHelper = (formId, handler) => {
 	if (!formHandlers[formId]) {
 		formHandlers[formId] = []
 	}
@@ -43,45 +43,55 @@ const getHelpersForEvent = (formId, event, params) => {
 	return handlers
 }
 
-class KrillHelper {
-	constructor (krill) {
-		this.krill = krill
+class MolaMolaHelper {
+	constructor (form) {
+		this.form = form
 	}
+
+	pose () {}
+
+	submit () {}
+
+	success () {}
+
+	error () {}
+
+	destroy () {}
 }
 
-class reCAPTCHAv3 extends KrillHelper {
-	submit () {
-		return new Promise((resolve, reject) => {
-			try {
-				grecaptcha.execute(this.krill.recaptcha, {
-					action: 'social'
-				}).then((token) => {
-					// add g-recaptcha-response to payload
-					this.krill.recaptchaToken = token
-					resolve()
-				})
-			} catch (err) {
-				reject(err)
-			}
+class ReCAPTCHAv3 extends MolaMolaHelper {
+	pose () {
+		elementTools.addClass(document.body, 'show-recaptcha', this)
+	}
+
+	async submit () {
+		const token = await grecaptcha.execute(this.form.recaptcha, {
+			action: 'social'
 		})
+
+		this.form.recaptchaToken = token
+	}
+
+	destroy () {
+		elementTools.removeClass(document.body, 'show-recaptcha')
 	}
 }
 
-class submitterHandler extends KrillHelper {
+class SubmitterHandler extends MolaMolaHelper {
 	submit () {
-		this.krill.disableSubmit()
+		this.form.disableSubmit()
 	}
 
 	success (data) {
-		this.krill.enableSubmit()
+		this.form.enableSubmit()
 	}
 
 	error (statusCode, data) {
-		this.krill.enableSubmit()
+		this.form.enableSubmit()
 	}
 }
 
-class Krill extends Sargasso {
+class MolaMola extends Sargasso {
 	constructor (elem, options) {
 		super(elem, options)
 
@@ -97,37 +107,40 @@ class Krill extends Sargasso {
 		this.submitter.style.width = this.submitter.width
 
 		if (this.recaptcha) {
-			registerKrillHelper(this.formId, new reCAPTCHAv3(this))
+			registerMolaMolaHelper(this.formId, new ReCAPTCHAv3(this))
 		}
 
 		if (this.submitter) {
-			registerKrillHelper(this.formId, new submitterHandler(this))
+			registerMolaMolaHelper(this.formId, new SubmitterHandler(this))
 		}
 	}
 
 	start () {
 		super.start()
 
-		if (this.recaptcha) {
-			elementTools.addClass(document.body, 'show-recaptcha', this)
-		}
+		if (this.recaptcha) {}
 
-		this.submitHandler = (e) => {
+		this.submitHandler = async (e) => {
 			e.preventDefault()
 
 			this.serializeForm()
 
-			const handlers = getHelpersForEvent(this.formId, 'submit')
-			Promise.all(handlers)
-				.then(() => {
-					this.submit()
-				})
-				.catch((error) => {
-					this.status.innerHTML = error
-				})
+			try {
+				await this.tellHelpers('submit')
+				this.submit()
+			} catch (err) {
+				this.status.innerHTML = err
+			}
 		}
 
 		this.element.addEventListener('submit', this.submitHandler)
+
+		const handlers = getHelpersForEvent(this.formId, 'pose')
+		Promise.all(handlers)
+			.then(() => {})
+			.catch((error) => {
+				this.status.innerHTML = error
+			})
 	}
 
 	serializeForm () {
@@ -176,29 +189,23 @@ class Krill extends Sargasso {
 			.then((response) => {
 				return response.json()
 			})
-			.then((data) => {
-				Promise.all(getHelpersForEvent(this.formId, 'success', [data]))
-					.then(() => {})
-					.catch((error) => {
-						this.status.innerHTML = error
-					})
+			.then(async (data) => {
+				await this.tellHelpers('success', [data])
 			})
-			.catch((error, response) => {
-				this.lastError = error
-				Promise.all(getHelpersForEvent(this.formId, 'error', [error, response]))
-					.then(() => {})
-					.catch((error) => {
-						this.status.innerHTML = error
-					})
+			.catch(async (error, response) => {
+				await this.tellHelpers('error', [error, response])
 			})
 	}
 
-	sleep () {
-		if (this.recaptcha) {
-			elementTools.removeClass(document.body, 'show-recaptcha')
-		}
+	async sleep () {
+		await this.tellHelpers('destroy')
 		this.element.removeEventListener('submit', this.submitHandler)
 		super.sleep()
+	}
+
+	async tellHelpers (event, params) {
+		const handlers = getHelpersForEvent(this.formId, event, params)
+		return Promise.all(handlers)
 	}
 
 	disableSubmit () {
@@ -212,14 +219,14 @@ class Krill extends Sargasso {
 	}
 }
 
-registerSargassoClass('Krill', Krill)
+registerSargassoClass('MolaMola', MolaMola)
 
 if (window) {
-	window.Krill = Krill
-	window.registerKrillHelper = registerKrillHelper
-	window.KrillHelper = KrillHelper
+	window.MolaMola = MolaMola
+	window.registerMolaMolaHelper = registerMolaMolaHelper
+	window.MolaMolaHelper = MolaMolaHelper
 }
 
 export {
-	Krill, registerKrillHelper, KrillHelper
+	MolaMola, registerMolaMolaHelper, MolaMolaHelper
 }
