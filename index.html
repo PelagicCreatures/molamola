@@ -1,0 +1,45 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href='https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird/dist/bundle.css' rel='stylesheet'>
+
+
+<script src="https://www.google.com/recaptcha/api.js?render=6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/sargasso/dist/sargasso.es.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird/dist/tropicbird.es.js"></script>
+<script type="module" src='./index.js'></script>
+
+<form id="test-form"  action="/test-result.json" method="GET" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro">
+	<input type="text" name="one" placeholder="field one">
+	<input type="text" name="two" placeholder="field two">
+	<button class="submitter">submit</button>
+	<p class="status"></p>
+</form>
+
+<script type='module'>
+	let loadPage = bootSargasso({hijax:{}})
+	let tropicBird = new TropicBird(document.body, {})
+	tropicBird.start()
+
+	class boilerplateHandler extends KrillHelper {
+		success (data) {
+			if (data.didLogin) {
+				tropicBird.pushSnackBar('info','Logged in')
+			}
+			if (data.didLogout) {
+				tropicBird.pushSnackBar('info','Logged out')
+			}
+			if (data['flash-message']) {
+				tropicBird.pushSnackBar(data['flash-level'] || 'info',data['flash-message'])
+			}
+			if (data.redirect) {
+				loadPage(data.redirect)
+			}
+		}
+
+		error (statusCode, data) {}
+	}
+
+	let form = new Krill(document.getElementById('test-form'))
+	registerKrillHelper('test-form', new boilerplateHandler(form))
+	form.start()
+
+</script>
