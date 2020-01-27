@@ -19,6 +19,13 @@
 		error: (statusCode, response) => {}
 	})
 
+	the API for the enpoint:
+		200 (ok) & 422 (unprocessable entity) are expected to return json
+		Use 422 for server side validation errors, the reponse payload is
+		up to implementor and must be handled with a helper success method.
+
+		Other http errors such as 401 (unauthorized) are handed to the helper
+		error method
 */
 
 const formHandlers = {}
@@ -53,15 +60,16 @@ class MolaMolaHelper {
 	pose () {} // pose form
 
 	/*
-		about to submit this.form.payload to endpoint
+		preFlight: about to submit this.form.payload to endpoint
 		return a promise for any async behavior (like recAPTCHA below)
 		throw an error to prevent submit
 	*/
-	submit () {}
 
-	success (data) {} // 200 or 422 response all is well
+	preFlight () {}
 
-	error (err, statusCode, data) {} // non 200 or 422 response or transport error
+	success (data) {} // 200 or 422 response all is well deal with response payload
+
+	error (err) {} // can be result of preFlight or from endpoint
 
 	destroy () {} // cleanup
 }
@@ -69,14 +77,14 @@ class MolaMolaHelper {
 class ReCAPTCHAv3 extends MolaMolaHelper {
 	constructor (form) {
 		super(form)
-		this.recaptcha = this.element.getAttribute('data-recaptcha')
+		this.recaptcha = this.form.element.getAttribute('data-recaptcha')
 	}
 
 	pose () {
 		elementTools.addClass(document.body, 'show-recaptcha', this)
 	}
 
-	async submit () {
+	async preFlight () {
 		try {
 			const token = await grecaptcha.execute(this.recaptcha, {
 				action: 'social'
@@ -95,12 +103,12 @@ class ReCAPTCHAv3 extends MolaMolaHelper {
 class SubmitterHandler extends MolaMolaHelper {
 	constructor (form) {
 		super(form)
-		this.submitter = this.element.querySelector(this.element.getAttribute('data-submitter'))
+		this.submitter = this.form.element.querySelector(this.form.element.getAttribute('data-submitter'))
 		this.submitterContent = this.submitter.innerHTML
 		this.submitter.style.width = this.submitter.width
 	}
 
-	submit () {
+	preFlight () {
 		this.disableSubmit()
 		// throw (new Error('error! errrrrrooooorr!'))
 	}
@@ -109,18 +117,15 @@ class SubmitterHandler extends MolaMolaHelper {
 		this.enableSubmit()
 	}
 
-	error (err, statusCode, data) {
+	error (err) {
 		this.enableSubmit()
 
 		const errors = []
 		if (err) {
 			errors.push(err.message)
 		}
-		if (statusCode) {
-			errors.push('http status ' + statusCode)
-		}
-		if (data && data.status && data.message) {
-			errors.push('status ' + data.status + ' ' + data.message)
+		if (err.statusCode) {
+			errors.push('http status ' + err.statusCode)
 		}
 		this.form.status.innerHTML = errors.join(',')
 	}
@@ -165,7 +170,7 @@ class MolaMola extends Sargasso {
 			this.serializeForm()
 
 			try {
-				await this.tellHelpers('submit')
+				await this.tellHelpers('preFlight')
 				this.submit()
 			} catch (err) {
 				await this.tellHelpers('error', [err])
@@ -216,7 +221,9 @@ class MolaMola extends Sargasso {
 			fetch(url, options)
 				.then((response) => {
 					if (response.status !== 200 && response.status !== 422) {
-						return Promise.reject(new Error(response.statusText), response)
+						const e = new Error(response.statusText)
+						e.response.errorCode = response.status
+						return Promise.reject(e)
 					}
 					return Promise.resolve(response)
 				})
@@ -227,7 +234,7 @@ class MolaMola extends Sargasso {
 					await this.tellHelpers('success', [data])
 				})
 				.catch(async (error, response) => {
-					await this.tellHelpers('error', [error, response])
+					await this.tellHelpers('error', [error])
 				})
 		} catch (err) {
 			this.tellHelpers('error', [err])
