@@ -2243,7 +2243,7 @@ class SubmitterHandler extends MolaMolaHelper {
 
 	preFlight () {
 		this.disableSubmit();
-		throw (new Error('error! errrrrrooooorr!'))
+		// throw (new Error('error! errrrrrooooorr!'))
 	}
 
 	success (data) {
@@ -2294,7 +2294,6 @@ class DataValidator extends MolaMolaHelper {
 		this.submitter = this.form.element.querySelector(this.form.element.getAttribute('data-submitter'));
 		this.uniqueDebounce = null;
 		this.lookupDebounce = null;
-		this.dirty = false;
 
 		this.inputs = Array.from(this.form.element.querySelectorAll('[data-validate]'));
 
@@ -2323,9 +2322,7 @@ class DataValidator extends MolaMolaHelper {
 		for (let i = 0; i < this.inputs.length; i++) {
 			var input = this.inputs[i];
 			input.setAttribute('data-touched', false);
-			input.setAttribute('data-dirty', false);
 			input.setAttribute('data-last-value', this.getRealVal(input));
-			input.setAttribute('data-original-value', this.getRealVal(input));
 			if (input.getAttribute('checked')) {
 				input.setAttribute('checked', 'checked');
 			}
@@ -2341,19 +2338,17 @@ class DataValidator extends MolaMolaHelper {
 	handleChange (e) {
 		const errors = this.inputs.map(this.validateField.bind(this));
 		let errorCount = 0;
-		for (var i = 0; i < this.inputs.length; i++) {
-			const input = this.inputs[i];
+		for (var i = 0; i < this.errors.length; i++) {
 			if (errors[i] && errors[i].length) {
-				++errorCount;
-				input.parentElement.getElementsByClassName('input-errors')[0].innerHTML = errors[i].join(', ');
-			} else {
-				input.parentElement.getElementsByClassName('input-errors')[0].innerHTML = '';
+				errorCount += errors[i].length;
 			}
 		}
 
 		if (errorCount) {
+			this.valid = false;
 			this.disableSubmit();
 		} else {
+			this.valid = true;
 			this.enableSubmit();
 		}
 	}
@@ -2409,6 +2404,12 @@ class DataValidator extends MolaMolaHelper {
 			}
 		}
 
+		if (errors.length) {
+			element.parentElement.getElementsByClassName('input-errors')[0].innerHTML = errors.join(', ');
+		} else {
+			element.parentElement.getElementsByClassName('input-errors')[0].innerHTML = '';
+		}
+
 		return errors
 	}
 
@@ -2461,7 +2462,9 @@ class MolaMola extends Sargasso {
 			registerMolaMolaHelper(this.formId, new StatusHandler(this));
 		}
 
-		registerMolaMolaHelper(this.formId, new DataValidator(this));
+		if (this.element.querySelectorAll('[data-validate]').length) {
+			registerMolaMolaHelper(this.formId, new DataValidator(this));
+		}
 	}
 
 	start () {

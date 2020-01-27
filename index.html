@@ -17,13 +17,22 @@
 		<span class="input-errors"></span>
 	</div>
 	<div class="input-group">
-		<select name="select" data-validate='{"isLength":[1]}' multiple>
+		<select name="select" data-validate='{"isLength":[1]}'>
 			<option value="">---</option>
 			<option value="val 1">val 1</option>
 			<option value="val 2">val 2</option>
 		</select>
 		<span class="input-errors"></span>
 	</div>
+	<div class="input-group">
+		<select name="select-multiple" data-validate='{"isLength":[1]}' multiple>
+			<option value="">---</option>
+			<option value="val 1">val 1</option>
+			<option value="val 2">val 2</option>
+		</select>
+		<span class="input-errors"></span>
+	</div>
+	
 	<button class="submitter">submit</button>
 	<p class="status"></p>
 </form>
