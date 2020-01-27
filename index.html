@@ -5,11 +5,25 @@
 <script src="https://www.google.com/recaptcha/api.js?render=6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro"></script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/sargasso/dist/sargasso.es.js"></script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird/dist/tropicbird.es.js"></script>
-<script type="module" src='./index.js'></script>
+<script type="module" src='./dist/molamola.es.js'></script>
 
 <form id="test-form"  action="/test-result.json" method="GET" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro">
-	<input type="text" name="one" placeholder="field one">
-	<input type="text" name="two" placeholder="field two">
+	<div class="input-group">
+		<input type="text" name="one" placeholder="field one" data-validate='{"isEmail":true,"isLength":[1]}'>
+		<span class="input-errors"></span>
+	</div>
+	<div class="input-group">
+		<input type="text" name="two" placeholder="field two">
+		<span class="input-errors"></span>
+	</div>
+	<div class="input-group">
+		<select name="select" data-validate='{"isLength":[1]}' multiple>
+			<option value="">---</option>
+			<option value="val 1">val 1</option>
+			<option value="val 2">val 2</option>
+		</select>
+		<span class="input-errors"></span>
+	</div>
 	<button class="submitter">submit</button>
 	<p class="status"></p>
 </form>
@@ -41,7 +55,7 @@
 		}
 
 		error (err) {
-			tropicBird.pushSnackBar('error',error.message)
+			tropicBird.pushSnackBar('error',err.message)
 		}
 	}
 

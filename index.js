@@ -28,6 +28,8 @@
 		error method
 */
 
+import Validator from './node_modules/validator/es/index.js'
+
 const formHandlers = {}
 
 const registerMolaMolaHelper = (formId, handler) => {
@@ -119,15 +121,6 @@ class SubmitterHandler extends MolaMolaHelper {
 
 	error (err) {
 		this.enableSubmit()
-
-		const errors = []
-		if (err) {
-			errors.push(err.message)
-		}
-		if (err.statusCode) {
-			errors.push('http status ' + err.statusCode)
-		}
-		this.form.status.innerHTML = errors.join(',')
 	}
 
 	disableSubmit () {
@@ -141,6 +134,182 @@ class SubmitterHandler extends MolaMolaHelper {
 	}
 }
 
+class StatusHandler extends MolaMolaHelper {
+	constructor (form) {
+		super(form)
+
+		this.status = this.form.element.querySelector(this.form.element.getAttribute('data-status'))
+		this.submitter = this.form.element.querySelector(this.form.element.getAttribute('data-submitter'))
+	}
+
+	error (err) {
+		const errors = []
+		if (err) {
+			errors.push(err.message)
+		}
+		if (err.statusCode) {
+			errors.push('http status ' + err.statusCode)
+		}
+		this.status.innerHTML = errors.join(',')
+	}
+}
+
+class DataValidator extends MolaMolaHelper {
+	constructor (form, validators) {
+		super(form)
+		this.validators = validators || Validator
+
+		this.valid = false
+		this.submitter = this.form.element.querySelector(this.form.element.getAttribute('data-submitter'))
+		this.uniqueDebounce = null
+		this.lookupDebounce = null
+		this.dirty = false
+
+		this.inputs = Array.from(this.form.element.querySelectorAll('[data-validate]'))
+
+		this.changeHandler = (e) => {
+			this.handleChange(e)
+		}
+
+		this.initInput(this.form.element)
+		if (this.form.element.querySelector('[data-autofocus="true"]')) {
+			this.form.element.querySelector('[data-autofocus="true"]').focus()
+		}
+	}
+
+	destroy () {
+		for (let i = 0; i < this.inputs.length; i++) {
+			var input = this.inputs[i]
+			input.removeEventListener('change', this.changeHandler)
+			input.removeEventListener('blur', this.changeHandler)
+			input.removeEventListener('focus', this.changeHandler)
+			input.removeEventListener('keyup', this.changeHandler)
+			input.removeEventListener('input', this.changeHandler)
+		}
+	}
+
+	initInput (element) {
+		for (let i = 0; i < this.inputs.length; i++) {
+			var input = this.inputs[i]
+			input.setAttribute('data-touched', false)
+			input.setAttribute('data-dirty', false)
+			input.setAttribute('data-last-value', this.getRealVal(input))
+			input.setAttribute('data-original-value', this.getRealVal(input))
+			if (input.getAttribute('checked')) {
+				input.setAttribute('checked', 'checked')
+			}
+
+			input.addEventListener('change', this.changeHandler, false)
+			input.addEventListener('blur', this.changeHandler, false)
+			input.addEventListener('focus', this.changeHandler, false)
+			input.addEventListener('keyup', this.changeHandler, false)
+			input.addEventListener('input', this.changeHandler, false)
+		}
+	}
+
+	handleChange (e) {
+		const errors = this.inputs.map(this.validateField.bind(this))
+		let errorCount = 0
+		for (var i = 0; i < this.inputs.length; i++) {
+			const input = this.inputs[i]
+			if (errors[i] && errors[i].length) {
+				++errorCount
+				input.parentElement.getElementsByClassName('input-errors')[0].innerHTML = errors[i].join(', ')
+			} else {
+				input.parentElement.getElementsByClassName('input-errors')[0].innerHTML = ''
+			}
+		}
+
+		if (errorCount) {
+			this.disableSubmit()
+		} else {
+			this.enableSubmit()
+		}
+	}
+
+	getMessage (test, opts) {
+		const messages = {
+			len: 'Length between %s and %s',
+			notEmpty: 'Required',
+			isEmail: 'Not an email address',
+			isPassword: 'At least one uppercase, one lowercase and one number'
+		}
+
+		let message = messages[test]
+		if (!messages[test]) {
+			message = test
+			if (opts) {
+				for (let i = 0; i < opts.length; i++) {
+					message += ' %s'
+				}
+			}
+		}
+		if (!opts) {
+			return message
+		}
+		let c = 0
+		return message.replace(/%s/g, function () {
+			const opt = opts[c++]
+			return opt ? opt.toString() : ''
+		})
+	}
+
+	validateField (element) {
+		const val = this.getRealVal(element)
+		const validations = JSON.parse(element.getAttribute('data-validate'))
+
+		if (!validations.isLength && !val) {
+			return null
+		}
+
+		const errors = []
+		for (const test in validations) {
+			const opts = validations[test]
+			if (typeof opts === 'boolean') {
+				if (!this.validators[test](val)) {
+					errors.push(this.getMessage(test))
+				}
+			} else {
+				const myopts = opts.slice()
+				myopts.unshift(val)
+				if (!this.validators[test].apply(Validator, myopts)) {
+					errors.push(this.getMessage(test, opts))
+				}
+			}
+		}
+
+		return errors
+	}
+
+	getRealVal (elem) {
+		let value
+
+		if (elem.getAttribute('type') === 'checkbox' || elem.getAttribute('type') === 'radio') {
+			value = !!elem.checked
+		} else if (elem.tagName === 'SELECT') {
+			const selected = elem.querySelectorAll('option:checked')
+			const values = Array.from(selected).map(el => el.value)
+			if (values) {
+				value = values.length > 1 ? values : values[0]
+			}
+		} else {
+			value = elem.value
+		}
+
+		return value ? value.toString() : ''
+	}
+
+	preFlight () {}
+
+	disableSubmit () {
+		this.submitter.setAttribute('disabled', true)
+	}
+
+	enableSubmit () {
+		this.submitter.removeAttribute('disabled')
+	}
+}
+
 class MolaMola extends Sargasso {
 	constructor (elem, options) {
 		super(elem, options)
@@ -148,7 +317,6 @@ class MolaMola extends Sargasso {
 		this.formId = this.element.getAttribute('id')
 		this.endpoint = this.element.getAttribute('action')
 		this.method = this.element.getAttribute('method') || 'POST'
-		this.status = this.element.querySelector(this.element.getAttribute('data-status'))
 
 		if (this.element.getAttribute('data-recaptcha')) {
 			registerMolaMolaHelper(this.formId, new ReCAPTCHAv3(this))
@@ -157,6 +325,12 @@ class MolaMola extends Sargasso {
 		if (this.element.getAttribute('data-submitter')) {
 			registerMolaMolaHelper(this.formId, new SubmitterHandler(this))
 		}
+
+		if (this.element.getAttribute('data-status')) {
+			registerMolaMolaHelper(this.formId, new StatusHandler(this))
+		}
+
+		registerMolaMolaHelper(this.formId, new DataValidator(this))
 	}
 
 	start () {
@@ -173,16 +347,13 @@ class MolaMola extends Sargasso {
 				await this.tellHelpers('preFlight')
 				this.submit()
 			} catch (err) {
-				await this.tellHelpers('error', [err])
+				this.tellHelpers('error', [err])
 			}
 		}
 
 		this.element.addEventListener('submit', this.submitHandler)
 
-		const handlers = getHelpersForEvent(this.formId, 'pose')
-		Promise.all(handlers)
-			.then(() => {})
-			.catch((error) => {})
+		this.tellHelpers('pose')
 	}
 
 	serializeForm () {
@@ -230,19 +401,19 @@ class MolaMola extends Sargasso {
 				.then((response) => {
 					return response.json()
 				})
-				.then(async (data) => {
-					await this.tellHelpers('success', [data])
+				.then((data) => {
+					this.tellHelpers('success', [data])
 				})
-				.catch(async (error, response) => {
-					await this.tellHelpers('error', [error])
+				.catch((error, response) => {
+					this.tellHelpers('error', [error])
 				})
 		} catch (err) {
 			this.tellHelpers('error', [err])
 		}
 	}
 
-	async sleep () {
-		await this.tellHelpers('destroy')
+	sleep () {
+		this.tellHelpers('destroy')
 		this.element.removeEventListener('submit', this.submitHandler)
 		super.sleep()
 	}
