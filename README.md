@@ -27,18 +27,18 @@ MolaMolla provides a framework for building forms w/extensive validation, captch
 
 ```
 Attributes:
-	id: the id of the form (required)
-	action: endpoint to transmit data to
-	method: method (POST,GET,PATCH etc)
-	data-submitter: css selector of the form submit button
-	data-status: css selector of a container where errors are displayed
-	data-recaptcha: public [reCaptchaV3](https://developers.google.com/recaptcha/docs/v3) API key.
+  id: the id of the form (required)
+  action: endpoint to transmit data to
+  method: method (POST,GET,PATCH etc)
+  data-submitter: css selector of the form submit button
+  data-status: css selector of a container where errors are displayed
+  data-recaptcha: public [reCaptchaV3](https://developers.google.com/recaptcha/docs/v3) API key.
 
 ### Form Elements
 ```html
 <div class="input-group">
-	<input type="text" name="email" placeholder="Email address" data-validate='{"isEmail":true,"notEmpty":true}' data-payload>
-	<span class="input-errors"></span>
+  <input type="text" name="email" placeholder="Email address" data-validate='{"isEmail":true,"notEmpty":true}' data-payload>
+  <span class="input-errors"></span>
 </div>
 ```
 **Prerequisites:**
@@ -61,49 +61,49 @@ Normalizing input types for normalized JSON payloads
 
 ```html
 <div class="input-group">
-	<input type="text" name="checkbox-group" data-group='[type="checkbox"]' data-validate='{"notEmpty":true}' multiple data-payload>
-	<input type="checkbox" value="1" checked> Check 1
-	<input type="checkbox" value="2"> Check 2
-	<input type="checkbox" value="3" checked> Check 3
-	<span class="input-errors"></span>
+  <input type="text" name="checkbox-group" data-group='[type="checkbox"]' data-validate='{"notEmpty":true}' multiple data-payload>
+  <input type="checkbox" value="1" checked> Check 1
+  <input type="checkbox" value="2"> Check 2
+  <input type="checkbox" value="3" checked> Check 3
+  <span class="input-errors"></span>
 </div>
 
 <div class="input-group">
-	<input type="text" name="radio-group" data-group='[type="radio"]' data-payload>
-	<input type="radio" name="radio" value="1" checked> radio 1
-	<input type="radio" name="radio" value="2"> radio 2
-	<input type="radio" name="radio" value="3"> radio 3
-	<span class="input-errors"></span>
+  <input type="text" name="radio-group" data-group='[type="radio"]' data-payload>
+  <input type="radio" name="radio" value="1" checked> radio 1
+  <input type="radio" name="radio" value="2"> radio 2
+  <input type="radio" name="radio" value="3"> radio 3
+  <span class="input-errors"></span>
 </div>
 
 <div class="input-group">
-	<select name="select-single" data-validate='{"notEmpty":true}' data-payload>
-		<option value="">---</option>
-		<option value="1">option 1</option>
-		<option value="2" selected>option 2</option>
-		<option value="3">option 2</option>
-	</select>
-	<span class="input-errors"></span>
+  <select name="select-single" data-validate='{"notEmpty":true}' data-payload>
+    <option value="">---</option>
+    <option value="1">option 1</option>
+    <option value="2" selected>option 2</option>
+    <option value="3">option 2</option>
+  </select>
+  <span class="input-errors"></span>
 </div>
 
 <div class="input-group">
-	<select name="select-multiple" data-validate='{"notEmpty":true}' multiple data-payload>
-		<option value="">---</option>
-		<option value="1" selected>option 1</option>
-		<option value="2" selected>option 2</option>
-		<option value="3">option 2</option>
-	</select>
-	<span class="input-errors"></span>
+  <select name="select-multiple" data-validate='{"notEmpty":true}' multiple data-payload>
+    <option value="">---</option>
+    <option value="1" selected>option 1</option>
+    <option value="2" selected>option 2</option>
+    <option value="3">option 2</option>
+  </select>
+  <span class="input-errors"></span>
 </div>
 ```
 
 The resulting payload groups multiple and single selects in a consistent manner
 ```json
 {
-	"checkbox-group" : [2,3],
-	"radio-group": 1,
-	"select-single": 2,
-	"select-multiple": [1,2]
+  "checkbox-group" : [2,3],
+  "radio-group": 1,
+  "select-single": 2,
+  "select-multiple": [1,2]
 }
 
 ### Helpers & Endpoint API
@@ -120,36 +120,36 @@ Subclass `MolaMolaHelper` and override the `success` and `error` methods to see 
 Example Payload
 ```json
 {
-	"status": "ok",
-	"didLogin": true,
-	"message": "welcome back"
+  "status": "ok",
+  "didLogin": true,
+  "message": "welcome back"
 }
 ```
 
 ```javascript
 class boilerplateHandler extends MolaMolaHelper {
-	success (data) {
-		if (data.didLogin) {
-			tropicBird.pushSnackBar('info', 'Logged in')
-		}
-		if (data.didLogout) {
-			tropicBird.pushSnackBar('info', 'Logged out')
-		}
-		if (data.message) {
-			tropicBird.pushSnackBar('info', data.message)
-		}
-		if (data.errors) {
-			for(let i = 0; i < data.errors.length; i++){
-				tropicBird.pushSnackBar(data['error-level'] || 'info', data.errors[i])
-			}
-		}
-		if (data.status === 'ok' && data.redirect) {
-			loadPage(data.redirect)
-		}
-	}
+  success (data) {
+    if (data.didLogin) {
+      tropicBird.pushSnackBar('info', 'Logged in')
+    }
+    if (data.didLogout) {
+      tropicBird.pushSnackBar('info', 'Logged out')
+    }
+    if (data.message) {
+      tropicBird.pushSnackBar('info', data.message)
+    }
+    if (data.errors) {
+      for(let i = 0; i < data.errors.length; i++){
+        tropicBird.pushSnackBar(data['error-level'] || 'info', data.errors[i])
+      }
+    }
+    if (data.status === 'ok' && data.redirect) {
+      loadPage(data.redirect)
+    }
+  }
 
-	error (err) {
-		tropicBird.pushSnackBar('error',err.message)
-	}
+  error (err) {
+    tropicBird.pushSnackBar('error',err.message)
+  }
 }
 ```
