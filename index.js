@@ -14,15 +14,15 @@
 	The following events can be handled by the handlers:
 
 	registerFormHandler('myform',{
-		submit: () => {},
+		preFlight: () => {},
 		success: (response) => {},
 		error: (statusCode, response) => {}
 	})
 
-	the API for the enpoint:
+	the API for the endpoint:
 		200 (ok) & 422 (unprocessable entity) are expected to return json
 		Use 422 for server side validation errors, the reponse payload is
-		up to implementor and must be handled with a helper success method.
+		up to implementor and should be handled with a helper success method.
 
 		Other http errors such as 401 (unauthorized) are handed to the helper
 		error method
@@ -109,11 +109,11 @@ class SubmitterHandler extends MolaMolaHelper {
 		this.submitter = this.form.element.querySelector(this.form.element.getAttribute('data-submitter'))
 		this.submitterContent = this.submitter.innerHTML
 		this.submitter.style.width = this.submitter.width
+		this.submitter.setAttribute('disabled', true)
 	}
 
 	preFlight () {
 		this.disableSubmit()
-		// throw (new Error('error! errrrrrooooorr!'))
 	}
 
 	success (data) {
@@ -226,10 +226,8 @@ class DataValidator extends MolaMolaHelper {
 
 	getMessage (test, opts) {
 		const messages = {
-			len: 'Length between %s and %s',
-			notEmpty: 'Required',
-			isEmail: 'Not an email address',
-			isPassword: 'At least one uppercase, one lowercase and one number'
+			isLength: 'Length between %s and %s',
+			isEmail: 'Not an email address'
 		}
 
 		let message = messages[test]
@@ -300,9 +298,11 @@ class DataValidator extends MolaMolaHelper {
 		}
 
 		if (errors.length) {
-			element.parentElement.getElementsByClassName('input-errors')[0].innerHTML = errors.join(', ')
+			elementTools.addClass(element.closest('.input-group'), 'error')
+			element.closest('.input-group').getElementsByClassName('input-errors')[0].innerHTML = errors.join(', ')
 		} else {
-			element.parentElement.getElementsByClassName('input-errors')[0].innerHTML = ''
+			elementTools.removeClass(element.closest('.input-group'), 'error')
+			element.closest('.input-group').getElementsByClassName('input-errors')[0].innerHTML = ''
 		}
 
 		return errors
