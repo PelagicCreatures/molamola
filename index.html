@@ -7,13 +7,13 @@
 <script type="module" src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird/dist/tropicbird.es.js"></script>
 <script type="module" src='./dist/molamola.es.js'></script>
 
-<form id="test-form"  action="/test-result.json" method="GET" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro">
+<form id="test-form"  action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro">
 	<div class="input-group">
 		<input type="text" name="one" placeholder="field one" data-validate='{"isEmail":true,"isLength":[1]}'>
 		<span class="input-errors"></span>
 	</div>
 	<div class="input-group">
-		<input type="text" name="two" placeholder="field two">
+		<input type="text" name="two" placeholder="field two" data-validate='{"isLength":[5]}' data-lookup-endpoint="/lookup" data-unique>
 		<span class="input-errors"></span>
 	</div>
 	<div class="input-group">
@@ -32,7 +32,7 @@
 		</select>
 		<span class="input-errors"></span>
 	</div>
-	
+
 	<button class="submitter">submit</button>
 	<p class="status"></p>
 </form>

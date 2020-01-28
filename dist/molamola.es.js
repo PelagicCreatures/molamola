@@ -2131,6 +2131,32 @@ var validator = {
   isSlug: isSlug
 };
 
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof commonjsGlobal == 'object' && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
+
+var _freeGlobal = freeGlobal;
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = _freeGlobal || freeSelf || Function('return this')();
+
+var _root = root;
+
+/** Built-in value references. */
+var Symbol$1 = _root.Symbol;
+
+var _Symbol = Symbol$1;
+
+/** Built-in value references. */
+var symToStringTag = _Symbol ? _Symbol.toStringTag : undefined;
+
+/** Built-in value references. */
+var symToStringTag$1 = _Symbol ? _Symbol.toStringTag : undefined;
+
 /**
 	@PelagicCreatures/MolaMola
 
@@ -2310,11 +2336,10 @@ class DataValidator extends MolaMolaHelper {
 	destroy () {
 		for (let i = 0; i < this.inputs.length; i++) {
 			var input = this.inputs[i];
-			input.removeEventListener('change', this.changeHandler);
 			input.removeEventListener('blur', this.changeHandler);
 			input.removeEventListener('focus', this.changeHandler);
-			input.removeEventListener('keyup', this.changeHandler);
 			input.removeEventListener('input', this.changeHandler);
+			input.removeEventListener('change', this.changeHandler);
 		}
 	}
 
@@ -2327,30 +2352,32 @@ class DataValidator extends MolaMolaHelper {
 				input.setAttribute('checked', 'checked');
 			}
 
-			input.addEventListener('change', this.changeHandler, false);
 			input.addEventListener('blur', this.changeHandler, false);
 			input.addEventListener('focus', this.changeHandler, false);
 			input.addEventListener('keyup', this.changeHandler, false);
 			input.addEventListener('input', this.changeHandler, false);
+			input.addEventListener('change', this.changeHandler, false);
 		}
 	}
 
-	handleChange (e) {
-		const errors = this.inputs.map(this.validateField.bind(this));
-		let errorCount = 0;
-		for (var i = 0; i < this.errors.length; i++) {
-			if (errors[i] && errors[i].length) {
-				errorCount += errors[i].length;
+	async handleChange (e) {
+		const errors = this.inputs.map(await this.validateField.bind(this));
+		Promise.all(errors).then((errors) => {
+			let errorCount = 0;
+			for (var i = 0; i < errors.length; i++) {
+				if (errors[i] && errors[i].length) {
+					errorCount += errors[i].length;
+				}
 			}
-		}
 
-		if (errorCount) {
-			this.valid = false;
-			this.disableSubmit();
-		} else {
-			this.valid = true;
-			this.enableSubmit();
-		}
+			if (errorCount) {
+				this.valid = false;
+				this.disableSubmit();
+			} else {
+				this.valid = true;
+				this.enableSubmit();
+			}
+		});
 	}
 
 	getMessage (test, opts) {
@@ -2380,7 +2407,7 @@ class DataValidator extends MolaMolaHelper {
 		})
 	}
 
-	validateField (element) {
+	async validateField (element) {
 		const val = this.getRealVal(element);
 		const validations = JSON.parse(element.getAttribute('data-validate'));
 
@@ -2404,6 +2431,28 @@ class DataValidator extends MolaMolaHelper {
 			}
 		}
 
+		const matchSelector = element.getAttribute('data-match');
+		if (matchSelector && this.getRealVal(this.element.querySelector(matchSelector)) !== this.getRealVal(element)) {
+			errors.push('Does not match');
+		}
+
+		if (element.getAttribute('data-lookup-endpoint')) {
+			if (val.length > 2 && !errors.length) {
+				if (element.getAttribute('data-last-val') !== val) {
+					element.setAttribute('data-last-val', val);
+					const e = await this.lookup(element.getAttribute('data-lookup-endpoint'), val, element.getAttribute('data-unique'));
+					element.setAttribute('data-last-unique', e);
+					if (e) {
+						errors.push(e);
+					}
+				} else {
+					if (element.getAttribute('data-last-unique')) {
+						errors.push('Already exists');
+					}
+				}
+			}
+		}
+
 		if (errors.length) {
 			element.parentElement.getElementsByClassName('input-errors')[0].innerHTML = errors.join(', ');
 		} else {
@@ -2411,6 +2460,49 @@ class DataValidator extends MolaMolaHelper {
 		}
 
 		return errors
+	}
+
+	async lookup (endpoint, val, unique) {
+		return new Promise((resolve, reject) => {
+			const options = {
+				method: 'POST',
+				dataType: 'json',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					value: val
+				})
+			};
+			try {
+				fetch(endpoint, options)
+					.then((response) => {
+						if (response.status !== 200) {
+							const e = new Error(response.statusText);
+							e.errorCode = response.status;
+							return Promise.reject(e)
+						}
+						return Promise.resolve(response)
+					})
+					.then((response) => {
+						return response.json()
+					})
+					.then((data) => {
+						let e = null;
+						if (unique) {
+							e = data.found ? 'Already exists' : null;
+						} else {
+							e = !data.found ? 'Not Found' : null;
+						}
+						resolve(e);
+					})
+					.catch((err, response) => {
+						resolve('error checking unique ' + err.message);
+					});
+			} catch (err) {
+				resolve('error checking unique' + err.message);
+			}
+		})
 	}
 
 	getRealVal (elem) {
@@ -2527,7 +2619,7 @@ class MolaMola extends Sargasso {
 				.then((response) => {
 					if (response.status !== 200 && response.status !== 422) {
 						const e = new Error(response.statusText);
-						e.response.errorCode = response.status;
+						e.errorCode = response.status;
 						return Promise.reject(e)
 					}
 					return Promise.resolve(response)
