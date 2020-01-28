@@ -28,8 +28,82 @@
 		error method
 */
 
-import Validator from './node_modules/validator/es/index.js'
 import debounce from 'lodash/debounce'
+import cloneDeep from 'lodash/cloneDeep'
+import forEach from 'lodash/forEach'
+
+// make a clone of validator and add extensions to conform to Sequelize
+// to allow frontend/backend validation to be identical.
+import Validator from './node_modules/validator/es/index.js'
+const ExtendedValidator = cloneDeep(Validator)
+
+const extensions = {
+	extend (name, fn) {
+		this[name] = fn
+		return this
+	},
+	notEmpty (str) {
+		return !str.match(/^[\s\t\r\n]*$/)
+	},
+	len (str, min, max) {
+		return this.isLength(str, min, max)
+	},
+	isUrl (str) {
+		return this.isURL(str)
+	},
+	isIPv6 (str) {
+		return this.isIP(str, 6)
+	},
+	isIPv4 (str) {
+		return this.isIP(str, 4)
+	},
+	notIn (str, values) {
+		return !this.isIn(str, values)
+	},
+	regex (str, pattern, modifiers) {
+		str += ''
+		if (Object.prototype.toString.call(pattern).slice(8, -1) !== 'RegExp') {
+			pattern = new RegExp(pattern, modifiers)
+		}
+		return str.match(pattern)
+	},
+	notRegex (str, pattern, modifiers) {
+		return !this.regex(str, pattern, modifiers)
+	},
+	isDecimal (str) {
+		return str !== '' && !!str.match(/^(?:-?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][+-]?(?:[0-9]+))?$/)
+	},
+	min (str, val) {
+		const number = parseFloat(str)
+		return isNaN(number) || number >= val
+	},
+	max (str, val) {
+		const number = parseFloat(str)
+		return isNaN(number) || number <= val
+	},
+	not (str, pattern, modifiers) {
+		return this.notRegex(str, pattern, modifiers)
+	},
+	contains (str, elem) {
+		return !!elem && str.includes(elem)
+	},
+	notContains (str, elem) {
+		return !this.contains(str, elem)
+	},
+	is (str, pattern, modifiers) {
+		return this.regex(str, pattern, modifiers)
+	},
+	notNull (str) {
+		return str !== null && str !== undefined
+	},
+	notEmpty (str) {
+		return str !== '' && str !== null && str !== undefined
+	}
+}
+
+forEach(extensions, (extend, key) => {
+	ExtendedValidator[key] = extend
+})
 
 const formHandlers = {}
 
@@ -203,9 +277,8 @@ class StatusHandler extends MolaMolaHelper {
 }
 
 class DataValidator extends MolaMolaHelper {
-	constructor (form, validators) {
+	constructor (form) {
 		super(form)
-		this.validators = validators || Validator
 
 		this.valid = false
 		this.submitter = this.form.element.querySelector(this.form.element.getAttribute('data-submitter'))
@@ -307,7 +380,7 @@ class DataValidator extends MolaMolaHelper {
 		const val = getRealVal(element).toString()
 		const validations = JSON.parse(element.getAttribute('data-validate'))
 
-		if (!validations.isLength && !val) {
+		if (!validations.notEmpty && !val) {
 			return null
 		}
 
@@ -315,13 +388,13 @@ class DataValidator extends MolaMolaHelper {
 		for (const test in validations) {
 			const opts = validations[test]
 			if (typeof opts === 'boolean') {
-				if (!this.validators[test](val)) {
+				if (!ExtendedValidator[test](val)) {
 					errors.push(this.getMessage(test))
 				}
 			} else {
 				const myopts = opts.slice()
 				myopts.unshift(val)
-				if (!this.validators[test].apply(Validator, myopts)) {
+				if (!ExtendedValidator[test].apply(ExtendedValidator, myopts)) {
 					errors.push(this.getMessage(test, opts))
 				}
 			}

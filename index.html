@@ -14,15 +14,15 @@
 
 <form id="test-form"  action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro">
 	<div class="input-group">
-		<input type="text" name="one" placeholder="field one" data-validate='{"isEmail":true,"isLength":[1]}' data-payload>
+		<input type="text" name="one" placeholder="field one" data-validate='{"isEmail":true,"notEmpty":true}' data-payload>
 		<span class="input-errors"></span>
 	</div>
 	<div class="input-group">
-		<input type="text" name="two" placeholder="field two" data-validate='{"isLength":[5]}' data-lookup-endpoint="/lookup" data-unique data-payload>
+		<input type="text" name="two" placeholder="field two" data-validate='{"isLength":[5,30]}' data-lookup-endpoint="/lookup" data-unique data-payload>
 		<span class="input-errors"></span>
 	</div>
 	<div class="input-group">
-		<select name="select" data-validate='{"isLength":[1]}' data-payload>
+		<select name="select" data-validate='{"notEmpty":true}' data-payload>
 			<option value="">---</option>
 			<option value="val 1">val 1</option>
 			<option value="val 2">val 2</option>
@@ -30,7 +30,7 @@
 		<span class="input-errors"></span>
 	</div>
 	<div class="input-group">
-		<select name="select-multiple" data-validate='{"isLength":[1]}' multiple data-payload>
+		<select name="select-multiple" data-validate='{"notEmpty":true}' multiple data-payload>
 			<option value="">---</option>
 			<option value="val 1">val 1</option>
 			<option value="val 2">val 2</option>
@@ -38,7 +38,7 @@
 		<span class="input-errors"></span>
 	</div>
 	<div class="input-group">
-		<input type="text" name="checkbox-group" data-group='[type="checkbox"]' data-validate='{"isLength":[1]}' multiple data-payload>
+		<input type="text" name="checkbox-group" data-group='[type="checkbox"]' data-validate='{"notEmpty":true}' multiple data-payload>
 		<input type="checkbox" value="1"> Check 1
 		<input type="checkbox" value="2"> Check 2
 		<input type="checkbox" value="3"> Check 3
