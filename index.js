@@ -53,6 +53,24 @@ const getHelpersForEvent = (formId, event, params) => {
 	return handlers
 }
 
+const getRealVal = (elem) => {
+	let value
+
+	if (elem.getAttribute('type') === 'checkbox' || elem.getAttribute('type') === 'radio') {
+		value = !!elem.checked
+	} else if (elem.tagName === 'SELECT') {
+		const selected = elem.querySelectorAll('option:checked')
+		const values = Array.from(selected).map(el => el.value)
+		if (values) {
+			value = values.length > 1 ? values : values[0]
+		}
+	} else {
+		value = elem.value
+	}
+
+	return value ? value.toString() : ''
+}
+
 class MolaMolaHelper {
 	constructor (form) {
 		this.form = form
@@ -191,9 +209,9 @@ class DataValidator extends MolaMolaHelper {
 		for (let i = 0; i < this.inputs.length; i++) {
 			var input = this.inputs[i]
 			input.setAttribute('data-touched', false)
-			input.setAttribute('data-last-value', this.getRealVal(input))
+			input.setAttribute('data-last-value', getRealVal(input))
 			if (input.getAttribute('checked')) {
-				input.setAttribute('checked', 'checked')
+				input.checked = true
 			}
 
 			input.addEventListener('blur', this.changeHandler, false)
@@ -250,7 +268,7 @@ class DataValidator extends MolaMolaHelper {
 	}
 
 	async validateField (element) {
-		const val = this.getRealVal(element)
+		const val = getRealVal(element)
 		const validations = JSON.parse(element.getAttribute('data-validate'))
 
 		if (!validations.isLength && !val) {
@@ -274,7 +292,7 @@ class DataValidator extends MolaMolaHelper {
 		}
 
 		const matchSelector = element.getAttribute('data-match')
-		if (matchSelector && this.getRealVal(this.element.querySelector(matchSelector)) !== this.getRealVal(element)) {
+		if (matchSelector && getRealVal(this.element.querySelector(matchSelector)) !== getRealVal(element)) {
 			errors.push('Does not match')
 		}
 
@@ -351,24 +369,6 @@ class DataValidator extends MolaMolaHelper {
 		})
 	}
 
-	getRealVal (elem) {
-		let value
-
-		if (elem.getAttribute('type') === 'checkbox' || elem.getAttribute('type') === 'radio') {
-			value = !!elem.checked
-		} else if (elem.tagName === 'SELECT') {
-			const selected = elem.querySelectorAll('option:checked')
-			const values = Array.from(selected).map(el => el.value)
-			if (values) {
-				value = values.length > 1 ? values : values[0]
-			}
-		} else {
-			value = elem.value
-		}
-
-		return value ? value.toString() : ''
-	}
-
 	preFlight () {}
 
 	disableSubmit () {
@@ -434,8 +434,20 @@ class MolaMola extends Sargasso {
 		for (let i = 0; i < elements.length; i++) {
 			const element = elements[i]
 			const k = element.getAttribute('name')
-			const v = element.value
-			this.payload[k] = v
+			const v = getRealVal(element)
+			const t = element.getAttribute('type')
+			if (t === 'checkbox' || t === 'radio') {
+				if (v) {
+					if (this.payload[k]) {
+						this.payload[k] += ','
+					} else {
+						this.payload[k] = ''
+					}
+					this.payload[k] += element.getAttribute('value')
+				}
+			} else {
+				this.payload[k] = v
+			}
 		}
 	}
 
