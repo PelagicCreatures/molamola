@@ -108,6 +108,7 @@ The resulting payload groups multiple and single selects in a consistent manner
   "select-single": 2,
   "select-multiple": [1,2]
 }
+```
 
 ## Form Helpers & Endpoint API
 
