@@ -24,15 +24,19 @@ MolaMolla provides a framework for building forms w/extensive validation, captch
 ### Form Tag
 ```html
 <form id="test-form"  action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="xxx">
+  ....
+  <button class="submitter">submit</button>
+	<p class="status"></p>
+</form>
 
 ```
 Attributes:
-  id: the id of the form (required)
-  action: endpoint to transmit data to
-  method: method (POST,GET,PATCH etc)
-  data-submitter: css selector of the form submit button
-  data-status: css selector of a container where errors are displayed
-  data-recaptcha: public [reCaptchaV3](https://developers.google.com/recaptcha/docs/v3) API key.
+* id: the id of the form (required)
+* action: endpoint to transmit data to
+* method: method (POST,GET,PATCH etc)
+* data-submitter: css selector of the form submit button
+* data-status: css selector of a container where errors are displayed
+* data-recaptcha: public [reCaptchaV3](https://developers.google.com/recaptcha/docs/v3) API key.
 
 ### Form Elements
 ```html
