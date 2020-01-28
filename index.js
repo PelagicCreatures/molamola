@@ -167,9 +167,9 @@ class DataValidator extends MolaMolaHelper {
 
 		this.inputs = Array.from(this.form.element.querySelectorAll('[data-validate]'))
 
-		this.changeHandler = (e) => {
+		this.changeHandler = debounce((e) => {
 			this.handleChange(e)
-		}
+		}, 500)
 
 		this.initInput(this.form.element)
 		if (this.form.element.querySelector('[data-autofocus="true"]')) {
@@ -282,16 +282,18 @@ class DataValidator extends MolaMolaHelper {
 
 		if (element.getAttribute('data-lookup-endpoint')) {
 			if (val.length > 2 && !errors.length) {
-				if (element.getAttribute('data-last-val') !== val) {
-					element.setAttribute('data-last-val', val)
+				if (element.getAttribute('data-last-lookup-val') !== val) {
+					element.setAttribute('data-last-lookup-val', val)
 					const e = await this.lookup(element.getAttribute('data-lookup-endpoint'), val, element.hasAttribute('data-unique'))
-					element.setAttribute('data-last-unique', e)
 					if (e) {
+						element.setAttribute('data-last-lookup-result', e)
 						errors.push(e)
+					} else {
+						element.removeAttribute('data-last-lookup-result')
 					}
 				} else {
-					if (element.getAttribute('data-last-unique')) {
-						errors.push('Already exists')
+					if (element.getAttribute('data-last-lookup-result')) {
+						errors.push(element.getAttribute('data-last-lookup-result'))
 					}
 				}
 			}
