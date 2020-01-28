@@ -26,7 +26,7 @@ MolaMolla provides a framework for building forms w/extensive validation, captch
 <form id="test-form"  action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="xxx">
   ....
   <button class="submitter">submit</button>
-	<p class="status"></p>
+  <p class="status"></p>
 </form>
 
 ```
