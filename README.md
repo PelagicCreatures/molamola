@@ -2,10 +2,9 @@
 
 ### Sargasso supervised Forms and Input Validation
 
-### STATUS: Development In progress. More Soon.
+### STATUS: Preview. Under active development. Stable Soon.
 
 [Demo Page](https://blog.myanti.social/demos/molamola)
-
 
 ```
 @author Michael Rhodes
@@ -110,7 +109,7 @@ The resulting payload groups multiple and single selects in a consistent manner
   "select-multiple": [1,2]
 }
 
-### Helpers & Endpoint API
+## Form Helpers & Endpoint API
 
 Prerequisites for API for the endpoint:
 * 200 (ok) & 422 (unprocessable entity) are expected to return json. Use 422 for server side validation errors, the response payload is up to implementor and should be handled with a helper success method.
@@ -121,8 +120,8 @@ You will at least need to receive the payload of the response to take action aft
 
 Subclass `MolaMolaHelper` and override the `success` and `error` methods to see the response payload and errors. This implementation is up to you. In our example response payload has some sugar to take some actions based on the response.
 
-Example Payload
-```json
+### Example Payload
+```javascript
 {
   "status": "ok",
   "didLogin": true,
@@ -130,6 +129,9 @@ Example Payload
 }
 ```
 
+This example hooks up a helper to the form with the id `test-form`
+
+### Form Helper
 ```javascript
 class boilerplateHandler extends MolaMolaHelper {
   success (data) {
@@ -156,4 +158,13 @@ class boilerplateHandler extends MolaMolaHelper {
     tropicBird.pushSnackBar('error',err.message)
   }
 }
+
+// Instantiate the form
+let form = new MolaMola(document.getElementById('test-form'))
+
+// Register the form helper
+registerMolaMolaHelper('test-form', new boilerplateHandler(form))
+
+// Start watching for input
+form.start()
 ```
