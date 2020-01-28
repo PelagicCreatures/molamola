@@ -95,9 +95,6 @@ const extensions = {
 	},
 	notNull (str) {
 		return str !== null && str !== undefined
-	},
-	notEmpty (str) {
-		return str !== '' && str !== null && str !== undefined
 	}
 }
 
