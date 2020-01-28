@@ -53,22 +53,51 @@ const getHelpersForEvent = (formId, event, params) => {
 	return handlers
 }
 
-const getRealVal = (elem) => {
-	let value
+/*
+	Normalize value from an input.
+	returns an array of values for groups and <select multiple>
+*/
+const getRealVal = (element) => {
+	let value = ''
 
-	if (elem.getAttribute('type') === 'checkbox' || elem.getAttribute('type') === 'radio') {
-		value = !!elem.checked
-	} else if (elem.tagName === 'SELECT') {
-		const selected = elem.querySelectorAll('option:checked')
-		const values = Array.from(selected).map(el => el.value)
-		if (values) {
-			value = values.length > 1 ? values : values[0]
+	// collection of checkboxes or other inputs results in array of values
+	if (element.getAttribute('data-group')) {
+		const group = element.closest('.input-group').querySelectorAll(element.getAttribute('data-group'))
+		const values = []
+		for (let i = 0; i < group.length; i++) {
+			if (getRealVal(group[i])) {
+				values.push(getRealVal(group[i]))
+			}
+			if (element.hasAttribute('multiple')) {
+				value = values
+			} else {
+				value = values.length ? values[0] : ''
+			}
 		}
 	} else {
-		value = elem.value
+		if (element.getAttribute('type') === 'checkbox' || element.getAttribute('type') === 'radio') {
+			if (element.checked) {
+				const v = element.getAttribute('value')
+				if (v) {
+					value = v
+				} else {
+					value = !!element.checked
+				}
+			}
+		} else if (element.tagName === 'SELECT') {
+			const selected = element.querySelectorAll('option:checked')
+			const values = Array.from(selected).map(el => el.value)
+			if (element.hasAttribute('multiple')) {
+				value = Array.from(values)
+			} else {
+				value = values[0]
+			}
+		} else {
+			value = element.value
+		}
 	}
 
-	return value ? value.toString() : ''
+	return value
 }
 
 class MolaMolaHelper {
@@ -193,13 +222,26 @@ class DataValidator extends MolaMolaHelper {
 		if (this.form.element.querySelector('[data-autofocus="true"]')) {
 			this.form.element.querySelector('[data-autofocus="true"]').focus()
 		}
+
+		this.allInputs = Array.from(this.form.element.querySelectorAll('input, select, textarea, button'))
+		for (let i = 0; i < this.allInputs.length; i++) {
+			const input = this.allInputs[i]
+			input.addEventListener('blur', this.changeHandler, false)
+			input.addEventListener('focus', this.changeHandler, false)
+			input.addEventListener('keyup', this.changeHandler, false)
+			input.addEventListener('input', this.changeHandler, false)
+			input.addEventListener('change', this.changeHandler, false)
+		}
+
+		this.handleChange()
 	}
 
 	destroy () {
-		for (let i = 0; i < this.inputs.length; i++) {
-			var input = this.inputs[i]
+		for (let i = 0; i < this.allInputs.length; i++) {
+			const input = this.allInputs[i]
 			input.removeEventListener('blur', this.changeHandler)
 			input.removeEventListener('focus', this.changeHandler)
+			input.removeEventListener('keyup', this.changeHandler)
 			input.removeEventListener('input', this.changeHandler)
 			input.removeEventListener('change', this.changeHandler)
 		}
@@ -209,16 +251,10 @@ class DataValidator extends MolaMolaHelper {
 		for (let i = 0; i < this.inputs.length; i++) {
 			var input = this.inputs[i]
 			input.setAttribute('data-touched', false)
-			input.setAttribute('data-last-value', getRealVal(input))
+			input.setAttribute('data-last-value', getRealVal(input).toString())
 			if (input.getAttribute('checked')) {
 				input.checked = true
 			}
-
-			input.addEventListener('blur', this.changeHandler, false)
-			input.addEventListener('focus', this.changeHandler, false)
-			input.addEventListener('keyup', this.changeHandler, false)
-			input.addEventListener('input', this.changeHandler, false)
-			input.addEventListener('change', this.changeHandler, false)
 		}
 	}
 
@@ -268,7 +304,7 @@ class DataValidator extends MolaMolaHelper {
 	}
 
 	async validateField (element) {
-		const val = getRealVal(element)
+		const val = getRealVal(element).toString()
 		const validations = JSON.parse(element.getAttribute('data-validate'))
 
 		if (!validations.isLength && !val) {
@@ -292,7 +328,7 @@ class DataValidator extends MolaMolaHelper {
 		}
 
 		const matchSelector = element.getAttribute('data-match')
-		if (matchSelector && getRealVal(this.element.querySelector(matchSelector)) !== getRealVal(element)) {
+		if (matchSelector && getRealVal(this.element.querySelector(matchSelector)).toString() !== getRealVal(element).toString()) {
 			errors.push('Does not match')
 		}
 
@@ -430,22 +466,12 @@ class MolaMola extends Sargasso {
 
 	serializeForm () {
 		this.payload = {}
-		var elements = this.element.querySelectorAll('input, select, textarea')
+		var elements = this.element.querySelectorAll('[data-payload]')
 		for (let i = 0; i < elements.length; i++) {
 			const element = elements[i]
 			const k = element.getAttribute('name')
-			const v = getRealVal(element)
-			const t = element.getAttribute('type')
-			if (t === 'checkbox' || t === 'radio') {
-				if (v) {
-					if (this.payload[k]) {
-						this.payload[k] += ','
-					} else {
-						this.payload[k] = ''
-					}
-					this.payload[k] += element.getAttribute('value')
-				}
-			} else {
+			if (k) { // must be named
+				const v = getRealVal(element)
 				this.payload[k] = v
 			}
 		}
