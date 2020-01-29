@@ -22,7 +22,7 @@ MolaMolla provides a framework for building forms w/extensive validation, captch
 
 ### Form Tag
 ```html
-<form id="test-form"  action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="xxx">
+<form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="xxx" data-helpers="HelperOne,HelperTwo">
   ....
   <button class="submitter">submit</button>
   <p class="status"></p>
@@ -36,6 +36,7 @@ Attributes:
 * data-submitter: css selector of the form submit button
 * data-status: css selector of a container where errors are displayed
 * data-recaptcha: public [reCaptchaV3](https://developers.google.com/recaptcha/docs/v3) API key.
+* data-helpers: list of MolaMola Helper subclasses for handling errors and response payload etc.
 
 ### Form Elements
 ```html
@@ -130,11 +131,11 @@ Subclass `MolaMolaHelper` and override the `success` and `error` methods to see 
 }
 ```
 
-This example hooks up a helper to the form with the id `test-form`
+This example hooks up a helper to the form
 
 ### Form Helper
 ```javascript
-class boilerplateHandler extends MolaMolaHelper {
+class BoilerplateHandler extends MolaMolaHelper {
   success (data) {
     if (data.didLogin) {
       tropicBird.pushSnackBar('info', 'Logged in')
@@ -160,12 +161,11 @@ class boilerplateHandler extends MolaMolaHelper {
   }
 }
 
-// Instantiate the form
-let form = new MolaMola(document.getElementById('test-form'))
-
 // Register the form helper
-form.registerHelper(boilerplateHandler)
+registerHelperClass('BoilerplateHandler',BoilerplateHandler)
+```
 
-// Start watching for input
-form.start()
+
+```html
+<form id="test-form" data-sargasso-class="MolaMola"  action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-helpers="BoilerplateHandler">
 ```
