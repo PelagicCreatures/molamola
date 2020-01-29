@@ -18,7 +18,7 @@
 		<span class="input-errors"></span>
 	</div>
 	<div class="input-group">
-		<input type="text" name="two" placeholder="field two" data-validate='{"isLength":[5,30]}' data-lookup-endpoint="/lookup" data-unique data-payload>
+		<input type="text" name="two" placeholder="lookup. try &quot;match&quot;" data-validate='{"isLength":[5,30]}' data-lookup-endpoint="/lookup" data-unique data-payload>
 		<span class="input-errors"></span>
 	</div>
 	<div class="input-group">
@@ -38,7 +38,7 @@
 		<span class="input-errors"></span>
 	</div>
 	<div class="input-group">
-		<input type="text" name="checkbox-group" data-group='[type="checkbox"]' data-validate='{"notEmpty":true}' multiple data-payload>
+		<input type="hidden" name="checkbox-group" data-group='[type="checkbox"]' data-validate='{"notEmpty":true}' multiple data-payload>
 		<input type="checkbox" value="1"> Check 1
 		<input type="checkbox" value="2"> Check 2
 		<input type="checkbox" value="3"> Check 3
@@ -49,7 +49,7 @@
 	</div>
 
 	<div class="input-group">
-		<input type="text" name="radio-group" data-group='[type="radio"]' data-payload>
+		<input type="hidden" name="radio-group" data-group='[type="radio"]' data-payload>
 		<input type="radio" name="radio" value="1" checked> radio 1
 		<input type="radio" name="radio" value="2"> radio 2
 		<input type="radio" name="radio" value="3"> radio 3
@@ -68,7 +68,7 @@
 	let tropicBird = new TropicBird(document.body, {})
 	tropicBird.start()
 
-	class boilerplateHandler extends MolaMolaHelper {
+	class BoilerplateHandler extends MolaMolaHelper {
 		success (data) {
 			if (data.didLogin) {
 				tropicBird.pushSnackBar('info','Logged in')
@@ -95,7 +95,7 @@
 	}
 
 	let form = new MolaMola(document.getElementById('test-form'))
-	registerMolaMolaHelper('test-form', new boilerplateHandler(form))
+	form.registerHelper(BoilerplateHandler)
 	form.start()
 
 </script>

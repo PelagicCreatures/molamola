@@ -164,7 +164,7 @@ class boilerplateHandler extends MolaMolaHelper {
 let form = new MolaMola(document.getElementById('test-form'))
 
 // Register the form helper
-registerMolaMolaHelper('test-form', new boilerplateHandler(form))
+form.registerHelper(boilerplateHandler)
 
 // Start watching for input
 form.start()

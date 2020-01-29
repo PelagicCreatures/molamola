@@ -1,6 +1,6 @@
 {
 	"name": "@pelagiccreatures/molamola",
-	"version": "0.0.6",
+	"version": "0.0.1",
 	"description": "Form Tools",
 	"main": "index.js",
 	"scripts": {
@@ -19,7 +19,8 @@
 	"homepage": "https://github.com/PelagicCreatures/molamola#readme",
 	"dependencies": {
 		"@pelagiccreatures/sargasso": "^0.7.0",
-		"validator": "^12.2.0"
+		"validator": "^12.2.0",
+		"lodash": "^4.17.15"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^11.0.1",

@@ -104,26 +104,6 @@ forEach(extensions, (extend, key) => {
 
 const formHandlers = {}
 
-const registerMolaMolaHelper = (formId, handler) => {
-	if (!formHandlers[formId]) {
-		formHandlers[formId] = []
-	}
-	formHandlers[formId].push(handler)
-}
-
-const getHelpersForEvent = (formId, event, params) => {
-	const handlers = []
-	if (formHandlers[formId]) {
-		for (var i = 0; i < formHandlers[formId].length; i++) {
-			if (formHandlers[formId][i][event]) {
-				const p = formHandlers[formId][i][event].apply(formHandlers[formId][i], params)
-				handlers.push(p)
-			}
-		}
-	}
-	return handlers
-}
-
 /*
 	Normalize value from an input.
 	returns an array of values for groups and <select multiple>
@@ -177,7 +157,6 @@ class MolaMolaHelper {
 	}
 
 	// override these methods as needed
-
 	pose () {} // pose form
 
 	/*
@@ -185,17 +164,19 @@ class MolaMolaHelper {
 		return a promise for any async behavior (like recAPTCHA below)
 		throw an error to prevent submit
 	*/
-
 	preFlight () {}
 
-	success (data) {} // 200 or 422 response all is well deal with response payload
+	// 200 or 422 response all is well deal with response payload
+	success (data) {}
 
-	error (err) {} // can be result of preFlight or from endpoint
+	// can be result of preFlight or from endpoint
+	error (err) {}
 
-	destroy () {} // cleanup
+	// cleanup
+	destroy () {}
 }
 
-class ReCAPTCHAv3 extends MolaMolaHelper {
+class ReCAPTCHAv3Helper extends MolaMolaHelper {
 	constructor (form) {
 		super(form)
 		this.recaptcha = this.form.element.getAttribute('data-recaptcha')
@@ -221,7 +202,7 @@ class ReCAPTCHAv3 extends MolaMolaHelper {
 	}
 }
 
-class SubmitterHandler extends MolaMolaHelper {
+class SubmitterHelper extends MolaMolaHelper {
 	constructor (form) {
 		super(form)
 		this.submitter = this.form.element.querySelector(this.form.element.getAttribute('data-submitter'))
@@ -253,7 +234,7 @@ class SubmitterHandler extends MolaMolaHelper {
 	}
 }
 
-class StatusHandler extends MolaMolaHelper {
+class StatusHelper extends MolaMolaHelper {
 	constructor (form) {
 		super(form)
 
@@ -273,7 +254,7 @@ class StatusHandler extends MolaMolaHelper {
 	}
 }
 
-class DataValidator extends MolaMolaHelper {
+class ValidateHelper extends MolaMolaHelper {
 	constructor (form) {
 		super(form)
 
@@ -351,7 +332,8 @@ class DataValidator extends MolaMolaHelper {
 	getMessage (test, opts) {
 		const messages = {
 			isLength: 'Length between %s and %s',
-			isEmail: 'Not an email address'
+			isEmail: 'Not an email address',
+			notEmpty: 'Required'
 		}
 
 		let message = messages[test]
@@ -493,21 +475,22 @@ class MolaMola extends Sargasso {
 		this.formId = this.element.getAttribute('id')
 		this.endpoint = this.element.getAttribute('action')
 		this.method = this.element.getAttribute('method') || 'POST'
+		this.formHandlers = []
 
 		if (this.element.getAttribute('data-recaptcha')) {
-			registerMolaMolaHelper(this.formId, new ReCAPTCHAv3(this))
+			this.registerHelper(ReCAPTCHAv3Helper)
 		}
 
 		if (this.element.getAttribute('data-submitter')) {
-			registerMolaMolaHelper(this.formId, new SubmitterHandler(this))
+			this.registerHelper(SubmitterHelper)
 		}
 
 		if (this.element.getAttribute('data-status')) {
-			registerMolaMolaHelper(this.formId, new StatusHandler(this))
+			this.registerHelper(StatusHelper)
 		}
 
 		if (this.element.querySelectorAll('[data-validate]').length) {
-			registerMolaMolaHelper(this.formId, new DataValidator(this))
+			this.registerHelper(ValidateHelper)
 		}
 	}
 
@@ -532,6 +515,21 @@ class MolaMola extends Sargasso {
 		this.element.addEventListener('submit', this.submitHandler)
 
 		this.tellHelpers('pose')
+	}
+
+	registerHelper (HelperClass) {
+		this.formHandlers.push(new HelperClass(this))
+	}
+
+	getHelpersForEvent (event, params) {
+		const handlers = []
+		for (var i = 0; i < this.formHandlers.length; i++) {
+			if (this.formHandlers[i][event]) {
+				const p = this.formHandlers[i][event].apply(this.formHandlers[i], params)
+				handlers.push(p)
+			}
+		}
+		return handlers
 	}
 
 	serializeForm () {
@@ -599,7 +597,7 @@ class MolaMola extends Sargasso {
 	}
 
 	async tellHelpers (event, params) {
-		const handlers = getHelpersForEvent(this.formId, event, params)
+		const handlers = this.getHelpersForEvent(event, params)
 		return Promise.all(handlers)
 	}
 }
@@ -608,10 +606,13 @@ registerSargassoClass('MolaMola', MolaMola)
 
 if (window) {
 	window.MolaMola = MolaMola
-	window.registerMolaMolaHelper = registerMolaMolaHelper
 	window.MolaMolaHelper = MolaMolaHelper
+	window.ReCAPTCHAv3Helper = ReCAPTCHAv3Helper
+	window.SubmitterHelper = SubmitterHelper
+	window.StatusHelper = StatusHelper
+	window.ValidateHelper = ValidateHelper
 }
 
 export {
-	MolaMola, registerMolaMolaHelper, MolaMolaHelper
+	MolaMola, MolaMolaHelper, ReCAPTCHAv3Helper, SubmitterHelper, StatusHelper, ValidateHelper
 }

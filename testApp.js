@@ -22,7 +22,7 @@ app.get('/dist/molamola.es.js', (req, res) => {
 })
 
 let count = 0
-app.post('/form-post', (req, res) => {
+app.post('/form-post', express.json(), (req, res) => {
 	res.send({
 		status: 'ok',
 		message: 'success',
@@ -30,9 +30,9 @@ app.post('/form-post', (req, res) => {
 	})
 })
 
-app.post('/lookup', (req, res) => {
+app.post('/lookup', express.json(), (req, res) => {
 	res.send({
-		found: false
+		found: req.body.value === 'match'
 	})
 })
 
