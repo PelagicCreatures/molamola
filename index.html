@@ -12,7 +12,7 @@
 <script type="module" src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird/dist/tropicbird.es.js"></script>
 <script type="module" src='./dist/molamola.es.js'></script>
 
-<form id="test-form"  action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro">
+<form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro" data-helpers="BoilerplateHandler">
 	<div class="input-group">
 		<input type="text" name="one" placeholder="field one" data-validate='{"isEmail":true,"notEmpty":true}' data-payload>
 		<span class="input-errors"></span>
@@ -64,9 +64,6 @@
 </form>
 
 <script type='module'>
-	let loadPage = bootSargasso({hijax:{}})
-	let tropicBird = new TropicBird(document.body, {})
-	tropicBird.start()
 
 	class BoilerplateHandler extends MolaMolaHelper {
 		success (data) {
@@ -94,9 +91,11 @@
 		}
 	}
 
-	let form = new MolaMola(document.getElementById('test-form'))
-	form.registerHelper(BoilerplateHandler)
-	form.start()
+	registerHelperClass('BoilerplateHandler',BoilerplateHandler)
+
+	let loadPage = bootSargasso({hijax:{}})
+	let tropicBird = new TropicBird(document.body, {})
+	tropicBird.start()
 
 </script>
 

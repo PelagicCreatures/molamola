@@ -102,7 +102,10 @@ forEach(extensions, (extend, key) => {
 	ExtendedValidator[key] = extend
 })
 
-const formHandlers = {}
+const registeredHelperClasses = {}
+const registerHelperClass = (className, object) => {
+	registeredHelperClasses[className] = object
+}
 
 /*
 	Normalize value from an input.
@@ -237,9 +240,7 @@ class SubmitterHelper extends MolaMolaHelper {
 class StatusHelper extends MolaMolaHelper {
 	constructor (form) {
 		super(form)
-
 		this.status = this.form.element.querySelector(this.form.element.getAttribute('data-status'))
-		this.submitter = this.form.element.querySelector(this.form.element.getAttribute('data-submitter'))
 	}
 
 	error (err) {
@@ -477,6 +478,16 @@ class MolaMola extends Sargasso {
 		this.method = this.element.getAttribute('method') || 'POST'
 		this.formHandlers = []
 
+		if (this.element.getAttribute('data-helpers')) {
+			const helperClasses = this.element.getAttribute('data-helpers').split(/\s*,\s*/)
+			for (let i = 0; i < helperClasses.length; i++) {
+				try {
+					this.registerHelper(registeredHelperClasses[helperClasses[i]])
+				} catch (e) {
+					console.log('error instantiating ' + helperClasses[i], e, registeredHelperClasses)
+				}
+			}
+		}
 		if (this.element.getAttribute('data-recaptcha')) {
 			this.registerHelper(ReCAPTCHAv3Helper)
 		}
@@ -606,6 +617,7 @@ registerSargassoClass('MolaMola', MolaMola)
 
 if (window) {
 	window.MolaMola = MolaMola
+	window.registerHelperClass = registerHelperClass
 	window.MolaMolaHelper = MolaMolaHelper
 	window.ReCAPTCHAv3Helper = ReCAPTCHAv3Helper
 	window.SubmitterHelper = SubmitterHelper
@@ -614,5 +626,5 @@ if (window) {
 }
 
 export {
-	MolaMola, MolaMolaHelper, ReCAPTCHAv3Helper, SubmitterHelper, StatusHelper, ValidateHelper
+	MolaMola, registerHelperClass, MolaMolaHelper, ReCAPTCHAv3Helper, SubmitterHelper, StatusHelper, ValidateHelper
 }
