@@ -5121,6 +5121,13 @@ var validator = {
 */
 const ExtendedValidator = cloneDeep_1(validator);
 
+const validationMessages = {
+	isLength: 'Length between %s and %s',
+	isEmail: 'Not an email address',
+	notEmpty: 'Required',
+	isPassword: 'At least one uppercase, one lowercase, and one number'
+};
+
 const extensions = {
 	extend (name, fn) {
 		this[name] = fn;
@@ -5179,6 +5186,12 @@ const extensions = {
 	},
 	notNull (str) {
 		return str !== null && str !== undefined
+	},
+	isPassword (str) {
+		return this.notEmpty(str) && this.len(str, 8, 20) && this.is(str, '(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])', '')
+	},
+	notHTML (str) {
+		return !str.match(/<\s*[^>]*>(.*?)<\s*\/[^>]*>/) && !str.match(/<[^>]*>/)
 	}
 };
 
@@ -5415,14 +5428,8 @@ class ValidateHelper extends MolaMolaHelper {
 	}
 
 	getMessage (test, opts) {
-		const messages = {
-			isLength: 'Length between %s and %s',
-			isEmail: 'Not an email address',
-			notEmpty: 'Required'
-		};
-
-		let message = messages[test];
-		if (!messages[test]) {
+		let message = validationMessages[test];
+		if (!message) {
 			message = test;
 			if (opts) {
 				for (let i = 0; i < opts.length; i++) {
@@ -5490,10 +5497,10 @@ class ValidateHelper extends MolaMolaHelper {
 
 		if (errors.length) {
 			elementTools.addClass(element.closest('.input-group'), 'error');
-			element.closest('.input-group').getElementsByClassName('input-errors')[0].innerHTML = errors.join(', ');
+			element.closest('.input-group').getElementsByClassName('validation-help')[0].innerHTML = errors.join(', ');
 		} else {
 			elementTools.removeClass(element.closest('.input-group'), 'error');
-			element.closest('.input-group').getElementsByClassName('input-errors')[0].innerHTML = '';
+			element.closest('.input-group').getElementsByClassName('validation-help')[0].innerHTML = '';
 		}
 
 		return errors

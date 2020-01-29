@@ -4,7 +4,7 @@
 <style>
 	.input-group { margin-bottom: .5em; }
 	.error { color: red; }
-	.input-errors { display: block; min-height: 1em;}
+	.validation-help { display: block; min-height: 1em;}
 </style>
 
 <script src="https://www.google.com/recaptcha/api.js?render=6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro"></script>
@@ -15,11 +15,11 @@
 <form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro" data-helpers="BoilerplateHandler">
 	<div class="input-group">
 		<input type="text" name="one" placeholder="field one" data-validate='{"isEmail":true,"notEmpty":true}' data-payload>
-		<span class="input-errors"></span>
+		<span class="validation-help"></span>
 	</div>
 	<div class="input-group">
 		<input type="text" name="two" placeholder="lookup. try &quot;match&quot;" data-validate='{"isLength":[5,30]}' data-lookup-endpoint="/lookup" data-unique data-payload>
-		<span class="input-errors"></span>
+		<span class="validation-help"></span>
 	</div>
 	<div class="input-group">
 		<select name="select" data-validate='{"notEmpty":true}' data-payload>
@@ -27,7 +27,7 @@
 			<option value="val 1">val 1</option>
 			<option value="val 2">val 2</option>
 		</select>
-		<span class="input-errors"></span>
+		<span class="validation-help"></span>
 	</div>
 	<div class="input-group">
 		<select name="select-multiple" data-validate='{"notEmpty":true}' multiple data-payload>
@@ -35,7 +35,7 @@
 			<option value="val 1">val 1</option>
 			<option value="val 2">val 2</option>
 		</select>
-		<span class="input-errors"></span>
+		<span class="validation-help"></span>
 	</div>
 	<div class="input-group">
 		<input type="hidden" name="checkbox-group" data-group='[type="checkbox"]' data-validate='{"notEmpty":true}' multiple data-payload>
@@ -45,7 +45,7 @@
 		<input type="checkbox" value="4"> Check 4
 		<input type="checkbox" value="5"> Check 5
 		<input type="checkbox" value="6"> Check 6
-		<span class="input-errors"></span>
+		<span class="validation-help"></span>
 	</div>
 
 	<div class="input-group">
@@ -56,7 +56,7 @@
 		<input type="radio" name="radio" value="4"> radio 4
 		<input type="radio" name="radio" value="5"> radio 5
 		<input type="radio" name="radio" value="6"> radio 6
-		<span class="input-errors"></span>
+		<span class="validation-help"></span>
 	</div>
 
 	<button class="submitter">submit</button>

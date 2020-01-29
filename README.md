@@ -42,12 +42,12 @@ Attributes:
 ```html
 <div class="input-group">
   <input type="text" name="email" placeholder="Email address" data-validate='{"isEmail":true,"notEmpty":true}' data-payload>
-  <span class="input-errors"></span>
+  <span class="validation-help"></span>
 </div>
 ```
 **Prerequisites:**
 * All input elements must be wrapped in an .input-group
-* All validated inputs must have an .input-errors container inside the .input-group
+* All validated inputs must have an .validation-help container inside the .input-group
 
 Field validation is implemented by [Validator](https://www.npmjs.com/package/validator) using  [Sequelize](https://www.npmjs.com/package/sequelize) extensions.
 
@@ -69,7 +69,7 @@ Normalizing input types for normalized JSON payloads
   <input type="checkbox" value="1" checked> Check 1
   <input type="checkbox" value="2"> Check 2
   <input type="checkbox" value="3" checked> Check 3
-  <span class="input-errors"></span>
+  <span class="validation-help"></span>
 </div>
 
 <div class="input-group">
@@ -77,7 +77,7 @@ Normalizing input types for normalized JSON payloads
   <input type="radio" name="radio" value="1" checked> radio 1
   <input type="radio" name="radio" value="2"> radio 2
   <input type="radio" name="radio" value="3"> radio 3
-  <span class="input-errors"></span>
+  <span class="validation-help"></span>
 </div>
 
 <div class="input-group">
@@ -87,7 +87,7 @@ Normalizing input types for normalized JSON payloads
     <option value="2" selected>option 2</option>
     <option value="3">option 2</option>
   </select>
-  <span class="input-errors"></span>
+  <span class="validation-help"></span>
 </div>
 
 <div class="input-group">
@@ -97,7 +97,7 @@ Normalizing input types for normalized JSON payloads
     <option value="2" selected>option 2</option>
     <option value="3">option 2</option>
   </select>
-  <span class="input-errors"></span>
+  <span class="validation-help"></span>
 </div>
 ```
 
