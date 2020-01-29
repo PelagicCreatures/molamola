@@ -113,7 +113,7 @@ The resulting payload groups multiple and single selects in a consistent manner
 
 ## Form Helpers & Endpoint API
 
-Prerequisites for API for the endpoint:
+Backend API prerequisites for the endpoint:
 * 200 (ok) & 422 (unprocessable entity) are expected to return json. Use 422 for server side validation errors, the response payload is up to implementor and should be handled with a helper success method.
 
 * Other http errors such as 401 (unauthorized) are handed to the helper error method
@@ -131,9 +131,9 @@ Subclass `MolaMolaHelper` and override the `success` and `error` methods to see 
 }
 ```
 
-This example hooks up a helper to the form
-
 ### Form Helper
+This example hooks up a helper to a form
+
 ```javascript
 class BoilerplateHandler extends MolaMolaHelper {
   success (data) {
