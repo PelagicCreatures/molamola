@@ -388,7 +388,7 @@ class ValidateHelper extends MolaMolaHelper {
 		}
 
 		const matchSelector = element.getAttribute('data-match')
-		if (matchSelector && getRealVal(this.element.querySelector(matchSelector)).toString() !== getRealVal(element).toString()) {
+		if (matchSelector && getRealVal(this.form.querySelector(matchSelector)).toString() !== getRealVal(element).toString()) {
 			errors.push('Does not match')
 		}
 
