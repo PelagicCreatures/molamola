@@ -18,7 +18,7 @@
 	},
 	"homepage": "https://github.com/PelagicCreatures/molamola#readme",
 	"dependencies": {
-		"@pelagiccreatures/sargasso": "^0.7.0",
+		"@pelagiccreatures/sargasso": "^0.7.2",
 		"validator": "^12.2.0",
 		"lodash": "^4.17.15"
 	},
