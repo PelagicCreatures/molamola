@@ -39,7 +39,7 @@ const ExtendedValidator = cloneDeep(Validator)
 
 const validationMessages = {
 	isLength: 'Length between %s and %s',
-	isEmail: 'Not an email address',
+	isEmail: 'Email address',
 	notEmpty: 'Required',
 	isPassword: 'At least one uppercase, one lowercase, and one number'
 }
@@ -291,11 +291,11 @@ class ValidateHelper extends MolaMolaHelper {
 		this.allInputs = Array.from(this.form.element.querySelectorAll('input, select, textarea, button'))
 		for (let i = 0; i < this.allInputs.length; i++) {
 			const input = this.allInputs[i]
-			input.addEventListener('blur', this.changeHandler, false)
-			input.addEventListener('focus', this.changeHandler, false)
-			input.addEventListener('keyup', this.changeHandler, false)
-			input.addEventListener('input', this.changeHandler, false)
-			input.addEventListener('change', this.changeHandler, false)
+			input.addEventListener('blur', this.changeHandler, true)
+			input.addEventListener('focus', this.changeHandler, true)
+			input.addEventListener('keyup', this.changeHandler, true)
+			input.addEventListener('input', this.changeHandler, true)
+			input.addEventListener('change', this.changeHandler, true)
 		}
 
 		this.handleChange()
@@ -314,7 +314,7 @@ class ValidateHelper extends MolaMolaHelper {
 
 	initInput (element) {
 		for (let i = 0; i < this.inputs.length; i++) {
-			var input = this.inputs[i]
+			const input = this.inputs[i]
 			input.setAttribute('data-touched', false)
 			input.setAttribute('data-last-value', getRealVal(input).toString())
 			if (input.getAttribute('checked')) {
@@ -324,10 +324,17 @@ class ValidateHelper extends MolaMolaHelper {
 	}
 
 	async handleChange (e) {
+		if (e && e.srcElement && e.srcElement !== window) {
+			const elem = e.srcElement
+			elementTools.addClass(elem.closest('form'), 'touched')
+			const isDirty = elem.getAttribute('data-last-value') !== getRealVal(elem)
+			elem.setAttribute('data-touched', true)
+			elem.setAttribute('data-dirty', isDirty)
+		}
 		const errors = this.inputs.map(await this.validateField.bind(this))
 		Promise.all(errors).then((errors) => {
 			let errorCount = 0
-			for (var i = 0; i < errors.length; i++) {
+			for (let i = 0; i < errors.length; i++) {
 				if (errors[i] && errors[i].length) {
 					errorCount += errors[i].length
 				}
@@ -388,7 +395,7 @@ class ValidateHelper extends MolaMolaHelper {
 		}
 
 		const matchSelector = element.getAttribute('data-match')
-		if (matchSelector && getRealVal(this.form.querySelector(matchSelector)).toString() !== getRealVal(element).toString()) {
+		if (matchSelector && getRealVal(this.form.element.querySelector(matchSelector)).toString() !== getRealVal(element).toString()) {
 			errors.push('Does not match')
 		}
 
@@ -541,7 +548,7 @@ class MolaMola extends Sargasso {
 
 	getHelpersForEvent (event, params) {
 		const handlers = []
-		for (var i = 0; i < this.formHandlers.length; i++) {
+		for (let i = 0; i < this.formHandlers.length; i++) {
 			if (this.formHandlers[i][event]) {
 				const p = this.formHandlers[i][event].apply(this.formHandlers[i], params)
 				handlers.push(p)
@@ -552,7 +559,7 @@ class MolaMola extends Sargasso {
 
 	serializeForm () {
 		this.payload = {}
-		var elements = this.element.querySelectorAll('[data-payload]')
+		const elements = this.element.querySelectorAll('[data-payload]')
 		for (let i = 0; i < elements.length; i++) {
 			const element = elements[i]
 			const k = element.getAttribute('name')

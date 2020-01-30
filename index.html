@@ -3,8 +3,8 @@
 
 <style>
 	.input-group { margin-bottom: .5em; }
-	.error { color: red; }
-	.validation-help { display: block; min-height: 1em;}
+	.validation-help { opacity:0;color:red; display: block; min-height: 1em; }
+	.touched .error .validation-help { opacity: 1}
 </style>
 
 <script src="https://www.google.com/recaptcha/api.js?render=6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro"></script>
@@ -19,6 +19,10 @@
 	</div>
 	<div class="input-group">
 		<input type="text" name="two" placeholder="lookup. try &quot;match&quot;" data-validate='{"isLength":[5,30]}' data-lookup-endpoint="/lookup" data-unique data-payload>
+		<span class="validation-help"></span>
+	</div>
+	<div class="input-group">
+		<input type="text" name="three" placeholder="must match above" data-validate='{"notEmpty":true}' data-match="[name=two]" data-payload>
 		<span class="validation-help"></span>
 	</div>
 	<div class="input-group">
