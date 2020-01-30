@@ -1,6 +1,6 @@
 {
 	"name": "@pelagiccreatures/molamola",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"description": "Form Tools",
 	"main": "index.js",
 	"scripts": {
