@@ -5503,10 +5503,12 @@ class ValidateHelper extends MolaMolaHelper {
 		}
 
 		if (errors.length) {
+			elementTools.removeClass(element.closest('.input-group'), 'input-ok');
 			elementTools.addClass(element.closest('.input-group'), 'error');
 			element.closest('.input-group').getElementsByClassName('validation-help')[0].innerHTML = errors.join(', ');
 		} else {
 			elementTools.removeClass(element.closest('.input-group'), 'error');
+			elementTools.addClass(element.closest('.input-group'), 'input-ok');
 			element.closest('.input-group').getElementsByClassName('validation-help')[0].innerHTML = '';
 		}
 
