@@ -2,8 +2,6 @@
 
 ### Sargasso supervised Forms and Input Validation
 
-### STATUS: Preview. Under active development. Stable Soon.
-
 [Demo Page](https://blog.myanti.social/demos/molamola)
 
 ```
