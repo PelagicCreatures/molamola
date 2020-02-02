@@ -1,111 +1,119 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href='https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird/dist/bundle.css' rel='stylesheet'>
+<html charset="UTF-8">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href='https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird/dist/bundle.css' rel='stylesheet'>
 
-<style>
-	.input-group { margin-bottom: .5em; }
-	.validation-help { opacity:0;color:red; display: block; min-height: 1em; }
-	.touched .error .validation-help { opacity: 1}
-</style>
+		<style>
+			.input-group { margin-bottom: .5em; }
+			.validation-help { opacity:0;color:red; display: block; min-height: 1em; }
+			.touched .error .validation-help { opacity: 1}
+		</style>
 
-<script src="https://www.google.com/recaptcha/api.js?render=6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro"></script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/sargasso/dist/sargasso.es.js"></script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird/dist/tropicbird.es.js"></script>
-<script type="module" src='./dist/molamola.es.js'></script>
+		<script src="https://www.google.com/recaptcha/api.js?render=6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/sargasso/dist/sargasso.iife.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird/dist/tropicbird.iife.js"></script>
+		<script src='./dist/molamola.iife.js' defer charset="utf-8"></script>
+	</head>
+	<body>
+		<form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro" data-helpers="BoilerplateHandler" autocomplete="off">
+			<div class="input-group">
+				<input type="text" name="one" placeholder="field one" data-validate='{"isEmail":true,"notEmpty":true}' data-payload>
+				<span class="validation-help"></span>
+			</div>
+			<div class="input-group">
+				<input type="text" name="two" placeholder="lookup. try &quot;match&quot;" data-validate='{"isLength":[5,30]}' data-lookup-endpoint="/lookup" data-unique data-payload>
+				<span class="validation-help"></span>
+			</div>
+			<div class="input-group">
+				<input type="text" name="three" placeholder="must match above" data-validate='{"notEmpty":true}' data-match="[name=two]" data-payload>
+				<span class="validation-help"></span>
+			</div>
+			<div class="input-group">
+				<select name="select" data-validate='{"notEmpty":true}' data-payload>
+					<option value="">---</option>
+					<option value="val 1">val 1</option>
+					<option value="val 2">val 2</option>
+				</select>
+				<span class="validation-help"></span>
+			</div>
+			<div class="input-group">
+				<select name="select-multiple" data-validate='{"notEmpty":true}' multiple data-payload>
+					<option value="">---</option>
+					<option value="val 1">val 1</option>
+					<option value="val 2">val 2</option>
+				</select>
+				<span class="validation-help"></span>
+			</div>
+			<div class="input-group">
+				<input type="hidden" name="checkbox-group" data-group='[type="checkbox"]' data-validate='{"notEmpty":true}' multiple data-payload>
+				<input type="checkbox" value="1"> Check 1
+				<input type="checkbox" value="2"> Check 2
+				<input type="checkbox" value="3"> Check 3
+				<input type="checkbox" value="4"> Check 4
+				<input type="checkbox" value="5"> Check 5
+				<input type="checkbox" value="6"> Check 6
+				<span class="validation-help"></span>
+			</div>
 
-<form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro" data-helpers="BoilerplateHandler" autocomplete="off">
-	<div class="input-group">
-		<input type="text" name="one" placeholder="field one" data-validate='{"isEmail":true,"notEmpty":true}' data-payload>
-		<span class="validation-help"></span>
-	</div>
-	<div class="input-group">
-		<input type="text" name="two" placeholder="lookup. try &quot;match&quot;" data-validate='{"isLength":[5,30]}' data-lookup-endpoint="/lookup" data-unique data-payload>
-		<span class="validation-help"></span>
-	</div>
-	<div class="input-group">
-		<input type="text" name="three" placeholder="must match above" data-validate='{"notEmpty":true}' data-match="[name=two]" data-payload>
-		<span class="validation-help"></span>
-	</div>
-	<div class="input-group">
-		<select name="select" data-validate='{"notEmpty":true}' data-payload>
-			<option value="">---</option>
-			<option value="val 1">val 1</option>
-			<option value="val 2">val 2</option>
-		</select>
-		<span class="validation-help"></span>
-	</div>
-	<div class="input-group">
-		<select name="select-multiple" data-validate='{"notEmpty":true}' multiple data-payload>
-			<option value="">---</option>
-			<option value="val 1">val 1</option>
-			<option value="val 2">val 2</option>
-		</select>
-		<span class="validation-help"></span>
-	</div>
-	<div class="input-group">
-		<input type="hidden" name="checkbox-group" data-group='[type="checkbox"]' data-validate='{"notEmpty":true}' multiple data-payload>
-		<input type="checkbox" value="1"> Check 1
-		<input type="checkbox" value="2"> Check 2
-		<input type="checkbox" value="3"> Check 3
-		<input type="checkbox" value="4"> Check 4
-		<input type="checkbox" value="5"> Check 5
-		<input type="checkbox" value="6"> Check 6
-		<span class="validation-help"></span>
-	</div>
+			<div class="input-group">
+				<input type="hidden" name="radio-group" data-group='[type="radio"]' data-payload>
+				<input type="radio" name="radio" value="1" checked> radio 1
+				<input type="radio" name="radio" value="2"> radio 2
+				<input type="radio" name="radio" value="3"> radio 3
+				<input type="radio" name="radio" value="4"> radio 4
+				<input type="radio" name="radio" value="5"> radio 5
+				<input type="radio" name="radio" value="6"> radio 6
+				<span class="validation-help"></span>
+			</div>
 
-	<div class="input-group">
-		<input type="hidden" name="radio-group" data-group='[type="radio"]' data-payload>
-		<input type="radio" name="radio" value="1" checked> radio 1
-		<input type="radio" name="radio" value="2"> radio 2
-		<input type="radio" name="radio" value="3"> radio 3
-		<input type="radio" name="radio" value="4"> radio 4
-		<input type="radio" name="radio" value="5"> radio 5
-		<input type="radio" name="radio" value="6"> radio 6
-		<span class="validation-help"></span>
-	</div>
+			<button class="submitter">submit</button>
+			<p class="status"></p>
+		</form>
 
-	<button class="submitter">submit</button>
-	<p class="status"></p>
-</form>
+		<script defer charset="UTF-8">
 
-<script type='module'>
+			window.onload=  function() {
 
-	class BoilerplateHandler extends MolaMolaHelper {
-		success (data) {
-			if (data.didLogin) {
-				tropicBird.pushSnackBar('info','Logged in')
-			}
-			if (data.didLogout) {
-				tropicBird.pushSnackBar('info','Logged out')
-			}
-			if( data.message) {
-				tropicBird.pushSnackBar('info',data.message)
-			}
-			if (data.errors) {
-				for(let i = 0; i < data.errors.length; i++){
-					tropicBird.pushSnackBar(data['error-level'] || 'info', data.errors[i])
+			class BoilerplateHandler extends PelagicCreatures.MolaMola.MolaMolaHelper {
+				success (data) {
+					if (data.didLogin) {
+						tropicBird.pushSnackBar('info','Logged in')
+					}
+					if (data.didLogout) {
+						tropicBird.pushSnackBar('info','Logged out')
+					}
+					if( data.message) {
+						tropicBird.pushSnackBar('info',data.message)
+					}
+					if (data.errors) {
+						for(let i = 0; i < data.errors.length; i++){
+							tropicBird.pushSnackBar(data['error-level'] || 'info', data.errors[i])
+						}
+					}
+					if (data.status === 'ok' && data.redirect) {
+						loadPage(data.redirect)
+					}
+				}
+
+				error (err) {
+					tropicBird.pushSnackBar('error',err.message)
 				}
 			}
-			if (data.status === 'ok' && data.redirect) {
-				loadPage(data.redirect)
-			}
+
+			PelagicCreatures.MolaMola.molaMolaUtils.registerHelperClass('BoilerplateHandler',BoilerplateHandler)
+
+			let loadPage = PelagicCreatures.Sargasso.utils.bootSargasso({hijax:{}})
+			let tropicBird = new PelagicCreatures.TropicBird.TropicBird(document.body, {})
+			tropicBird.start()
 		}
+		</script>
 
-		error (err) {
-			tropicBird.pushSnackBar('error',err.message)
-		}
-	}
-
-	registerHelperClass('BoilerplateHandler',BoilerplateHandler)
-
-	let loadPage = bootSargasso({hijax:{}})
-	let tropicBird = new TropicBird(document.body, {})
-	tropicBird.start()
-
-</script>
-
-<div class="mdc-snackbar">
-	<div class="mdc-snackbar__surface">
-		<div class="mdc-snackbar__label">
+		<div class="mdc-snackbar">
+			<div class="mdc-snackbar__surface">
+				<div class="mdc-snackbar__label">
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
+	</body>
+</html>

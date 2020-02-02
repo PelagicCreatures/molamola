@@ -162,7 +162,7 @@ class BoilerplateHandler extends MolaMolaHelper {
 }
 
 // Register the form helper
-registerHelperClass('BoilerplateHandler',BoilerplateHandler)
+molaMolaUtils.registerHelperClass('BoilerplateHandler',BoilerplateHandler)
 ```
 
 

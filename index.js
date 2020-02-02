@@ -28,6 +28,11 @@
 		error method
 */
 
+import {
+	Sargasso, utils
+}
+	from '@PelagicCreatures/Sargasso'
+
 import debounce from 'lodash/debounce'
 import cloneDeep from 'lodash/cloneDeep'
 import forEach from 'lodash/forEach'
@@ -35,6 +40,7 @@ import forEach from 'lodash/forEach'
 // make a clone of validator and add extensions to conform to Sequelize
 // to allow frontend/backend validation to be identical.
 import Validator from './node_modules/validator/es/index.js'
+
 const ExtendedValidator = cloneDeep(Validator)
 
 const validationMessages = {
@@ -199,7 +205,7 @@ class ReCAPTCHAv3Helper extends MolaMolaHelper {
 	}
 
 	pose () {
-		elementTools.addClass(document.body, 'show-recaptcha', this)
+		utils.elementTools.addClass(document.body, 'show-recaptcha', this)
 	}
 
 	async preFlight () {
@@ -214,7 +220,7 @@ class ReCAPTCHAv3Helper extends MolaMolaHelper {
 	}
 
 	destroy () {
-		elementTools.removeClass(document.body, 'show-recaptcha')
+		utils.elementTools.removeClass(document.body, 'show-recaptcha')
 	}
 }
 
@@ -326,7 +332,7 @@ class ValidateHelper extends MolaMolaHelper {
 	async handleChange (e) {
 		if (e && e.srcElement && e.srcElement !== window) {
 			const elem = e.srcElement
-			elementTools.addClass(elem.closest('form'), 'touched')
+			utils.elementTools.addClass(elem.closest('form'), 'touched')
 			const isDirty = elem.getAttribute('data-last-value') !== getRealVal(elem)
 			elem.setAttribute('data-touched', true)
 			elem.setAttribute('data-dirty', isDirty)
@@ -418,14 +424,19 @@ class ValidateHelper extends MolaMolaHelper {
 			}
 		}
 
-		if (errors.length) {
-			elementTools.removeClass(element.closest('.input-group'), 'input-ok')
-			elementTools.addClass(element.closest('.input-group'), 'error')
-			element.closest('.input-group').getElementsByClassName('validation-help')[0].innerHTML = errors.join(', ')
+		const inputGroup = element.closest('.input-group')
+		if (!inputGroup) {
+			console.log(element)
 		} else {
-			elementTools.removeClass(element.closest('.input-group'), 'error')
-			elementTools.addClass(element.closest('.input-group'), 'input-ok')
-			element.closest('.input-group').getElementsByClassName('validation-help')[0].innerHTML = ''
+			if (errors.length) {
+				utils.elementTools.removeClass(inputGroup, 'input-ok')
+				utils.elementTools.addClass(inputGroup, 'error')
+				inputGroup.getElementsByClassName('validation-help')[0].innerHTML = errors.join(', ')
+			} else {
+				utils.elementTools.removeClass(inputGroup, 'error')
+				utils.elementTools.addClass(inputGroup, 'input-ok')
+				inputGroup.getElementsByClassName('validation-help')[0].innerHTML = ''
+			}
 		}
 
 		return errors
@@ -629,18 +640,16 @@ class MolaMola extends Sargasso {
 	}
 }
 
-registerSargassoClass('MolaMola', MolaMola)
+utils.registerSargassoClass('MolaMola', MolaMola)
 
-if (window) {
-	window.MolaMola = MolaMola
-	window.registerHelperClass = registerHelperClass
-	window.MolaMolaHelper = MolaMolaHelper
-	window.ReCAPTCHAv3Helper = ReCAPTCHAv3Helper
-	window.SubmitterHelper = SubmitterHelper
-	window.StatusHelper = StatusHelper
-	window.ValidateHelper = ValidateHelper
+const molaMolaUtils = {
+	registerHelperClass: registerHelperClass,
+	ReCAPTCHAv3Helper: ReCAPTCHAv3Helper,
+	SubmitterHelper: SubmitterHelper,
+	StatusHelper: StatusHelper,
+	ValidateHelper: ValidateHelper
 }
 
 export {
-	MolaMola, registerHelperClass, MolaMolaHelper, ReCAPTCHAv3Helper, SubmitterHelper, StatusHelper, ValidateHelper
+	MolaMola, MolaMolaHelper, molaMolaUtils
 }
