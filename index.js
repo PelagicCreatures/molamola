@@ -426,7 +426,7 @@ class ValidateHelper extends MolaMolaHelper {
 
 		const inputGroup = element.closest('.input-group')
 		if (!inputGroup) {
-			console.log(element)
+			console.log('Warning: document structure error - validated inputs must be in container with class "input-group"')
 		} else {
 			if (errors.length) {
 				utils.elementTools.removeClass(inputGroup, 'input-ok')

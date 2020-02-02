@@ -13,7 +13,7 @@
 		<script src="https://www.google.com/recaptcha/api.js?render=6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro"></script>
 		<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/sargasso/dist/sargasso.iife.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird/dist/tropicbird.iife.js"></script>
-		<script src='./dist/molamola.iife.js' defer charset="utf-8"></script>
+		<script src='./dist/molamola.iife.js'></script>
 	</head>
 	<body>
 		<form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro" data-helpers="BoilerplateHandler" autocomplete="off">
@@ -74,39 +74,38 @@
 		<script defer charset="UTF-8">
 
 			window.onload=  function() {
-
-			class BoilerplateHandler extends PelagicCreatures.MolaMola.MolaMolaHelper {
-				success (data) {
-					if (data.didLogin) {
-						tropicBird.pushSnackBar('info','Logged in')
-					}
-					if (data.didLogout) {
-						tropicBird.pushSnackBar('info','Logged out')
-					}
-					if( data.message) {
-						tropicBird.pushSnackBar('info',data.message)
-					}
-					if (data.errors) {
-						for(let i = 0; i < data.errors.length; i++){
-							tropicBird.pushSnackBar(data['error-level'] || 'info', data.errors[i])
+				class BoilerplateHandler extends PelagicCreatures.MolaMola.MolaMolaHelper {
+					success (data) {
+						if (data.didLogin) {
+							tropicBird.pushSnackBar('info','Logged in')
+						}
+						if (data.didLogout) {
+							tropicBird.pushSnackBar('info','Logged out')
+						}
+						if( data.message) {
+							tropicBird.pushSnackBar('info',data.message)
+						}
+						if (data.errors) {
+							for(let i = 0; i < data.errors.length; i++){
+								tropicBird.pushSnackBar(data['error-level'] || 'info', data.errors[i])
+							}
+						}
+						if (data.status === 'ok' && data.redirect) {
+							loadPage(data.redirect)
 						}
 					}
-					if (data.status === 'ok' && data.redirect) {
-						loadPage(data.redirect)
+
+					error (err) {
+						tropicBird.pushSnackBar('error',err.message)
 					}
 				}
 
-				error (err) {
-					tropicBird.pushSnackBar('error',err.message)
-				}
+				PelagicCreatures.MolaMola.molaMolaUtils.registerHelperClass('BoilerplateHandler',BoilerplateHandler)
+
+				let loadPage = PelagicCreatures.Sargasso.utils.bootSargasso({hijax:{}})
+				let tropicBird = new PelagicCreatures.TropicBird.TropicBird(document.body, {})
+				tropicBird.start()
 			}
-
-			PelagicCreatures.MolaMola.molaMolaUtils.registerHelperClass('BoilerplateHandler',BoilerplateHandler)
-
-			let loadPage = PelagicCreatures.Sargasso.utils.bootSargasso({hijax:{}})
-			let tropicBird = new PelagicCreatures.TropicBird.TropicBird(document.body, {})
-			tropicBird.start()
-		}
 		</script>
 
 		<div class="mdc-snackbar">

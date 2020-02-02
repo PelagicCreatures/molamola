@@ -12,8 +12,8 @@ app.get('/', (req, res) => {
 	})
 })
 
-app.get('/dist/molamola.es.js', (req, res) => {
-	const file = path.join(__dirname, '/dist/molamola.es.js')
+app.get('/dist/molamola.iife.js', (req, res) => {
+	const file = path.join(__dirname, '/dist/molamola.iife.js')
 	res.sendFile(file, {
 		headers: {
 			'Content-Type': 'application/javascript'
