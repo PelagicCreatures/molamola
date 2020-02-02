@@ -31,7 +31,7 @@
 import {
 	Sargasso, utils
 }
-	from '@PelagicCreatures/Sargasso'
+	from '@pelagiccreatures/sargasso'
 
 import debounce from 'lodash/debounce'
 import cloneDeep from 'lodash/cloneDeep'

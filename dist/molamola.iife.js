@@ -1,5 +1,5 @@
 this.PelagicCreatures = this.PelagicCreatures || {};
-this.PelagicCreatures.MolaMola = (function (exports, Sargasso) {
+this.PelagicCreatures.MolaMola = (function (exports, sargasso) {
   'use strict';
 
   /**
@@ -5288,7 +5288,7 @@ this.PelagicCreatures.MolaMola = (function (exports, Sargasso) {
   	}
 
   	pose () {
-  		Sargasso.utils.elementTools.addClass(document.body, 'show-recaptcha', this);
+  		sargasso.utils.elementTools.addClass(document.body, 'show-recaptcha', this);
   	}
 
   	async preFlight () {
@@ -5303,7 +5303,7 @@ this.PelagicCreatures.MolaMola = (function (exports, Sargasso) {
   	}
 
   	destroy () {
-  		Sargasso.utils.elementTools.removeClass(document.body, 'show-recaptcha');
+  		sargasso.utils.elementTools.removeClass(document.body, 'show-recaptcha');
   	}
   }
 
@@ -5415,7 +5415,7 @@ this.PelagicCreatures.MolaMola = (function (exports, Sargasso) {
   	async handleChange (e) {
   		if (e && e.srcElement && e.srcElement !== window) {
   			const elem = e.srcElement;
-  			Sargasso.utils.elementTools.addClass(elem.closest('form'), 'touched');
+  			sargasso.utils.elementTools.addClass(elem.closest('form'), 'touched');
   			const isDirty = elem.getAttribute('data-last-value') !== getRealVal(elem);
   			elem.setAttribute('data-touched', true);
   			elem.setAttribute('data-dirty', isDirty);
@@ -5509,15 +5509,15 @@ this.PelagicCreatures.MolaMola = (function (exports, Sargasso) {
 
   		const inputGroup = element.closest('.input-group');
   		if (!inputGroup) {
-  			console.log(element);
+  			console.log('Warning: document structure error - validated inputs must be in container with class "input-group"');
   		} else {
   			if (errors.length) {
-  				Sargasso.utils.elementTools.removeClass(inputGroup, 'input-ok');
-  				Sargasso.utils.elementTools.addClass(inputGroup, 'error');
+  				sargasso.utils.elementTools.removeClass(inputGroup, 'input-ok');
+  				sargasso.utils.elementTools.addClass(inputGroup, 'error');
   				inputGroup.getElementsByClassName('validation-help')[0].innerHTML = errors.join(', ');
   			} else {
-  				Sargasso.utils.elementTools.removeClass(inputGroup, 'error');
-  				Sargasso.utils.elementTools.addClass(inputGroup, 'input-ok');
+  				sargasso.utils.elementTools.removeClass(inputGroup, 'error');
+  				sargasso.utils.elementTools.addClass(inputGroup, 'input-ok');
   				inputGroup.getElementsByClassName('validation-help')[0].innerHTML = '';
   			}
   		}
@@ -5579,7 +5579,7 @@ this.PelagicCreatures.MolaMola = (function (exports, Sargasso) {
   	}
   }
 
-  class MolaMola extends Sargasso.Sargasso {
+  class MolaMola extends sargasso.Sargasso {
   	constructor (elem, options) {
   		super(elem, options);
 
@@ -5723,7 +5723,7 @@ this.PelagicCreatures.MolaMola = (function (exports, Sargasso) {
   	}
   }
 
-  Sargasso.utils.registerSargassoClass('MolaMola', MolaMola);
+  sargasso.utils.registerSargassoClass('MolaMola', MolaMola);
 
   const molaMolaUtils = {
   	registerHelperClass: registerHelperClass,

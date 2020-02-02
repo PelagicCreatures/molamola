@@ -4,14 +4,14 @@ import json from '@rollup/plugin-json'
 
 export default {
 	input: './index.js',
-	external: ['@PelagicCreatures/Sargasso'],
+	external: ['@pelagiccreatures/sargasso'],
 
 	output: [{
 		format: 'iife',
 		name: 'PelagicCreatures.MolaMola',
 		file: './dist/molamola.iife.js',
 		globals: {
-			'@PelagicCreatures/Sargasso': 'PelagicCreatures.Sargasso'
+			'@pelagiccreatures/sargasso': 'PelagicCreatures.Sargasso'
 		},
 		sourcemap: true
 	}],
