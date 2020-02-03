@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "rollup -c rollup.config.js"
+		"build": "rollup --no-treeshake -c rollup.config.js"
 	},
 	"repository": {
 		"type": "git",
@@ -18,7 +18,7 @@
 	},
 	"homepage": "https://github.com/PelagicCreatures/molamola#readme",
 	"peerDependencies": {
-		"@pelagiccreatures/sargasso": "^0.8.0"
+		"@pelagiccreatures/sargasso": "^0.8.1"
 	},
 	"dependencies": {
 		"lodash": "^4.17.15",

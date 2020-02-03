@@ -36,8 +36,20 @@ this.PelagicCreatures.MolaMola = (function (exports, sargasso) {
 
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
+  function commonjsRequire () {
+  	throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
+  }
+
+  function unwrapExports (x) {
+  	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+  }
+
   function createCommonjsModule(fn, module) {
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
+  }
+
+  function getCjsExportFromNamespace (n) {
+  	return n && n['default'] || n;
   }
 
   /** Detect free variable `global` from Node.js. */
@@ -1474,7 +1486,7 @@ this.PelagicCreatures.MolaMola = (function (exports, sargasso) {
 
   var isBuffer_1 = createCommonjsModule(function (module, exports) {
   /** Detect free variable `exports`. */
-  var freeExports =  exports && !exports.nodeType && exports;
+  var freeExports = 'object' == 'object' && exports && !exports.nodeType && exports;
 
   /** Detect free variable `module`. */
   var freeModule = freeExports && 'object' == 'object' && module && !module.nodeType && module;
@@ -1646,7 +1658,7 @@ this.PelagicCreatures.MolaMola = (function (exports, sargasso) {
 
   var _nodeUtil = createCommonjsModule(function (module, exports) {
   /** Detect free variable `exports`. */
-  var freeExports =  exports && !exports.nodeType && exports;
+  var freeExports = 'object' == 'object' && exports && !exports.nodeType && exports;
 
   /** Detect free variable `module`. */
   var freeModule = freeExports && 'object' == 'object' && module && !module.nodeType && module;
@@ -1987,7 +1999,7 @@ this.PelagicCreatures.MolaMola = (function (exports, sargasso) {
 
   var _cloneBuffer = createCommonjsModule(function (module, exports) {
   /** Detect free variable `exports`. */
-  var freeExports =  exports && !exports.nodeType && exports;
+  var freeExports = 'object' == 'object' && exports && !exports.nodeType && exports;
 
   /** Detect free variable `module`. */
   var freeModule = freeExports && 'object' == 'object' && module && !module.nodeType && module;
@@ -3363,7 +3375,9 @@ this.PelagicCreatures.MolaMola = (function (exports, sargasso) {
           }
 
           foundOmissionBlock = true;
-        } else if (foundIPv4TransitionBlock && i === blocks.length - 1) ; else if (!ipv6Block.test(blocks[i])) {
+        } else if (foundIPv4TransitionBlock && i === blocks.length - 1) {// it has been checked before that the last
+          // block is a valid IPv4 address
+        } else if (!ipv6Block.test(blocks[i])) {
           return false;
         }
       }
@@ -4655,7 +4669,8 @@ this.PelagicCreatures.MolaMola = (function (exports, sargasso) {
     }
 
     for (var i = 0; i < attributes.length; i++) {
-      if (i === attributes.length - 1 && attributes[i].toLowerCase() === 'base64') ; else if (!validAttribute.test(attributes[i])) {
+      if (i === attributes.length - 1 && attributes[i].toLowerCase() === 'base64') {// ok
+      } else if (!validAttribute.test(attributes[i])) {
         return false;
       }
     }
@@ -5618,7 +5633,7 @@ this.PelagicCreatures.MolaMola = (function (exports, sargasso) {
   	start () {
   		super.start();
 
-  		if (this.recaptcha) ;
+  		if (this.recaptcha) {}
 
   		this.submitHandler = async (e) => {
   			e.preventDefault();
