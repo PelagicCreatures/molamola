@@ -2,7 +2,7 @@
 
 ### Sargasso supervised Forms and Input Validation
 
-[Demo Page](https://blog.myanti.social/demos/molamola)
+[Demo Page](https://blog.PelagicCreatures.com/demos/molamola)
 
 ```
 @author Michael Rhodes
