@@ -18,17 +18,17 @@
 	},
 	"homepage": "https://github.com/PelagicCreatures/molamola#readme",
 	"peerDependencies": {
-		"@pelagiccreatures/sargasso": "^0.8.5"
+		"@pelagiccreatures/sargasso": "^0.10.0"
 	},
 	"dependencies": {
 		"lodash": "^4.17.19",
-		"validator": "^12.2.0"
+		"validator": "^13.1.1"
 	},
 	"devDependencies": {
 		"rollup": "^2.22.1",
-		"@rollup/plugin-commonjs": "^14.0.0",
+		"@rollup/plugin-commonjs": "^15.0.0",
 		"@rollup/plugin-json": "^4.1.0",
-		"@rollup/plugin-node-resolve": "^8.4.0",
+		"@rollup/plugin-node-resolve": "^9.0.0",
 		"eslint": "^7.5.0",
 		"eslint-config-standard": "^14.1.1",
 		"eslint-plugin-import": "^2.22.0",
