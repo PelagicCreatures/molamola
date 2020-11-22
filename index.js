@@ -39,7 +39,7 @@ import forEach from 'lodash/forEach'
 
 // make a clone of validator and add extensions to conform to Sequelize
 // to allow frontend/backend validation to be identical.
-import Validator from './node_modules/validator/es/index.js'
+import Validator from 'validator'
 
 const ExtendedValidator = cloneDeep(Validator)
 

@@ -21,7 +21,7 @@
 		"@pelagiccreatures/sargasso": "^0.10.0"
 	},
 	"dependencies": {
-		"lodash": "^4.17.19",
+		"lodash": "^4.17.20",
 		"validator": "^13.1.1"
 	},
 	"devDependencies": {
