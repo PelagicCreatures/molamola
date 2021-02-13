@@ -68,13 +68,13 @@
 			<p class="status"></p>
 		</form>
 
-		<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/sargasso/dist/sargasso.iife.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird/dist/tropicbird.iife.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/sargasso@v1.0.1/dist/sargasso.iife.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird@v1.0.3/dist/tropicbird.iife.js"></script>
 		<script src='./dist/molamola.iife.js'></script>
 
 		<script defer charset="UTF-8">
 
-			class BoilerplateHandler extends PelagicCreatures.MolaMola.MolaMolaHelper {
+			class BoilerplateHandler extends MolaMolaModule.MolaMolaHelper {
 				success (data) {
 					if (data.didLogin) {
 						tropicBird.pushSnackBar('info','Logged in')
@@ -91,7 +91,7 @@
 						}
 					}
 					if (data.status === 'ok' && data.redirect) {
-						loadPage(data.redirect)
+						SargassoModule.loadPageHandler(data.redirect)
 					}
 				}
 
@@ -100,10 +100,10 @@
 				}
 			}
 
-			PelagicCreatures.MolaMola.molaMolaUtils.registerHelperClass('BoilerplateHandler',BoilerplateHandler)
+			MolaMolaModule.molaMolaUtils.registerHelperClass('BoilerplateHandler',BoilerplateHandler)
 
-			let loadPage = PelagicCreatures.Sargasso.utils.bootSargasso({hijax:{}})
-			let tropicBird = new PelagicCreatures.TropicBird.TropicBird(document.body, {})
+			let loadPage = SargassoModule.utils.bootSargasso({hijax:{}})
+			let tropicBird = new TropicBirdModule.TropicBird(document.body, {})
 			tropicBird.start()
 
 		</script>
