@@ -12,7 +12,7 @@ Made in Barbados 🇧🇧 Copyright © 2020-2021 Michael Rhodes
 
 MolaMolla provides a framework for building forms with unified validation, captcha, csrf and other capabilities.
 
-### Form Element Attributes
+### Form Element Layout
 ```html
 <form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="xxx" data-helpers="HelperOne,HelperTwo">
   ....
@@ -175,3 +175,109 @@ Backend API prerequisites for the endpoint:
 You will at least need to receive the payload of the response to take action after the form is submitted and probably show a confirmation page in success or something like that.
 
 Subclass `MolaMolaHelper` and override the `success` and `error` methods to see the response payload and errors. This implementation is up to you. In our example response payload has some sugar to take some actions based on the response.
+
+
+### Serving modules from your project
+```
+npm install @pelagiccreatures/sargasso --save-dev
+npm install @pelagiccreatures/molamola --save-dev
+```
+
+You can use the .iife.js bundles in the /dist directory of the \@PelagicCreatures modules by copying them to a public directory on your server and referencing them in script tags in your html.
+```
+node_modules/@pelagiccreatures/sargasso/dist/sargasso.iife.js
+node_modules/@pelagiccreatures/molamola/dist/molamola.iife.js
+```
+
+-or-
+
+You can also bundle sargasso modules with your own es6 code using rollup.
+
+```
+npm install npx -g
+npm install rollup --save-dev
+npm install @rollup/plugin-json --save-dev
+npm install @rollup/plugin-commonjs --save-dev
+npm install @rollup/plugin-node-resolve --save-dev
+npm install rollup-plugin-terser --save-dev
+```
+
+app.js
+```javascript
+import { Sargasso, utils, loadPageHandler } from '@pelagiccreatures/sargasso'
+
+import { MolaMola } from '@pelagiccreatures/molamola'
+
+const boot = () => {
+  utils.bootSargasso({})
+}
+
+export {
+  boot
+}
+```
+
+html
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <script src="public/dist/js/userapp.iife.js" defer></script>
+    <script defer>
+      window.onload= () => {
+        App.boot()
+      }
+    </script>
+  </body>
+</html>
+```
+
+#### Create a rollup config file
+Set input and output ass needed.
+
+rollup.config.js
+```javascript
+import commonjs from '@rollup/plugin-commonjs'
+import nodeResolve from '@rollup/plugin-node-resolve'
+import json from '@rollup/plugin-json'
+
+import {
+  terser
+}
+  from 'rollup-plugin-terser'
+
+export default {
+  input: './app.js', // <<< location of your es6 code
+
+  output: {
+    format: 'iife',
+    file: 'public/dist/js/userapp.iife.js', // <<< where to save the browser bundle
+    name: 'App', // <<< global variable where app.js exports are exposed
+    sourcemap: true,
+    compact: true
+  },
+
+  plugins: [
+    json(),
+    commonjs({}),
+    nodeResolve({
+      preferBuiltins: false,
+      dedupe: (dep) => {
+        return dep.match(/^(@pelagiccreatures|lodash|js-cookie)/)
+      }
+    }),
+    terser({
+      output: {
+        comments: false
+      }
+    })
+  ]
+}
+```
+
+Make the bundle
+```
+npx rollup --no-treeshake --no-freeze -c rollup.config.js
+```
