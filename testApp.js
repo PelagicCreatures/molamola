@@ -4,7 +4,7 @@ const port = 3000
 const path = require('path')
 
 app.get('/', (req, res) => {
-	const file = path.join(__dirname, 'index.html')
+	const file = path.join(__dirname, 'example/index.html')
 	res.sendFile(file, {
 		headers: {
 			'Content-Type': 'text/html'

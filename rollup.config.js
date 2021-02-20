@@ -16,8 +16,7 @@ export default {
 		file: './dist/molamola.iife.js',
 		globals: {
 			'@pelagiccreatures/sargasso': 'SargassoModule'
-		},
-		sourcemap: true
+		}
 	}, {
 		format: 'iife',
 		name: 'MolaMolaModule',

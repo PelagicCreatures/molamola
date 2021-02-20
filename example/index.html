@@ -1,4 +1,5 @@
-<html charset="UTF-8">
+<!DOCTYPE html>
+<html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -68,44 +69,34 @@
 			<p class="status"></p>
 		</form>
 
-		<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/sargasso@v1.0.1/dist/sargasso.iife.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird@v1.0.3/dist/tropicbird.iife.js"></script>
-		<script src='./dist/molamola.iife.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/sargasso/dist/sargasso.iife.js"></script>
+		<script src='/dist/molamola.iife.js'></script>
 
-		<script defer charset="UTF-8">
+		<script defer>
 
 			class BoilerplateHandler extends MolaMolaModule.MolaMolaHelper {
+
+				// override this method to handle 200 and 422 responses
 				success (data) {
-					if (data.didLogin) {
-						tropicBird.pushSnackBar('info','Logged in')
-					}
-					if (data.didLogout) {
-						tropicBird.pushSnackBar('info','Logged out')
-					}
 					if( data.message) {
-						tropicBird.pushSnackBar('info',data.message)
+						alert(data.message)
 					}
 					if (data.errors) {
 						for(let i = 0; i < data.errors.length; i++){
-							tropicBird.pushSnackBar(data['error-level'] || 'info', data.errors[i])
+							alert(data.errors[i])
 						}
-					}
-					if (data.status === 'ok' && data.redirect) {
-						SargassoModule.loadPageHandler(data.redirect)
 					}
 				}
 
+				// override this method to handle all other http responses
 				error (err) {
-					tropicBird.pushSnackBar('error',err.message)
+					alert(err.message)
 				}
 			}
 
 			MolaMolaModule.molaMolaUtils.registerHelperClass('BoilerplateHandler',BoilerplateHandler)
 
-			let loadPage = SargassoModule.utils.bootSargasso({hijax:{}})
-			let tropicBird = new TropicBirdModule.TropicBird(document.body, {})
-			tropicBird.start()
-
+			let loadPage = SargassoModule.utils.bootSargasso()
 		</script>
 
 		<div class="mdc-snackbar">

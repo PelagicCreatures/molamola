@@ -356,19 +356,30 @@ class ValidateHelper extends MolaMolaHelper {
 		})
 	}
 
-	getMessage (test, opts) {
-		let message = validationMessages[test]
-		if (!message) {
+	getMessage (test, opts, overrideMessage) {
+		let message = overrideMessage || validationMessages[test]
+		if (!message) { // build a message
 			message = test
 			if (opts) {
-				for (let i = 0; i < opts.length; i++) {
-					message += ' %s'
+				if (Array.isArray[opts]) {
+					for (let i = 0; i < opts.length; i++) {
+						message += ' %s'
+					}
 				}
 			}
 		}
 		if (!opts) {
 			return message
 		}
+
+		if (!Array.isArray(opts)) {
+			const tmp = []
+			for (const prop in opts) {
+				tmp.push(opts[prop])
+			}
+			opts = tmp
+		}
+
 		let c = 0
 		return message.replace(/%s/g, function () {
 			const opt = opts[c++]
@@ -378,24 +389,36 @@ class ValidateHelper extends MolaMolaHelper {
 
 	async validateField (element) {
 		const val = getRealVal(element).toString()
-		const validations = JSON.parse(element.getAttribute('data-validate'))
+		let validations = {}
+		let validationMessage = {}
+		let errors = []
 
-		if (!validations.notEmpty && !val) {
+		try {
+			validations = JSON.parse(element.getAttribute('data-validate') || '{}')
+			validationMessage = JSON.parse(element.getAttribute('data-validate-message') || '{}')
+		} catch (e) {
+			errors = ['data-validation attribute parse error']
+		}
+
+		if (!validations.notEmpty && !val && !errors.length) {
 			return null
 		}
 
-		const errors = []
 		for (const test in validations) {
 			const opts = validations[test]
 			if (typeof opts === 'boolean') {
 				if (!ExtendedValidator[test](val)) {
-					errors.push(this.getMessage(test))
+					errors.push(this.getMessage(test, undefined, validationMessage[test]))
 				}
-			} else {
+			} else if (Array.isArray(opts)) {
 				const myopts = opts.slice()
 				myopts.unshift(val)
 				if (!ExtendedValidator[test].apply(ExtendedValidator, myopts)) {
-					errors.push(this.getMessage(test, opts))
+					errors.push(this.getMessage(test, opts, validationMessage[test]))
+				}
+			} else {
+				if (!ExtendedValidator[test].apply(ExtendedValidator, [val, opts])) {
+					errors.push(this.getMessage(test, opts, validationMessage[test]))
 				}
 			}
 		}
