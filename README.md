@@ -30,35 +30,48 @@ Attributes:
 * `data-recaptcha`: public [reCaptchaV3](https://developers.google.com/recaptcha/docs/v3) API key.
 * `data-helpers`: list of MolaMola Helper classes for handling errors and response payload etc.
 
-### Form Elements
+
+Field validation is implemented by [Validator](https://www.npmjs.com/package/validator) using  [Sequelize](https://www.npmjs.com/package/sequelize) extensions.
+
+If using reCaptchaV3 it will be called on form submit and the token will be added to the payload (g-recaptcha-response) for backend validation and scoring.
+
+### Form Element Layout
+
 ```html
 <div class="input-group">
   <input type="text" name="email" placeholder="Email address" data-validate='{"isEmail":true,"notEmpty":true}' data-payload>
   <span class="validation-help"></span>
 </div>
 ```
-**Prerequisites:**
-* All input elements must be wrapped in an `.input-group`
-* All validated inputs must have an `.validation-help` container inside the `.input-group`
-
-Field validation is implemented by [Validator](https://www.npmjs.com/package/validator) using  [Sequelize](https://www.npmjs.com/package/sequelize) extensions.
-
-If using reCaptchaV3 it will be called on form submit and the token will be added to the payload (g-recaptcha-response) for backend validation and scoring.
 
 **Input Attributes:**
-* name: payload property (required)
-* data-validate: JSON string detailing applicable Field validators
-* data-validate-message: message to display on validation error (default messages are somewhat cryptic)
-* data-payload: set if the field should be included in form payload
+* `name`: payload property (required)
+* `data-validate`: JSON string detailing applicable Field validators
+* `data-validate-message`: message to display on validation error (default messages are somewhat cryptic)
+* `data-payload`: set if the field should be included in form payload
+
+### Validation Helper
+The built in validation helper marks input errors and displays input error messages
+
+Prerequisites for validation behavior:
+* All input elements must be wrapped in an `.input-group` container
+* All validated inputs must have an `.validation-help` container inside the `.input-group`
+
+CSS rules to reveal validation messages on input error
+```css
+.validation-help { opacity:0; }
+.touched .error .validation-help { opacity: 1}
+```
+
+Example validators [See Validator for details](https://www.npmjs.com/package/validator):
+* `data-validate='{"isEmail":true,"notEmpty":true}'`
+* `data-validate='{"isInt":{"min":1,"max":2}}' data-validate-message='{"isInt":"integer between %s and %s"}'`
+* `data-validate='{"isLength":{"min":0,"max":10}}'`
 
 Note: the format of the attributes must be valid JSON (double quotes required)
-Example validators [See Validator for details](https://www.npmjs.com/package/validator):
-* data-validate='{"isEmail":true,"notEmpty":true}'
-* data-validate='{"isInt":{"min":1,"max":2}}' data-validate-message='{"isInt":"integer between %s and %s"}'
-* data-validate='{"isLength":{"min":0,"max":10}}'
 
 ### Grouping selects, checkboxes and radio buttons
-Normalizing input types for normalized JSON payloads
+Grouping payloads for multiple and single select, checkboxes and radio buttons
 
 ```html
 <div class="input-group">
@@ -113,7 +126,7 @@ Make an API call on change to validate uniqueness or existence for a field value
 
 TODO: need example
 
-## Form Helpers & Endpoint API
+### Endpoint API
 
 Backend API prerequisites for the endpoint:
 
@@ -125,48 +138,26 @@ You will at least need to receive the payload of the response to take action aft
 
 Subclass `MolaMolaHelper` and override the `success` and `error` methods to see the response payload and errors. This implementation is up to you. In our example response payload has some sugar to take some actions based on the response.
 
-### Example Payload
-```javascript
-{
-  "status": "ok",
-  "message": "welcome back"
-}
-{
-  "status": "error",
-  "message": "invalid",
-	"errors": [{}]
-}
-```
-
 ### Form Helper
 This example hooks up a helper to a form
 
 ```javascript
 class ExampleHandler extends MolaMolaModule.MolaMolaHelper {
 
-	// The submit button is pressed and can be used to modify the payload or implement a captcha or something.
+	// A chance to modify the payload or implement a captcha or something before submit.
   preFlight() {
-    document.querySelector('.status').innerHTML = 'submitting form\n'
-    document.querySelector('.status').append(JSON.stringify(this.form.payload,null,2) + '\n')
+
   }
 
   // use this method to handle 200 (ok) and 422 (unprocessable entity) responses
 	// this example expects a JSON response. The specification of the payload is up to you.
   success(data) {
-    if (data.message) {
-      document.querySelector('.status').append('data.message\n')
-    }
-    if (data.errors) {
-      for (let i = 0; i < data.errors.length; i++) {
-        document.querySelector('.status').append(data.errors[i]+'\n')
-      }
-    }
-    document.querySelector('.status').append('form submitted\n')
+    alert('submitted')
   }
 
   // use this method to handle all other http responses
   error(err) {
-    alert(err.message+'\n')
+    alert('error ' + err.message)
   }
 }
 
@@ -175,5 +166,5 @@ MolaMolaModule.molaMolaUtils.registerHelperClass('ExampleHandler', ExampleHandle
 ```
 
 ```html
-<form id="test-form" data-sargasso-class="MolaMola"  action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-helpers="BoilerplateHandler">
+<form id="test-form" data-sargasso-class="MolaMola"  action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-helpers="ExampleHandler">
 ```

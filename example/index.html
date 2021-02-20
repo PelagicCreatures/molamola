@@ -1,109 +1,134 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link href='https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird/dist/bundle.css' rel='stylesheet'>
 
-		<style>
-			.input-group { margin-bottom: .5em; }
-			.validation-help { opacity:0;color:red; display: block; min-height: 1em; }
-			.touched .error .validation-help { opacity: 1}
-		</style>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href='https://cdn.jsdelivr.net/npm/@pelagiccreatures/tropicbird/dist/bundle.css' rel='stylesheet'>
 
-		<script src="https://www.google.com/recaptcha/api.js?render=6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro"></script>
-	</head>
-	<body>
-		<form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro" data-helpers="BoilerplateHandler" autocomplete="off">
-			<div class="input-group">
-				<input type="text" name="one" placeholder="field one" data-validate='{"isEmail":true,"notEmpty":true}' data-payload>
-				<span class="validation-help"></span>
-			</div>
-			<div class="input-group">
-				<input type="text" name="two" placeholder="lookup. try &quot;match&quot;" data-validate='{"isLength":[5,30]}' data-lookup-endpoint="/lookup" data-unique data-payload>
-				<span class="validation-help"></span>
-			</div>
-			<div class="input-group">
-				<input type="text" name="three" placeholder="must match above" data-validate='{"notEmpty":true}' data-match="[name=two]" data-payload>
-				<span class="validation-help"></span>
-			</div>
-			<div class="input-group">
-				<select name="select" data-validate='{"notEmpty":true}' data-payload>
-					<option value="">---</option>
-					<option value="val 1">val 1</option>
-					<option value="val 2">val 2</option>
-				</select>
-				<span class="validation-help"></span>
-			</div>
-			<div class="input-group">
-				<select name="select-multiple" data-validate='{"notEmpty":true}' multiple data-payload>
-					<option value="">---</option>
-					<option value="val 1">val 1</option>
-					<option value="val 2">val 2</option>
-				</select>
-				<span class="validation-help"></span>
-			</div>
-			<div class="input-group">
-				<input type="hidden" name="checkbox-group" data-group='[type="checkbox"]' data-validate='{"notEmpty":true}' multiple data-payload>
-				<input type="checkbox" value="1"> Check 1
-				<input type="checkbox" value="2"> Check 2
-				<input type="checkbox" value="3"> Check 3
-				<input type="checkbox" value="4"> Check 4
-				<input type="checkbox" value="5"> Check 5
-				<input type="checkbox" value="6"> Check 6
-				<span class="validation-help"></span>
-			</div>
+	<style>
+		.input-group { margin-bottom: .5em; }
+		.validation-help { opacity:0;color:red; display: block; min-height: 1em; }
+		.touched .error .validation-help { opacity: 1}
+	</style>
 
-			<div class="input-group">
-				<input type="hidden" name="radio-group" data-group='[type="radio"]' data-payload>
-				<input type="radio" name="radio" value="1" checked> radio 1
-				<input type="radio" name="radio" value="2"> radio 2
-				<input type="radio" name="radio" value="3"> radio 3
-				<input type="radio" name="radio" value="4"> radio 4
-				<input type="radio" name="radio" value="5"> radio 5
-				<input type="radio" name="radio" value="6"> radio 6
-				<span class="validation-help"></span>
-			</div>
+	<script src="https://www.google.com/recaptcha/api.js?render=6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro"></script>
+</head>
 
-			<button class="submitter">submit</button>
-			<p class="status"></p>
-		</form>
+<body>
+	<form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro" data-helpers="BoilerplateHandler,ExampleHelper" autocomplete="off">
+		<div class="input-group">
+			<input type="text" name="one" placeholder="field one" data-validate='{"isEmail":true,"notEmpty":true}' data-payload>
+			<span class="validation-help"></span>
+		</div>
+		<div class="input-group">
+			<input type="text" name="two" placeholder="lookup. try &quot;match&quot;" data-validate='{"isLength":[5,30]}' data-lookup-endpoint="/lookup" data-unique data-payload>
+			<span class="validation-help"></span>
+		</div>
+		<div class="input-group">
+			<input type="text" name="three" placeholder="must match above" data-validate='{"notEmpty":true}' data-match="[name=two]" data-payload>
+			<span class="validation-help"></span>
+		</div>
+		<div class="input-group">
+			<select name="select" data-validate='{"notEmpty":true}' data-payload>
+				<option value="">---</option>
+				<option value="val 1">val 1</option>
+				<option value="val 2">val 2</option>
+			</select>
+			<span class="validation-help"></span>
+		</div>
+		<div class="input-group">
+			<select name="select-multiple" data-validate='{"notEmpty":true}' multiple data-payload>
+				<option value="">---</option>
+				<option value="val 1">val 1</option>
+				<option value="val 2">val 2</option>
+			</select>
+			<span class="validation-help"></span>
+		</div>
+		<div class="input-group">
+			<input type="hidden" name="checkbox-group" data-group='[type="checkbox"]' data-validate='{"notEmpty":true}' multiple data-payload>
+			<input type="checkbox" value="1"> Check 1
+			<input type="checkbox" value="2"> Check 2
+			<input type="checkbox" value="3"> Check 3
+			<input type="checkbox" value="4"> Check 4
+			<input type="checkbox" value="5"> Check 5
+			<input type="checkbox" value="6"> Check 6
+			<span class="validation-help"></span>
+		</div>
 
-		<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/sargasso/dist/sargasso.iife.js"></script>
-		<script src='/dist/molamola.iife.js'></script>
+		<div class="input-group">
+			<input type="hidden" name="radio-group" data-group='[type="radio"]' data-payload>
+			<input type="radio" name="radio" value="1" checked> radio 1
+			<input type="radio" name="radio" value="2"> radio 2
+			<input type="radio" name="radio" value="3"> radio 3
+			<input type="radio" name="radio" value="4"> radio 4
+			<input type="radio" name="radio" value="5"> radio 5
+			<input type="radio" name="radio" value="6"> radio 6
+			<span class="validation-help"></span>
+		</div>
 
-		<script defer>
+		<button class="submitter">submit</button>
 
-			class BoilerplateHandler extends MolaMolaModule.MolaMolaHelper {
+		<pre class="status"></pre>
+	</form>
 
-				// override this method to handle 200 and 422 responses
-				success (data) {
-					if( data.message) {
-						alert(data.message)
-					}
-					if (data.errors) {
-						for(let i = 0; i < data.errors.length; i++){
-							alert(data.errors[i])
-						}
-					}
+	<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/sargasso/dist/sargasso.iife.js"></script>
+	<script src='/dist/molamola.iife.js'></script>
+
+	<script defer>
+		class ExampleHelper extends MolaMolaModule.MolaMolaHelper {
+
+			async preFlight() {
+				return new Promise((accept,reject)=>{
+					document.querySelector('.status').innerHTML = 'payload: ' + JSON.stringify(this.form.payload, null, 2) + '\n'
+					accept()
+				})
+			}
+
+			// override this method to handle 200 and 422 responses
+			success(data) {
+				document.querySelector('.status').append('form submitted\nresponse: ' + JSON.stringify(data,null,2) + '\n')
+
+				if (data.message) {
+					document.querySelector('.status').append(data.message + '\n')
 				}
-
-				// override this method to handle all other http responses
-				error (err) {
-					alert(err.message)
+				if (data.errors) {
+					for (let i = 0; i < data.errors.length; i++) {
+						document.querySelector('.status').append(data.errors[i] + '\n')
+					}
 				}
 			}
 
-			MolaMolaModule.molaMolaUtils.registerHelperClass('BoilerplateHandler',BoilerplateHandler)
+			// override this method to handle all other http responses
+			error(err) {
+				document.querySelector('.status').append('ExampleHelper error:' + err.message + '\n')
+			}
+		}
 
-			let loadPage = SargassoModule.utils.bootSargasso()
-		</script>
+		MolaMolaModule.molaMolaUtils.registerHelperClass('ExampleHelper', ExampleHelper)
 
-		<div class="mdc-snackbar">
-			<div class="mdc-snackbar__surface">
-				<div class="mdc-snackbar__label">
-				</div>
+		class BoilerplateHandler extends MolaMolaModule.MolaMolaHelper {
+
+			// override this method to handle 200 and 422 responses
+			success(data) {
+			}
+
+			// override this method to handle all other http responses
+			error(err) {
+			}
+		}
+
+		MolaMolaModule.molaMolaUtils.registerHelperClass('BoilerplateHandler', BoilerplateHandler)
+
+		let loadPage = SargassoModule.utils.bootSargasso()
+	</script>
+
+	<div class="mdc-snackbar">
+		<div class="mdc-snackbar__surface">
+			<div class="mdc-snackbar__label">
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
+
 </html>
