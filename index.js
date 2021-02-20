@@ -3,7 +3,7 @@
 
 	@author Michael Rhodes
 	@license MIT
-	Made in Barbados 🇧🇧 Copyright © 2020 Michael Rhodes
+	Made in Barbados 🇧🇧 Copyright © 2020-2021 Michael Rhodes
 
 	Form ID: an application unique identifier for the form EG: 'login', 'register'
 

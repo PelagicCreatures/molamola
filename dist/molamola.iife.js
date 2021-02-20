@@ -6,7 +6,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 		@author Michael Rhodes
 		@license MIT
-		Made in Barbados 🇧🇧 Copyright © 2020 Michael Rhodes
+		Made in Barbados 🇧🇧 Copyright © 2020-2021 Michael Rhodes
 	**/
 
 	const registeredHelperClasses = {};
@@ -44,7 +44,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 		@author Michael Rhodes
 		@license MIT
-		Made in Barbados 🇧🇧 Copyright © 2020 Michael Rhodes
+		Made in Barbados 🇧🇧 Copyright © 2020-2021 Michael Rhodes
 	**/
 
 	class ReCAPTCHAv3Helper extends MolaMolaHelper {
@@ -9498,7 +9498,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 		@author Michael Rhodes
 		@license MIT
-		Made in Barbados 🇧🇧 Copyright © 2020 Michael Rhodes
+		Made in Barbados 🇧🇧 Copyright © 2020-2021 Michael Rhodes
 	**/
 
 	const ExtendedValidator = cloneDeep_1(Validator);
@@ -9927,7 +9927,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 		@author Michael Rhodes
 		@license MIT
-		Made in Barbados 🇧🇧 Copyright © 2020 Michael Rhodes
+		Made in Barbados 🇧🇧 Copyright © 2020-2021 Michael Rhodes
 	**/
 
 	const validationMessages = {
@@ -10199,7 +10199,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 		@author Michael Rhodes
 		@license MIT
-		Made in Barbados 🇧🇧 Copyright © 2020 Michael Rhodes
+		Made in Barbados 🇧🇧 Copyright © 2020-2021 Michael Rhodes
 	**/
 
 	class MolaMola extends sargasso.Sargasso {
@@ -10349,7 +10349,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 		@author Michael Rhodes
 		@license MIT
-		Made in Barbados 🇧🇧 Copyright © 2020 Michael Rhodes
+		Made in Barbados 🇧🇧 Copyright © 2020-2021 Michael Rhodes
 
 		Form ID: an application unique identifier for the form EG: 'login', 'register'
 

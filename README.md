@@ -1,18 +1,18 @@
 # @PelagicCreatures/MolaMola
 
-### Sargasso supervised Forms and Input Validation
+### Supervised Forms and Input Validation
 
 [Demo Page](https://blog.PelagicCreatures.com/demos/molamola)
 
 ```
 @author Michael Rhodes
 @license MIT
-Made in Barbados 🇧🇧 Copyright © 2020 Michael Rhodes
+Made in Barbados 🇧🇧 Copyright © 2020-2021 Michael Rhodes
 ```
 
-MolaMolla provides a framework for building forms unified validation, captcha, csrf and other capabilities.
+MolaMolla provides a framework for building forms with unified validation, captcha, csrf and other capabilities.
 
-### Form Tag
+### Form Element Attributes
 ```html
 <form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="xxx" data-helpers="HelperOne,HelperTwo">
   ....
@@ -25,17 +25,20 @@ Attributes:
 * `id`: the id of the form (required)
 * `action`: endpoint to transmit data to
 * `method`: method (POST,GET,PATCH etc)
-* `data-submitter`: css selector of the form submit button
+* `data-helpers`: list of MolaMola Helper classes for handling errors and response payload etc.
+* `data-submitter`: css selector of the form submit button. button will be enabled only when input is valid.
 * `data-status`: css selector of a container where errors are displayed
 * `data-recaptcha`: public [reCaptchaV3](https://developers.google.com/recaptcha/docs/v3) API key.
-* `data-helpers`: list of MolaMola Helper classes for handling errors and response payload etc.
 
+If using reCaptchaV3 The recaptcha script must be included with an API id on the page. It will be called on form submit and the token will be added to the payload (g-recaptcha-response) for backend validation and scoring.
 
-Field validation is implemented by [Validator](https://www.npmjs.com/package/validator) using  [Sequelize](https://www.npmjs.com/package/sequelize) extensions.
+```html
+<head>
+  <script src="https://www.google.com/recaptcha/api.js?render=xxx"></script>
+</head>
+```
 
-If using reCaptchaV3 it will be called on form submit and the token will be added to the payload (g-recaptcha-response) for backend validation and scoring.
-
-### Form Element Layout
+### Input Element Layout
 
 ```html
 <div class="input-group">
@@ -53,9 +56,11 @@ If using reCaptchaV3 it will be called on form submit and the token will be adde
 ### Validation Helper
 The built in validation helper marks input errors and displays input error messages
 
+Field validation is implemented by [Validator](https://www.npmjs.com/package/validator) using [Sequelize](https://www.npmjs.com/package/sequelize) extensions.
+
 Prerequisites for validation behavior:
 * All input elements must be wrapped in an `.input-group` container
-* All validated inputs must have an `.validation-help` container inside the `.input-group`
+* All validated inputs must have an `.validation-help` container inside the `.input-group` for displaying errors
 
 CSS rules to reveal validation messages on input error
 ```css
@@ -126,17 +131,7 @@ Make an API call on change to validate uniqueness or existence for a field value
 
 TODO: need example
 
-### Endpoint API
 
-Backend API prerequisites for the endpoint:
-
-* 200 (ok) & 422 (unprocessable entity) are expected to return json. Use 422 for server side validation errors, the response payload is up to implementor and should be handled with a helper `success` method.
-
-* Other http errors such as 401 (unauthorized) are handed to the helper `error` method
-
-You will at least need to receive the payload of the response to take action after the form is submitted and probably show a confirmation page in success or something like that.
-
-Subclass `MolaMolaHelper` and override the `success` and `error` methods to see the response payload and errors. This implementation is up to you. In our example response payload has some sugar to take some actions based on the response.
 
 ### Form Helper
 This example hooks up a helper to a form
@@ -144,13 +139,13 @@ This example hooks up a helper to a form
 ```javascript
 class ExampleHandler extends MolaMolaModule.MolaMolaHelper {
 
-	// A chance to modify the payload or implement a captcha or something before submit.
+  // A chance to modify the payload or implement a captcha or something before submit.
   preFlight() {
 
   }
 
   // use this method to handle 200 (ok) and 422 (unprocessable entity) responses
-	// this example expects a JSON response. The specification of the payload is up to you.
+  // this example expects a JSON response. The specification of the payload is up to you.
   success(data) {
     alert('submitted')
   }
@@ -166,5 +161,17 @@ MolaMolaModule.molaMolaUtils.registerHelperClass('ExampleHandler', ExampleHandle
 ```
 
 ```html
-<form id="test-form" data-sargasso-class="MolaMola"  action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-helpers="ExampleHandler">
+<form id="test-form" data-sargasso-class="MolaMola" data-helpers="ExampleHandler" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status">
 ```
+
+### Endpoint API
+
+Backend API prerequisites for the endpoint:
+
+* 200 (ok) & 422 (unprocessable entity) are expected to return json. Use 422 for server side validation errors, the response payload is up to implementor and should be handled with a helper `success` method.
+
+* Other http errors such as 401 (unauthorized) are handed to the helper `error` method
+
+You will at least need to receive the payload of the response to take action after the form is submitted and probably show a confirmation page in success or something like that.
+
+Subclass `MolaMolaHelper` and override the `success` and `error` methods to see the response payload and errors. This implementation is up to you. In our example response payload has some sugar to take some actions based on the response.

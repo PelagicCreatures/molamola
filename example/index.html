@@ -12,11 +12,10 @@
 		.touched .error .validation-help { opacity: 1}
 	</style>
 
-	<script src="https://www.google.com/recaptcha/api.js?render=6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro"></script>
 </head>
 
 <body>
-	<form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-recaptcha="6Lf9JcsUAAAAAIj22YtqvAcP3xScEXheQN76zKro" data-helpers="BoilerplateHandler,ExampleHelper" autocomplete="off">
+	<form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-helpers="BoilerplateHandler,ExampleHelper" autocomplete="off">
 		<div class="input-group">
 			<input type="text" name="one" placeholder="field one" data-validate='{"isEmail":true,"notEmpty":true}' data-payload>
 			<span class="validation-help"></span>
