@@ -2,15 +2,15 @@
 
 ### Supervised Forms and Input Validation
 
-[Demo Page](https://blog.PelagicCreatures.com/demos/molamola)
-
 ```
 @author Michael Rhodes
 @license MIT
 Made in Barbados 🇧🇧 Copyright © 2020-2021 Michael Rhodes
 ```
 
-MolaMolla provides a framework for building forms with unified validation, captcha, csrf and other capabilities.
+MolaMolla provides a framework for building forms with validation, captcha, csrf and other plugin capabilities.
+
+[Try It](https://jsfiddle.net/PelagicCreatures/9zkwp7u5/36/)
 
 ### Form Element Layout
 ```html
