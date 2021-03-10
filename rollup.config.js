@@ -27,7 +27,9 @@ export default {
 		plugins: [terser({
 			output: {
 				comments: false
-			}
+			},
+			keep_classnames: true,
+			keep_fnames: true
 		})],
 		sourcemap: true
 	}],

@@ -1,6 +1,6 @@
 # @PelagicCreatures/MolaMola
 
-### Supervised Forms and Input Validation
+### PWA friendly form validation & API payload management 
 
 ```
 @author Michael Rhodes
@@ -271,7 +271,9 @@ export default {
     terser({
       output: {
         comments: false
-      }
+      },
+      keep_classnames: true,
+      keep_fnames: true
     })
   ]
 }
