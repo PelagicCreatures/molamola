@@ -1,6 +1,6 @@
 # @PelagicCreatures/MolaMola
 
-### PWA friendly form validation & API payload management 
+### PWA friendly form validation & API payload management
 
 ```
 @author Michael Rhodes
@@ -8,9 +8,9 @@
 Made in Barbados 🇧🇧 Copyright © 2020-2021 Michael Rhodes
 ```
 
-MolaMolla provides a framework for building forms with validation, captcha, csrf and other plugin capabilities.
+MolaMola provides a framework for building forms with validation, captcha, csrf and other plugin capabilities.
 
-[Try It](https://jsfiddle.net/PelagicCreatures/9zkwp7u5/39/)
+[Try It](https://stackblitz.com/edit/sargasso-molamola)
 
 ### Form Element Layout
 ```html

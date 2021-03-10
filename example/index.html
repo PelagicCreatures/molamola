@@ -15,7 +15,7 @@
 </head>
 
 <body>
-	<form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-helpers="BoilerplateHandler,ExampleHelper" autocomplete="off">
+	<form id="test-form" data-sargasso-class="MolaMola" action="/form-post" method="POST" data-submitter=".submitter" data-status=".status" data-helpers="ExampleHelper" autocomplete="off">
 		<div class="input-group">
 			<input type="text" name="one" placeholder="field one" data-validate='{"isEmail":true,"notEmpty":true}' data-payload>
 			<span class="validation-help"></span>
@@ -105,19 +105,6 @@
 		}
 
 		MolaMolaModule.molaMolaUtils.registerHelperClass('ExampleHelper', ExampleHelper)
-
-		class BoilerplateHandler extends MolaMolaModule.MolaMolaHelper {
-
-			// override this method to handle 200 and 422 responses
-			success(data) {
-			}
-
-			// override this method to handle all other http responses
-			error(err) {
-			}
-		}
-
-		MolaMolaModule.molaMolaUtils.registerHelperClass('BoilerplateHandler', BoilerplateHandler)
 
 		let loadPage = SargassoModule.utils.bootSargasso()
 	</script>
