@@ -162,16 +162,17 @@ var MolaMolaModule = (function (exports, sargasso) {
 		return a;
 	}
 
-	function createCommonjsModule(fn) {
-	  var module = { exports: {} };
-		return fn(module, module.exports), module.exports;
+	function commonjsRequire (path) {
+		throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
 	}
 
-	function commonjsRequire (target) {
-		throw new Error('Could not dynamically require "' + target + '". Please configure the dynamicRequireTargets option of @rollup/plugin-commonjs appropriately for this require call to behave properly.');
-	}
+	var validator = {exports: {}};
 
-	var assertString_1 = createCommonjsModule(function (module, exports) {
+	var toDate$1 = {exports: {}};
+
+	var assertString$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -194,11 +195,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(assertString$1, assertString$1.exports));
 
-	var assertString = /*@__PURE__*/getDefaultExportFromCjs(assertString_1);
+	var assertString = /*@__PURE__*/getDefaultExportFromCjs(assertString$1.exports);
 
-	var toDate_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -206,7 +207,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = toDate;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -218,17 +219,22 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(toDate$1, toDate$1.exports));
 
-	var toDate = /*@__PURE__*/getDefaultExportFromCjs(toDate_1);
+	var toDate = /*@__PURE__*/getDefaultExportFromCjs(toDate$1.exports);
 
-	var alpha_1 = createCommonjsModule(function (module, exports) {
+	var toFloat$1 = {exports: {}};
+
+	var isFloat$1 = {};
+
+	var alpha$1 = {};
+
 	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(alpha$1, "__esModule", {
 	  value: true
 	});
-	exports.commaDecimal = exports.dotDecimal = exports.farsiLocales = exports.arabicLocales = exports.englishLocales = exports.decimal = exports.alphanumeric = exports.alpha = void 0;
+	var commaDecimal_1 = alpha$1.commaDecimal = dotDecimal_1 = alpha$1.dotDecimal = farsiLocales_1 = alpha$1.farsiLocales = arabicLocales_1 = alpha$1.arabicLocales = englishLocales_1 = alpha$1.englishLocales = decimal_1 = alpha$1.decimal = alphanumeric_1 = alpha$1.alphanumeric = alpha_2 = alpha$1.alpha = void 0;
 	var alpha = {
 	  'en-US': /^[A-Z]+$/i,
 	  'az-AZ': /^[A-VXYZÇƏĞİıÖŞÜ]+$/i,
@@ -262,7 +268,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  he: /^[א-ת]+$/,
 	  fa: /^['آاءأؤئبپتثجچحخدذرزژسشصضطظعغفقکگلمنوهةی']+$/i
 	};
-	exports.alpha = alpha;
+	var alpha_2 = alpha$1.alpha = alpha;
 	var alphanumeric = {
 	  'en-US': /^[0-9A-Z]+$/i,
 	  'az-AZ': /^[0-9A-VXYZÇƏĞİıÖŞÜ]+$/i,
@@ -295,14 +301,14 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  he: /^[0-9א-ת]+$/,
 	  fa: /^['0-9آاءأؤئبپتثجچحخدذرزژسشصضطظعغفقکگلمنوهةی۱۲۳۴۵۶۷۸۹۰']+$/i
 	};
-	exports.alphanumeric = alphanumeric;
+	var alphanumeric_1 = alpha$1.alphanumeric = alphanumeric;
 	var decimal = {
 	  'en-US': '.',
 	  ar: '٫'
 	};
-	exports.decimal = decimal;
+	var decimal_1 = alpha$1.decimal = decimal;
 	var englishLocales = ['AU', 'GB', 'HK', 'IN', 'NZ', 'ZA', 'ZM'];
-	exports.englishLocales = englishLocales;
+	var englishLocales_1 = alpha$1.englishLocales = englishLocales;
 
 	for (var locale, i = 0; i < englishLocales.length; i++) {
 	  locale = "en-".concat(englishLocales[i]);
@@ -313,7 +319,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 
 	var arabicLocales = ['AE', 'BH', 'DZ', 'EG', 'IQ', 'JO', 'KW', 'LB', 'LY', 'MA', 'QM', 'QA', 'SA', 'SD', 'SY', 'TN', 'YE'];
-	exports.arabicLocales = arabicLocales;
+	var arabicLocales_1 = alpha$1.arabicLocales = arabicLocales;
 
 	for (var _locale, _i = 0; _i < arabicLocales.length; _i++) {
 	  _locale = "ar-".concat(arabicLocales[_i]);
@@ -323,7 +329,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	}
 
 	var farsiLocales = ['IR', 'AF'];
-	exports.farsiLocales = farsiLocales;
+	var farsiLocales_1 = alpha$1.farsiLocales = farsiLocales;
 
 	for (var _locale2, _i2 = 0; _i2 < farsiLocales.length; _i2++) {
 	  _locale2 = "fa-".concat(farsiLocales[_i2]);
@@ -333,9 +339,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 
 	var dotDecimal = ['ar-EG', 'ar-LB', 'ar-LY'];
-	exports.dotDecimal = dotDecimal;
+	var dotDecimal_1 = alpha$1.dotDecimal = dotDecimal;
 	var commaDecimal = ['bg-BG', 'cs-CZ', 'da-DK', 'de-DE', 'el-GR', 'en-ZM', 'es-ES', 'fr-CA', 'fr-FR', 'id-ID', 'it-IT', 'ku-IQ', 'hu-HU', 'nb-NO', 'nn-NO', 'nl-NL', 'pl-PL', 'pt-PT', 'ru-RU', 'sl-SI', 'sr-RS@latin', 'sr-RS', 'sv-SE', 'tr-TR', 'uk-UA', 'vi-VN'];
-	exports.commaDecimal = commaDecimal;
+	commaDecimal_1 = alpha$1.commaDecimal = commaDecimal;
 
 	for (var _i3 = 0; _i3 < dotDecimal.length; _i3++) {
 	  decimal[dotDecimal[_i3]] = decimal['en-US'];
@@ -356,29 +362,25 @@ var MolaMolaModule = (function (exports, sargasso) {
 	decimal['pl-Pl'] = decimal['pl-PL']; // see #1455
 
 	alpha['fa-AF'] = alpha.fa;
-	});
 
-	var alpha = /*@__PURE__*/getDefaultExportFromCjs(alpha_1);
-
-	var isFloat_1 = createCommonjsModule(function (module, exports) {
 	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(isFloat$1, "__esModule", {
 	  value: true
 	});
-	exports.default = isFloat;
-	exports.locales = void 0;
+	var _default$8 = isFloat$1.default = isFloat;
+	var locales_1$4 = isFloat$1.locales = void 0;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString$8 = _interopRequireDefault$8(assertString$1.exports);
 
+	var _alpha$2 = alpha$1;
 
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault$8(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function isFloat(str, options) {
-	  (0, _assertString.default)(str);
+	  (0, _assertString$8.default)(str);
 	  options = options || {};
-	  var float = new RegExp("^(?:[-+])?(?:[0-9]+)?(?:\\".concat(options.locale ? alpha_1.decimal[options.locale] : '.', "[0-9]*)?(?:[eE][\\+\\-]?(?:[0-9]+))?$"));
+	  var float = new RegExp("^(?:[-+])?(?:[0-9]+)?(?:\\".concat(options.locale ? _alpha$2.decimal[options.locale] : '.', "[0-9]*)?(?:[eE][\\+\\-]?(?:[0-9]+))?$"));
 
 	  if (str === '' || str === '.' || str === '-' || str === '+') {
 	    return false;
@@ -388,13 +390,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return float.test(str) && (!options.hasOwnProperty('min') || value >= options.min) && (!options.hasOwnProperty('max') || value <= options.max) && (!options.hasOwnProperty('lt') || value < options.lt) && (!options.hasOwnProperty('gt') || value > options.gt);
 	}
 
-	var locales = Object.keys(alpha_1.decimal);
-	exports.locales = locales;
-	});
+	var locales$4 = Object.keys(_alpha$2.decimal);
+	locales_1$4 = isFloat$1.locales = locales$4;
 
-	var isFloat = /*@__PURE__*/getDefaultExportFromCjs(isFloat_1);
-
-	var toFloat_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -402,7 +401,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = toFloat;
 
-	var _isFloat = _interopRequireDefault(isFloat_1);
+	var _isFloat = _interopRequireDefault(isFloat$1);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -413,11 +412,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(toFloat$1, toFloat$1.exports));
 
-	var toFloat = /*@__PURE__*/getDefaultExportFromCjs(toFloat_1);
+	var toFloat = /*@__PURE__*/getDefaultExportFromCjs(toFloat$1.exports);
 
-	var toInt_1 = createCommonjsModule(function (module, exports) {
+	var toInt$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -425,7 +426,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = toInt;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -436,11 +437,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(toInt$1, toInt$1.exports));
 
-	var toInt = /*@__PURE__*/getDefaultExportFromCjs(toInt_1);
+	var toInt = /*@__PURE__*/getDefaultExportFromCjs(toInt$1.exports);
 
-	var toBoolean_1 = createCommonjsModule(function (module, exports) {
+	var toBoolean$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -448,7 +451,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = toBoolean;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -464,11 +467,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(toBoolean$1, toBoolean$1.exports));
 
-	var toBoolean = /*@__PURE__*/getDefaultExportFromCjs(toBoolean_1);
+	var toBoolean = /*@__PURE__*/getDefaultExportFromCjs(toBoolean$1.exports);
 
-	var equals_1 = createCommonjsModule(function (module, exports) {
+	var equals$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -476,7 +481,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = equals;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -487,11 +492,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(equals$1, equals$1.exports));
 
-	var equals = /*@__PURE__*/getDefaultExportFromCjs(equals_1);
+	var equals = /*@__PURE__*/getDefaultExportFromCjs(equals$1.exports);
 
-	var toString_1 = createCommonjsModule(function (module, exports) {
+	var contains$1 = {exports: {}};
+
+	var toString$2 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -517,11 +526,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(toString$2, toString$2.exports));
 
-	var toString$1 = /*@__PURE__*/getDefaultExportFromCjs(toString_1);
+	var toString$1 = /*@__PURE__*/getDefaultExportFromCjs(toString$2.exports);
 
-	var merge_1 = createCommonjsModule(function (module, exports) {
+	var merge$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -544,11 +555,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(merge$1, merge$1.exports));
 
-	var merge = /*@__PURE__*/getDefaultExportFromCjs(merge_1);
+	var merge = /*@__PURE__*/getDefaultExportFromCjs(merge$1.exports);
 
-	var contains_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -556,11 +567,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = contains;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _toString = _interopRequireDefault(toString_1);
+	var _toString = _interopRequireDefault(toString$2.exports);
 
-	var _merge = _interopRequireDefault(merge_1);
+	var _merge = _interopRequireDefault(merge$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -576,11 +587,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(contains$1, contains$1.exports));
 
-	var contains = /*@__PURE__*/getDefaultExportFromCjs(contains_1);
+	var contains = /*@__PURE__*/getDefaultExportFromCjs(contains$1.exports);
 
-	var matches_1 = createCommonjsModule(function (module, exports) {
+	var matches$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -588,7 +601,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = matches;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -604,11 +617,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(matches$1, matches$1.exports));
 
-	var matches = /*@__PURE__*/getDefaultExportFromCjs(matches_1);
+	var matches = /*@__PURE__*/getDefaultExportFromCjs(matches$1.exports);
 
-	var isByteLength_1 = createCommonjsModule(function (module, exports) {
+	var isEmail$1 = {exports: {}};
+
+	var isByteLength$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -616,7 +633,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isByteLength;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -643,11 +660,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isByteLength$1, isByteLength$1.exports));
 
-	var isByteLength = /*@__PURE__*/getDefaultExportFromCjs(isByteLength_1);
+	var isByteLength = /*@__PURE__*/getDefaultExportFromCjs(isByteLength$1.exports);
 
-	var isFQDN_1 = createCommonjsModule(function (module, exports) {
+	var isFQDN$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -655,9 +674,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isFQDN;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _merge = _interopRequireDefault(merge_1);
+	var _merge = _interopRequireDefault(merge$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -730,11 +749,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isFQDN$1, isFQDN$1.exports));
 
-	var isFQDN = /*@__PURE__*/getDefaultExportFromCjs(isFQDN_1);
+	var isFQDN = /*@__PURE__*/getDefaultExportFromCjs(isFQDN$1.exports);
 
-	var isIP_1 = createCommonjsModule(function (module, exports) {
+	var isIP$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -742,7 +763,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isIP;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -775,8 +796,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	   where the interface "ne0" belongs to the 1st link, "pvc1.3" belongs
 	   to the 5th link, and "interface10" belongs to the 10th organization.
 	 * * */
-	var ipv4Maybe = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
-	var ipv6Block = /^[0-9A-F]{1,4}$/i;
+	var IPv4SegmentFormat = '(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])';
+	var IPv4AddressFormat = "(".concat(IPv4SegmentFormat, "[.]){3}").concat(IPv4SegmentFormat);
+	var IPv4AddressRegExp = new RegExp("^".concat(IPv4AddressFormat, "$"));
+	var IPv6SegmentFormat = '(?:[0-9a-fA-F]{1,4})';
+	var IPv6AddressRegExp = new RegExp('^(' + "(?:".concat(IPv6SegmentFormat, ":){7}(?:").concat(IPv6SegmentFormat, "|:)|") + "(?:".concat(IPv6SegmentFormat, ":){6}(?:").concat(IPv4AddressFormat, "|:").concat(IPv6SegmentFormat, "|:)|") + "(?:".concat(IPv6SegmentFormat, ":){5}(?::").concat(IPv4AddressFormat, "|(:").concat(IPv6SegmentFormat, "){1,2}|:)|") + "(?:".concat(IPv6SegmentFormat, ":){4}(?:(:").concat(IPv6SegmentFormat, "){0,1}:").concat(IPv4AddressFormat, "|(:").concat(IPv6SegmentFormat, "){1,3}|:)|") + "(?:".concat(IPv6SegmentFormat, ":){3}(?:(:").concat(IPv6SegmentFormat, "){0,2}:").concat(IPv4AddressFormat, "|(:").concat(IPv6SegmentFormat, "){1,4}|:)|") + "(?:".concat(IPv6SegmentFormat, ":){2}(?:(:").concat(IPv6SegmentFormat, "){0,3}:").concat(IPv4AddressFormat, "|(:").concat(IPv6SegmentFormat, "){1,5}|:)|") + "(?:".concat(IPv6SegmentFormat, ":){1}(?:(:").concat(IPv6SegmentFormat, "){0,4}:").concat(IPv4AddressFormat, "|(:").concat(IPv6SegmentFormat, "){1,6}|:)|") + "(?::((?::".concat(IPv6SegmentFormat, "){0,5}:").concat(IPv4AddressFormat, "|(?::").concat(IPv6SegmentFormat, "){1,7}|:))") + ')(%[0-9a-zA-Z-.:]{1,})?$');
 
 	function isIP(str) {
 	  var version = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
@@ -785,8 +809,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	  if (!version) {
 	    return isIP(str, 4) || isIP(str, 6);
-	  } else if (version === '4') {
-	    if (!ipv4Maybe.test(str)) {
+	  }
+
+	  if (version === '4') {
+	    if (!IPv4AddressRegExp.test(str)) {
 	      return false;
 	    }
 
@@ -794,77 +820,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 	      return a - b;
 	    });
 	    return parts[3] <= 255;
-	  } else if (version === '6') {
-	    var addressAndZone = [str]; // ipv6 addresses could have scoped architecture
-	    // according to https://tools.ietf.org/html/rfc4007#section-11
+	  }
 
-	    if (str.includes('%')) {
-	      addressAndZone = str.split('%');
-
-	      if (addressAndZone.length !== 2) {
-	        // it must be just two parts
-	        return false;
-	      }
-
-	      if (!addressAndZone[0].includes(':')) {
-	        // the first part must be the address
-	        return false;
-	      }
-
-	      if (addressAndZone[1] === '') {
-	        // the second part must not be empty
-	        return false;
-	      }
-	    }
-
-	    var blocks = addressAndZone[0].split(':');
-	    var foundOmissionBlock = false; // marker to indicate ::
-	    // At least some OS accept the last 32 bits of an IPv6 address
-	    // (i.e. 2 of the blocks) in IPv4 notation, and RFC 3493 says
-	    // that '::ffff:a.b.c.d' is valid for IPv4-mapped IPv6 addresses,
-	    // and '::a.b.c.d' is deprecated, but also valid.
-
-	    var foundIPv4TransitionBlock = isIP(blocks[blocks.length - 1], 4);
-	    var expectedNumberOfBlocks = foundIPv4TransitionBlock ? 7 : 8;
-
-	    if (blocks.length > expectedNumberOfBlocks) {
-	      return false;
-	    } // initial or final ::
-
-
-	    if (str === '::') {
-	      return true;
-	    } else if (str.substr(0, 2) === '::') {
-	      blocks.shift();
-	      blocks.shift();
-	      foundOmissionBlock = true;
-	    } else if (str.substr(str.length - 2) === '::') {
-	      blocks.pop();
-	      blocks.pop();
-	      foundOmissionBlock = true;
-	    }
-
-	    for (var i = 0; i < blocks.length; ++i) {
-	      // test for a :: which can not be at the string start/end
-	      // since those cases have been handled above
-	      if (blocks[i] === '' && i > 0 && i < blocks.length - 1) {
-	        if (foundOmissionBlock) {
-	          return false; // multiple :: in address
-	        }
-
-	        foundOmissionBlock = true;
-	      } else if (foundIPv4TransitionBlock && i === blocks.length - 1) {// it has been checked before that the last
-	        // block is a valid IPv4 address
-	      } else if (!ipv6Block.test(blocks[i])) {
-	        return false;
-	      }
-	    }
-
-	    if (foundOmissionBlock) {
-	      return blocks.length >= 1;
-	    }
-
-	    return blocks.length === expectedNumberOfBlocks;
+	  if (version === '6') {
+	    return !!IPv6AddressRegExp.test(str);
 	  }
 
 	  return false;
@@ -872,11 +831,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isIP$1, isIP$1.exports));
 
-	var isIP = /*@__PURE__*/getDefaultExportFromCjs(isIP_1);
+	var isIP = /*@__PURE__*/getDefaultExportFromCjs(isIP$1.exports);
 
-	var isEmail_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -884,29 +843,17 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isEmail;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _merge = _interopRequireDefault(merge_1);
+	var _merge = _interopRequireDefault(merge$1.exports);
 
-	var _isByteLength = _interopRequireDefault(isByteLength_1);
+	var _isByteLength = _interopRequireDefault(isByteLength$1.exports);
 
-	var _isFQDN = _interopRequireDefault(isFQDN_1);
+	var _isFQDN = _interopRequireDefault(isFQDN$1.exports);
 
-	var _isIP = _interopRequireDefault(isIP_1);
+	var _isIP = _interopRequireDefault(isIP$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-	function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-	function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-	function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-	function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-	function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 	var default_email_options = {
 	  allow_display_name: false,
@@ -920,7 +867,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	/* eslint-disable no-control-regex */
 
-	var splitNameAddress = /^([^\x00-\x1F\x7F-\x9F\cX]+)<(.+)>$/i;
+	var splitNameAddress = /^([^\x00-\x1F\x7F-\x9F\cX]+)</i;
 	var emailUserPart = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~]+$/i;
 	var gmailUserPart = /^[a-z\d]+$/;
 	var quotedEmailUser = /^([\s\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e]|(\\[\x01-\x09\x0b\x0c\x0d-\x7f]))*$/i;
@@ -937,8 +884,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 */
 
 	function validateDisplayName(display_name) {
-	  var trim_quotes = display_name.match(/^"(.+)"$/i);
-	  var display_name_without_quotes = trim_quotes ? trim_quotes[1] : display_name; // display name with only spaces is not valid
+	  var display_name_without_quotes = display_name.replace(/^"(.+)"$/, '$1'); // display name with only spaces is not valid
 
 	  if (!display_name_without_quotes.trim()) {
 	    return false;
@@ -950,7 +896,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  if (contains_illegal) {
 	    // if contains illegal characters,
 	    // must to be enclosed in double-quotes, otherwise it's not a valid display name
-	    if (!trim_quotes) {
+	    if (display_name_without_quotes === display_name) {
 	      return false;
 	    } // the quotes in display name must start with character symbol \
 
@@ -973,17 +919,14 @@ var MolaMolaModule = (function (exports, sargasso) {
 	    var display_email = str.match(splitNameAddress);
 
 	    if (display_email) {
-	      var display_name;
+	      var display_name = display_email[1]; // Remove display name and angle brackets to get email address
+	      // Can be done in the regex but will introduce a ReDOS (See  #1597 for more info)
 
-	      var _display_email = _slicedToArray(display_email, 3);
-
-	      display_name = _display_email[1];
-	      str = _display_email[2];
-
-	      // sometimes need to trim the last space to get the display name
+	      str = str.replace(display_name, '').replace(/(^<|>$)/g, ''); // sometimes need to trim the last space to get the display name
 	      // because there may be a space between display name and email address
 	      // eg. myname <address@gmail.com>
 	      // the display name is `myname` instead of `myname `, so need to trim the last space
+
 	      if (display_name.endsWith(' ')) {
 	        display_name = display_name.substr(0, display_name.length - 1);
 	      }
@@ -1069,8 +1012,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  var pattern = options.allow_utf8_local_part ? emailUserUtf8Part : emailUserPart;
 	  var user_parts = user.split('.');
 
-	  for (var _i2 = 0; _i2 < user_parts.length; _i2++) {
-	    if (!pattern.test(user_parts[_i2])) {
+	  for (var _i = 0; _i < user_parts.length; _i++) {
+	    if (!pattern.test(user_parts[_i])) {
 	      return false;
 	    }
 	  }
@@ -1084,11 +1027,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isEmail$1, isEmail$1.exports));
 
-	var isEmail = /*@__PURE__*/getDefaultExportFromCjs(isEmail_1);
+	var isEmail = /*@__PURE__*/getDefaultExportFromCjs(isEmail$1.exports);
 
-	var isURL_1 = createCommonjsModule(function (module, exports) {
+	var isURL$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1096,13 +1041,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isURL;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _isFQDN = _interopRequireDefault(isFQDN_1);
+	var _isFQDN = _interopRequireDefault(isFQDN$1.exports);
 
-	var _isIP = _interopRequireDefault(isIP_1);
+	var _isIP = _interopRequireDefault(isIP$1.exports);
 
-	var _merge = _interopRequireDefault(merge_1);
+	var _merge = _interopRequireDefault(merge$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1208,9 +1153,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 	      return false;
 	    }
 
+	    if (split[0] === '' || split[0].substr(0, 1) === ':') {
+	      return false;
+	    }
+
 	    auth = split.shift();
 
-	    if (auth.indexOf(':') === -1 || auth.indexOf(':') >= 0 && auth.split(':').length > 2) {
+	    if (auth.indexOf(':') >= 0 && auth.split(':').length > 2) {
 	      return false;
 	    }
 	  }
@@ -1262,11 +1211,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isURL$1, isURL$1.exports));
 
-	var isURL = /*@__PURE__*/getDefaultExportFromCjs(isURL_1);
+	var isURL = /*@__PURE__*/getDefaultExportFromCjs(isURL$1.exports);
 
-	var isMACAddress_1 = createCommonjsModule(function (module, exports) {
+	var isMACAddress$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1274,33 +1225,36 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isMACAddress;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var macAddress = /^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$/;
-	var macAddressNoColons = /^([0-9a-fA-F]){12}$/;
-	var macAddressWithHyphen = /^([0-9a-fA-F][0-9a-fA-F]-){5}([0-9a-fA-F][0-9a-fA-F])$/;
-	var macAddressWithSpaces = /^([0-9a-fA-F][0-9a-fA-F]\s){5}([0-9a-fA-F][0-9a-fA-F])$/;
-	var macAddressWithDots = /^([0-9a-fA-F]{4}).([0-9a-fA-F]{4}).([0-9a-fA-F]{4})$/;
+	var macAddress = /^(?:[0-9a-fA-F]{2}([-:\s]))([0-9a-fA-F]{2}\1){4}([0-9a-fA-F]{2})$/;
+	var macAddressNoSeparators = /^([0-9a-fA-F]){12}$/;
+	var macAddressWithDots = /^([0-9a-fA-F]{4}\.){2}([0-9a-fA-F]{4})$/;
 
 	function isMACAddress(str, options) {
 	  (0, _assertString.default)(str);
+	  /**
+	   * @deprecated `no_colons` TODO: remove it in the next major
+	  */
 
-	  if (options && options.no_colons) {
-	    return macAddressNoColons.test(str);
+	  if (options && (options.no_colons || options.no_separators)) {
+	    return macAddressNoSeparators.test(str);
 	  }
 
-	  return macAddress.test(str) || macAddressWithHyphen.test(str) || macAddressWithSpaces.test(str) || macAddressWithDots.test(str);
+	  return macAddress.test(str) || macAddressWithDots.test(str);
 	}
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isMACAddress$1, isMACAddress$1.exports));
 
-	var isMACAddress = /*@__PURE__*/getDefaultExportFromCjs(isMACAddress_1);
+	var isMACAddress = /*@__PURE__*/getDefaultExportFromCjs(isMACAddress$1.exports);
 
-	var isIPRange_1 = createCommonjsModule(function (module, exports) {
+	var isIPRange$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1308,15 +1262,18 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isIPRange;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _isIP = _interopRequireDefault(isIP_1);
+	var _isIP = _interopRequireDefault(isIP$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var subnetMaybe = /^\d{1,2}$/;
+	var subnetMaybe = /^\d{1,3}$/;
+	var v4Subnet = 32;
+	var v6Subnet = 128;
 
 	function isIPRange(str) {
+	  var version = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 	  (0, _assertString.default)(str);
 	  var parts = str.split('/'); // parts[0] -> ip, parts[1] -> subnet
 
@@ -1333,16 +1290,40 @@ var MolaMolaModule = (function (exports, sargasso) {
 	    return false;
 	  }
 
-	  return (0, _isIP.default)(parts[0], 4) && parts[1] <= 32 && parts[1] >= 0;
+	  var isValidIP = (0, _isIP.default)(parts[0], version);
+
+	  if (!isValidIP) {
+	    return false;
+	  } // Define valid subnet according to IP's version
+
+
+	  var expectedSubnet = null;
+
+	  switch (String(version)) {
+	    case '4':
+	      expectedSubnet = v4Subnet;
+	      break;
+
+	    case '6':
+	      expectedSubnet = v6Subnet;
+	      break;
+
+	    default:
+	      expectedSubnet = (0, _isIP.default)(parts[0], '6') ? v6Subnet : v4Subnet;
+	  }
+
+	  return parts[1] <= expectedSubnet && parts[1] >= 0;
 	}
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isIPRange$1, isIPRange$1.exports));
 
-	var isIPRange = /*@__PURE__*/getDefaultExportFromCjs(isIPRange_1);
+	var isIPRange = /*@__PURE__*/getDefaultExportFromCjs(isIPRange$1.exports);
 
-	var isDate_1 = createCommonjsModule(function (module, exports) {
+	var isDate$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1350,7 +1331,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isDate;
 
-	var _merge = _interopRequireDefault(merge_1);
+	var _merge = _interopRequireDefault(merge$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1442,11 +1423,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isDate$1, isDate$1.exports));
 
-	var isDate = /*@__PURE__*/getDefaultExportFromCjs(isDate_1);
+	var isDate = /*@__PURE__*/getDefaultExportFromCjs(isDate$1.exports);
 
-	var isBoolean_1 = createCommonjsModule(function (module, exports) {
+	var isBoolean$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1454,7 +1437,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isBoolean;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1465,11 +1448,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isBoolean$1, isBoolean$1.exports));
 
-	var isBoolean = /*@__PURE__*/getDefaultExportFromCjs(isBoolean_1);
+	var isBoolean = /*@__PURE__*/getDefaultExportFromCjs(isBoolean$1.exports);
 
-	var isLocale_1 = createCommonjsModule(function (module, exports) {
+	var isLocale$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1477,11 +1462,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isLocale;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var localeReg = /^[A-z]{2,4}([_-]([A-z]{4}|[\d]{3}))?([_-]([A-z]{2}|[\d]{3}))?$/;
+	var localeReg = /^[A-Za-z]{2,4}([_-]([A-Za-z]{4}|[\d]{3}))?([_-]([A-Za-z]{2}|[\d]{3}))?$/;
 
 	function isLocale(str) {
 	  (0, _assertString.default)(str);
@@ -1495,29 +1480,30 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isLocale$1, isLocale$1.exports));
 
-	var isLocale = /*@__PURE__*/getDefaultExportFromCjs(isLocale_1);
+	var isLocale = /*@__PURE__*/getDefaultExportFromCjs(isLocale$1.exports);
 
-	var isAlpha_1 = createCommonjsModule(function (module, exports) {
+	var isAlpha$1 = {};
+
 	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(isAlpha$1, "__esModule", {
 	  value: true
 	});
-	exports.default = isAlpha;
-	exports.locales = void 0;
+	var _default$7 = isAlpha$1.default = isAlpha;
+	var locales_1$3 = isAlpha$1.locales = void 0;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString$7 = _interopRequireDefault$7(assertString$1.exports);
 
+	var _alpha$1 = alpha$1;
 
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault$7(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function isAlpha(_str) {
 	  var locale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'en-US';
 	  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-	  (0, _assertString.default)(_str);
+	  (0, _assertString$7.default)(_str);
 	  var str = _str;
 	  var ignore = options.ignore;
 
@@ -1531,52 +1517,62 @@ var MolaMolaModule = (function (exports, sargasso) {
 	    }
 	  }
 
-	  if (locale in alpha_1.alpha) {
-	    return alpha_1.alpha[locale].test(str);
+	  if (locale in _alpha$1.alpha) {
+	    return _alpha$1.alpha[locale].test(str);
 	  }
 
 	  throw new Error("Invalid locale '".concat(locale, "'"));
 	}
 
-	var locales = Object.keys(alpha_1.alpha);
-	exports.locales = locales;
-	});
+	var locales$3 = Object.keys(_alpha$1.alpha);
+	locales_1$3 = isAlpha$1.locales = locales$3;
 
-	var isAlpha = /*@__PURE__*/getDefaultExportFromCjs(isAlpha_1);
+	var isAlphanumeric$1 = {};
 
-	var isAlphanumeric_1 = createCommonjsModule(function (module, exports) {
 	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(isAlphanumeric$1, "__esModule", {
 	  value: true
 	});
-	exports.default = isAlphanumeric;
-	exports.locales = void 0;
+	var _default$6 = isAlphanumeric$1.default = isAlphanumeric;
+	var locales_1$2 = isAlphanumeric$1.locales = void 0;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString$6 = _interopRequireDefault$6(assertString$1.exports);
 
+	var _alpha = alpha$1;
 
+	function _interopRequireDefault$6(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function isAlphanumeric(str) {
+	function isAlphanumeric(_str) {
 	  var locale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'en-US';
-	  (0, _assertString.default)(str);
+	  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+	  (0, _assertString$6.default)(_str);
+	  var str = _str;
+	  var ignore = options.ignore;
 
-	  if (locale in alpha_1.alphanumeric) {
-	    return alpha_1.alphanumeric[locale].test(str);
+	  if (ignore) {
+	    if (ignore instanceof RegExp) {
+	      str = str.replace(ignore, '');
+	    } else if (typeof ignore === 'string') {
+	      str = str.replace(new RegExp("[".concat(ignore.replace(/[-[\]{}()*+?.,\\^$|#\\s]/g, '\\$&'), "]"), 'g'), ''); // escape regex for ignore
+	    } else {
+	      throw new Error('ignore should be instance of a String or RegExp');
+	    }
+	  }
+
+	  if (locale in _alpha.alphanumeric) {
+	    return _alpha.alphanumeric[locale].test(str);
 	  }
 
 	  throw new Error("Invalid locale '".concat(locale, "'"));
 	}
 
-	var locales = Object.keys(alpha_1.alphanumeric);
-	exports.locales = locales;
-	});
+	var locales$2 = Object.keys(_alpha.alphanumeric);
+	locales_1$2 = isAlphanumeric$1.locales = locales$2;
 
-	var isAlphanumeric = /*@__PURE__*/getDefaultExportFromCjs(isAlphanumeric_1);
+	var isNumeric$1 = {exports: {}};
 
-	var isNumeric_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1584,9 +1580,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isNumeric;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-
+	var _alpha = alpha$1;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1599,16 +1595,18 @@ var MolaMolaModule = (function (exports, sargasso) {
 	    return numericNoSymbols.test(str);
 	  }
 
-	  return new RegExp("^[+-]?([0-9]*[".concat((options || {}).locale ? alpha_1.decimal[options.locale] : '.', "])?[0-9]+$")).test(str);
+	  return new RegExp("^[+-]?([0-9]*[".concat((options || {}).locale ? _alpha.decimal[options.locale] : '.', "])?[0-9]+$")).test(str);
 	}
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isNumeric$1, isNumeric$1.exports));
 
-	var isNumeric = /*@__PURE__*/getDefaultExportFromCjs(isNumeric_1);
+	var isNumeric = /*@__PURE__*/getDefaultExportFromCjs(isNumeric$1.exports);
 
-	var isPassportNumber_1 = createCommonjsModule(function (module, exports) {
+	var isPassportNumber$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1616,7 +1614,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isPassportNumber;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1639,6 +1637,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  // BELGIUM
 	  BG: /^\d{9}$/,
 	  // BULGARIA
+	  BR: /^[A-Z]{2}\d{6}$/,
+	  // BRAZIL
 	  BY: /^[A-Z]{2}\d{7}$/,
 	  // BELARUS
 	  CA: /^[A-Z]{2}\d{6}$/,
@@ -1677,6 +1677,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  // IRELAND
 	  IN: /^[A-Z]{1}-?\d{7}$/,
 	  // INDIA
+	  IR: /^[A-Z]\d{8}$/,
+	  // IRAN
 	  IS: /^(A)\d{7}$/,
 	  // ICELAND
 	  IT: /^[A-Z0-9]{2}\d{7}$/,
@@ -1691,8 +1693,14 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  // LUXEMBURG
 	  LV: /^[A-Z0-9]{2}\d{7}$/,
 	  // LATVIA
+	  LY: /^[A-Z0-9]{8}$/,
+	  // LIBYA
 	  MT: /^\d{7}$/,
 	  // MALTA
+	  MZ: /^([A-Z]{2}\d{7})|(\d{2}[A-Z]{2}\d{5})$/,
+	  // MOZAMBIQUE
+	  MY: /^[AHK]\d{8}$/,
+	  // MALAYSIA
 	  NL: /^[A-Z]{2}[A-Z0-9]{6}\d$/,
 	  // NETHERLANDS
 	  PO: /^[A-Z]{2}\d{7}$/,
@@ -1735,11 +1743,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isPassportNumber$1, isPassportNumber$1.exports));
 
-	var isPassportNumber = /*@__PURE__*/getDefaultExportFromCjs(isPassportNumber_1);
+	var isPassportNumber = /*@__PURE__*/getDefaultExportFromCjs(isPassportNumber$1.exports);
 
-	var isInt_1 = createCommonjsModule(function (module, exports) {
+	var isPort$1 = {exports: {}};
+
+	var isInt$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1747,7 +1759,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isInt;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1770,11 +1782,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isInt$1, isInt$1.exports));
 
-	var isInt = /*@__PURE__*/getDefaultExportFromCjs(isInt_1);
+	var isInt = /*@__PURE__*/getDefaultExportFromCjs(isInt$1.exports);
 
-	var isPort_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1782,7 +1794,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isPort;
 
-	var _isInt = _interopRequireDefault(isInt_1);
+	var _isInt = _interopRequireDefault(isInt$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1795,11 +1807,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isPort$1, isPort$1.exports));
 
-	var isPort = /*@__PURE__*/getDefaultExportFromCjs(isPort_1);
+	var isPort = /*@__PURE__*/getDefaultExportFromCjs(isPort$1.exports);
 
-	var isLowercase_1 = createCommonjsModule(function (module, exports) {
+	var isLowercase$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1807,7 +1821,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isLowercase;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1818,11 +1832,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isLowercase$1, isLowercase$1.exports));
 
-	var isLowercase = /*@__PURE__*/getDefaultExportFromCjs(isLowercase_1);
+	var isLowercase = /*@__PURE__*/getDefaultExportFromCjs(isLowercase$1.exports);
 
-	var isUppercase_1 = createCommonjsModule(function (module, exports) {
+	var isUppercase$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1830,7 +1846,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isUppercase;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1841,11 +1857,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isUppercase$1, isUppercase$1.exports));
 
-	var isUppercase = /*@__PURE__*/getDefaultExportFromCjs(isUppercase_1);
+	var isUppercase = /*@__PURE__*/getDefaultExportFromCjs(isUppercase$1.exports);
 
-	var isIMEI_1 = createCommonjsModule(function (module, exports) {
+	var isIMEI$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1853,7 +1871,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isIMEI;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1907,11 +1925,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isIMEI$1, isIMEI$1.exports));
 
-	var isIMEI = /*@__PURE__*/getDefaultExportFromCjs(isIMEI_1);
+	var isIMEI = /*@__PURE__*/getDefaultExportFromCjs(isIMEI$1.exports);
 
-	var isAscii_1 = createCommonjsModule(function (module, exports) {
+	var isAscii$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1919,7 +1939,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isAscii;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1934,59 +1954,57 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isAscii$1, isAscii$1.exports));
 
-	var isAscii = /*@__PURE__*/getDefaultExportFromCjs(isAscii_1);
+	var isAscii = /*@__PURE__*/getDefaultExportFromCjs(isAscii$1.exports);
 
-	var isFullWidth_1 = createCommonjsModule(function (module, exports) {
+	var isFullWidth$1 = {};
+
 	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(isFullWidth$1, "__esModule", {
 	  value: true
 	});
-	exports.default = isFullWidth;
-	exports.fullWidth = void 0;
+	var _default$5 = isFullWidth$1.default = isFullWidth;
+	var fullWidth_1 = isFullWidth$1.fullWidth = void 0;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString$5 = _interopRequireDefault$5(assertString$1.exports);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault$5(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var fullWidth = /[^\u0020-\u007E\uFF61-\uFF9F\uFFA0-\uFFDC\uFFE8-\uFFEE0-9a-zA-Z]/;
-	exports.fullWidth = fullWidth;
+	fullWidth_1 = isFullWidth$1.fullWidth = fullWidth;
 
 	function isFullWidth(str) {
-	  (0, _assertString.default)(str);
+	  (0, _assertString$5.default)(str);
 	  return fullWidth.test(str);
 	}
-	});
 
-	var isFullWidth = /*@__PURE__*/getDefaultExportFromCjs(isFullWidth_1);
+	var isHalfWidth$1 = {};
 
-	var isHalfWidth_1 = createCommonjsModule(function (module, exports) {
 	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(isHalfWidth$1, "__esModule", {
 	  value: true
 	});
-	exports.default = isHalfWidth;
-	exports.halfWidth = void 0;
+	var _default$4 = isHalfWidth$1.default = isHalfWidth;
+	var halfWidth_1 = isHalfWidth$1.halfWidth = void 0;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString$4 = _interopRequireDefault$4(assertString$1.exports);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault$4(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var halfWidth = /[\u0020-\u007E\uFF61-\uFF9F\uFFA0-\uFFDC\uFFE8-\uFFEE0-9a-zA-Z]/;
-	exports.halfWidth = halfWidth;
+	halfWidth_1 = isHalfWidth$1.halfWidth = halfWidth;
 
 	function isHalfWidth(str) {
-	  (0, _assertString.default)(str);
+	  (0, _assertString$4.default)(str);
 	  return halfWidth.test(str);
 	}
-	});
 
-	var isHalfWidth = /*@__PURE__*/getDefaultExportFromCjs(isHalfWidth_1);
+	var isVariableWidth$1 = {exports: {}};
 
-	var isVariableWidth_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -1994,26 +2012,28 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isVariableWidth;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
+	var _isFullWidth = isFullWidth$1;
 
-
-
+	var _isHalfWidth = isHalfWidth$1;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function isVariableWidth(str) {
 	  (0, _assertString.default)(str);
-	  return isFullWidth_1.fullWidth.test(str) && isHalfWidth_1.halfWidth.test(str);
+	  return _isFullWidth.fullWidth.test(str) && _isHalfWidth.halfWidth.test(str);
 	}
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isVariableWidth$1, isVariableWidth$1.exports));
 
-	var isVariableWidth = /*@__PURE__*/getDefaultExportFromCjs(isVariableWidth_1);
+	var isVariableWidth = /*@__PURE__*/getDefaultExportFromCjs(isVariableWidth$1.exports);
 
-	var isMultibyte_1 = createCommonjsModule(function (module, exports) {
+	var isMultibyte$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2021,7 +2041,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isMultibyte;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2036,11 +2056,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isMultibyte$1, isMultibyte$1.exports));
 
-	var isMultibyte = /*@__PURE__*/getDefaultExportFromCjs(isMultibyte_1);
+	var isMultibyte = /*@__PURE__*/getDefaultExportFromCjs(isMultibyte$1.exports);
 
-	var multilineRegex = createCommonjsModule(function (module, exports) {
+	var isSemVer$1 = {exports: {}};
+
+	var multilineRegex$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2063,11 +2087,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(multilineRegex$1, multilineRegex$1.exports));
 
-	var multilineRegex$1 = /*@__PURE__*/getDefaultExportFromCjs(multilineRegex);
+	var multilineRegex = /*@__PURE__*/getDefaultExportFromCjs(multilineRegex$1.exports);
 
-	var isSemVer_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2075,9 +2099,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isSemVer;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _multilineRegex = _interopRequireDefault(multilineRegex);
+	var _multilineRegex = _interopRequireDefault(multilineRegex$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2096,11 +2120,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isSemVer$1, isSemVer$1.exports));
 
-	var isSemVer = /*@__PURE__*/getDefaultExportFromCjs(isSemVer_1);
+	var isSemVer = /*@__PURE__*/getDefaultExportFromCjs(isSemVer$1.exports);
 
-	var isSurrogatePair_1 = createCommonjsModule(function (module, exports) {
+	var isSurrogatePair$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2108,7 +2134,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isSurrogatePair;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2121,11 +2147,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isSurrogatePair$1, isSurrogatePair$1.exports));
 
-	var isSurrogatePair = /*@__PURE__*/getDefaultExportFromCjs(isSurrogatePair_1);
+	var isSurrogatePair = /*@__PURE__*/getDefaultExportFromCjs(isSurrogatePair$1.exports);
 
-	var includes_1 = createCommonjsModule(function (module, exports) {
+	var isDecimal$1 = {exports: {}};
+
+	var includes$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2143,11 +2173,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	exports.default = _default;
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(includes$1, includes$1.exports));
 
-	var includes = /*@__PURE__*/getDefaultExportFromCjs(includes_1);
+	var includes = /*@__PURE__*/getDefaultExportFromCjs(includes$1.exports);
 
-	var isDecimal_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2155,18 +2185,18 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isDecimal;
 
-	var _merge = _interopRequireDefault(merge_1);
+	var _merge = _interopRequireDefault(merge$1.exports);
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _includes = _interopRequireDefault(includes_1);
+	var _includes = _interopRequireDefault(includes$1.exports);
 
-
+	var _alpha = alpha$1;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function decimalRegExp(options) {
-	  var regExp = new RegExp("^[-+]?([0-9]+)?(\\".concat(alpha_1.decimal[options.locale], "[0-9]{").concat(options.decimal_digits, "})").concat(options.force_decimal ? '' : '?', "$"));
+	  var regExp = new RegExp("^[-+]?([0-9]+)?(\\".concat(_alpha.decimal[options.locale], "[0-9]{").concat(options.decimal_digits, "})").concat(options.force_decimal ? '' : '?', "$"));
 	  return regExp;
 	}
 
@@ -2181,7 +2211,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  (0, _assertString.default)(str);
 	  options = (0, _merge.default)(options, default_decimal_options);
 
-	  if (options.locale in alpha_1.decimal) {
+	  if (options.locale in _alpha.decimal) {
 	    return !(0, _includes.default)(blacklist, str.replace(/ /g, '')) && decimalRegExp(options).test(str);
 	  }
 
@@ -2190,11 +2220,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isDecimal$1, isDecimal$1.exports));
 
-	var isDecimal = /*@__PURE__*/getDefaultExportFromCjs(isDecimal_1);
+	var isDecimal = /*@__PURE__*/getDefaultExportFromCjs(isDecimal$1.exports);
 
-	var isHexadecimal_1 = createCommonjsModule(function (module, exports) {
+	var isHexadecimal$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2202,7 +2234,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isHexadecimal;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2215,11 +2247,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isHexadecimal$1, isHexadecimal$1.exports));
 
-	var isHexadecimal = /*@__PURE__*/getDefaultExportFromCjs(isHexadecimal_1);
+	var isHexadecimal = /*@__PURE__*/getDefaultExportFromCjs(isHexadecimal$1.exports);
 
-	var isOctal_1 = createCommonjsModule(function (module, exports) {
+	var isOctal$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2227,7 +2261,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isOctal;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2240,11 +2274,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isOctal$1, isOctal$1.exports));
 
-	var isOctal = /*@__PURE__*/getDefaultExportFromCjs(isOctal_1);
+	var isOctal = /*@__PURE__*/getDefaultExportFromCjs(isOctal$1.exports);
 
-	var isDivisibleBy_1 = createCommonjsModule(function (module, exports) {
+	var isDivisibleBy$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2252,9 +2288,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isDivisibleBy;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _toFloat = _interopRequireDefault(toFloat_1);
+	var _toFloat = _interopRequireDefault(toFloat$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2265,11 +2301,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isDivisibleBy$1, isDivisibleBy$1.exports));
 
-	var isDivisibleBy = /*@__PURE__*/getDefaultExportFromCjs(isDivisibleBy_1);
+	var isDivisibleBy = /*@__PURE__*/getDefaultExportFromCjs(isDivisibleBy$1.exports);
 
-	var isHexColor_1 = createCommonjsModule(function (module, exports) {
+	var isHexColor$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2277,7 +2315,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isHexColor;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2290,11 +2328,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isHexColor$1, isHexColor$1.exports));
 
-	var isHexColor = /*@__PURE__*/getDefaultExportFromCjs(isHexColor_1);
+	var isHexColor = /*@__PURE__*/getDefaultExportFromCjs(isHexColor$1.exports);
 
-	var isRgbColor_1 = createCommonjsModule(function (module, exports) {
+	var isRgbColor$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2302,7 +2342,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isRgbColor;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2324,11 +2364,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isRgbColor$1, isRgbColor$1.exports));
 
-	var isRgbColor = /*@__PURE__*/getDefaultExportFromCjs(isRgbColor_1);
+	var isRgbColor = /*@__PURE__*/getDefaultExportFromCjs(isRgbColor$1.exports);
 
-	var isHSL_1 = createCommonjsModule(function (module, exports) {
+	var isHSL$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2336,25 +2378,34 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isHSL;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var hslcomma = /^(hsl)a?\(\s*((\+|\-)?([0-9]+(\.[0-9]+)?(e(\+|\-)?[0-9]+)?|\.[0-9]+(e(\+|\-)?[0-9]+)?))(deg|grad|rad|turn|\s*)(\s*,\s*(\+|\-)?([0-9]+(\.[0-9]+)?(e(\+|\-)?[0-9]+)?|\.[0-9]+(e(\+|\-)?[0-9]+)?)%){2}\s*(,\s*((\+|\-)?([0-9]+(\.[0-9]+)?(e(\+|\-)?[0-9]+)?|\.[0-9]+(e(\+|\-)?[0-9]+)?)%?)\s*)?\)$/i;
-	var hslspace = /^(hsl)a?\(\s*((\+|\-)?([0-9]+(\.[0-9]+)?(e(\+|\-)?[0-9]+)?|\.[0-9]+(e(\+|\-)?[0-9]+)?))(deg|grad|rad|turn|\s)(\s*(\+|\-)?([0-9]+(\.[0-9]+)?(e(\+|\-)?[0-9]+)?|\.[0-9]+(e(\+|\-)?[0-9]+)?)%){2}\s*(\/\s*((\+|\-)?([0-9]+(\.[0-9]+)?(e(\+|\-)?[0-9]+)?|\.[0-9]+(e(\+|\-)?[0-9]+)?)%?)\s*)?\)$/i;
+	var hslComma = /^hsla?\(((\+|\-)?([0-9]+(\.[0-9]+)?(e(\+|\-)?[0-9]+)?|\.[0-9]+(e(\+|\-)?[0-9]+)?))(deg|grad|rad|turn)?(,(\+|\-)?([0-9]+(\.[0-9]+)?(e(\+|\-)?[0-9]+)?|\.[0-9]+(e(\+|\-)?[0-9]+)?)%){2}(,((\+|\-)?([0-9]+(\.[0-9]+)?(e(\+|\-)?[0-9]+)?|\.[0-9]+(e(\+|\-)?[0-9]+)?)%?))?\)$/i;
+	var hslSpace = /^hsla?\(((\+|\-)?([0-9]+(\.[0-9]+)?(e(\+|\-)?[0-9]+)?|\.[0-9]+(e(\+|\-)?[0-9]+)?))(deg|grad|rad|turn)?(\s(\+|\-)?([0-9]+(\.[0-9]+)?(e(\+|\-)?[0-9]+)?|\.[0-9]+(e(\+|\-)?[0-9]+)?)%){2}\s?(\/\s((\+|\-)?([0-9]+(\.[0-9]+)?(e(\+|\-)?[0-9]+)?|\.[0-9]+(e(\+|\-)?[0-9]+)?)%?)\s?)?\)$/i;
 
 	function isHSL(str) {
-	  (0, _assertString.default)(str);
-	  return hslcomma.test(str) || hslspace.test(str);
+	  (0, _assertString.default)(str); // Strip duplicate spaces before calling the validation regex (See  #1598 for more info)
+
+	  var strippedStr = str.replace(/\s+/g, ' ').replace(/\s?(hsla?\(|\)|,)\s?/ig, '$1');
+
+	  if (strippedStr.indexOf(',') !== -1) {
+	    return hslComma.test(strippedStr);
+	  }
+
+	  return hslSpace.test(strippedStr);
 	}
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isHSL$1, isHSL$1.exports));
 
-	var isHSL = /*@__PURE__*/getDefaultExportFromCjs(isHSL_1);
+	var isHSL = /*@__PURE__*/getDefaultExportFromCjs(isHSL$1.exports);
 
-	var isISRC_1 = createCommonjsModule(function (module, exports) {
+	var isISRC$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2362,7 +2413,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isISRC;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2376,11 +2427,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isISRC$1, isISRC$1.exports));
 
-	var isISRC = /*@__PURE__*/getDefaultExportFromCjs(isISRC_1);
+	var isISRC = /*@__PURE__*/getDefaultExportFromCjs(isISRC$1.exports);
 
-	var isIBAN_1 = createCommonjsModule(function (module, exports) {
+	var isIBAN$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2388,7 +2441,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isIBAN;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2452,6 +2505,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  MR: /^(MR[0-9]{2})\d{23}$/,
 	  MT: /^(MT[0-9]{2})[A-Z]{4}\d{5}[A-Z0-9]{18}$/,
 	  MU: /^(MU[0-9]{2})[A-Z]{4}\d{19}[A-Z]{3}$/,
+	  MZ: /^(MZ[0-9]{2})\d{21}$/,
 	  NL: /^(NL[0-9]{2})[A-Z]{4}\d{10}$/,
 	  NO: /^(NO[0-9]{2})\d{11}$/,
 	  PK: /^(PK[0-9]{2})[A-Z0-9]{4}\d{16}$/,
@@ -2529,11 +2583,38 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
+	}(isIBAN$1, isIBAN$1.exports));
+
+	var isIBAN = /*@__PURE__*/getDefaultExportFromCjs(isIBAN$1.exports);
+
+	var isBIC$1 = {exports: {}};
+
+	var isISO31661Alpha2$1 = {};
+
+	"use strict";
+
+	Object.defineProperty(isISO31661Alpha2$1, "__esModule", {
+	  value: true
 	});
+	var _default$3 = isISO31661Alpha2$1.default = isISO31661Alpha2;
+	var CountryCodes_1 = isISO31661Alpha2$1.CountryCodes = void 0;
 
-	var isIBAN = /*@__PURE__*/getDefaultExportFromCjs(isIBAN_1);
+	var _assertString$3 = _interopRequireDefault$3(assertString$1.exports);
 
-	var isBIC_1 = createCommonjsModule(function (module, exports) {
+	function _interopRequireDefault$3(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// from https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+	var validISO31661Alpha2CountriesCodes = ['AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CU', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH', 'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FM', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HM', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IO', 'IQ', 'IR', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KP', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MH', 'MK', 'ML', 'MM', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NF', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU', 'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PW', 'PY', 'QA', 'RE', 'RO', 'RS', 'RU', 'RW', 'SA', 'SB', 'SC', 'SD', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'SS', 'ST', 'SV', 'SX', 'SY', 'SZ', 'TC', 'TD', 'TF', 'TG', 'TH', 'TJ', 'TK', 'TL', 'TM', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI', 'VN', 'VU', 'WF', 'WS', 'YE', 'YT', 'ZA', 'ZM', 'ZW'];
+
+	function isISO31661Alpha2(str) {
+	  (0, _assertString$3.default)(str);
+	  return validISO31661Alpha2CountriesCodes.indexOf(str.toUpperCase()) >= 0;
+	}
+
+	var CountryCodes = validISO31661Alpha2CountriesCodes;
+	CountryCodes_1 = isISO31661Alpha2$1.CountryCodes = CountryCodes;
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2541,24 +2622,35 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isBIC;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
+
+	var _isISO31661Alpha = isISO31661Alpha2$1;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var isBICReg = /^[A-z]{4}[A-z]{2}\w{2}(\w{3})?$/;
+	// https://en.wikipedia.org/wiki/ISO_9362
+	var isBICReg = /^[A-Za-z]{6}[A-Za-z0-9]{2}([A-Za-z0-9]{3})?$/;
 
 	function isBIC(str) {
-	  (0, _assertString.default)(str);
+	  (0, _assertString.default)(str); // toUpperCase() should be removed when a new major version goes out that changes
+	  // the regex to [A-Z] (per the spec).
+
+	  if (_isISO31661Alpha.CountryCodes.indexOf(str.slice(4, 6).toUpperCase()) < 0) {
+	    return false;
+	  }
+
 	  return isBICReg.test(str);
 	}
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isBIC$1, isBIC$1.exports));
 
-	var isBIC = /*@__PURE__*/getDefaultExportFromCjs(isBIC_1);
+	var isBIC = /*@__PURE__*/getDefaultExportFromCjs(isBIC$1.exports);
 
-	var isMD5_1 = createCommonjsModule(function (module, exports) {
+	var isMD5$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2566,7 +2658,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isMD5;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2579,11 +2671,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isMD5$1, isMD5$1.exports));
 
-	var isMD5 = /*@__PURE__*/getDefaultExportFromCjs(isMD5_1);
+	var isMD5 = /*@__PURE__*/getDefaultExportFromCjs(isMD5$1.exports);
 
-	var isHash_1 = createCommonjsModule(function (module, exports) {
+	var isHash$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2591,7 +2685,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isHash;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2619,11 +2713,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isHash$1, isHash$1.exports));
 
-	var isHash = /*@__PURE__*/getDefaultExportFromCjs(isHash_1);
+	var isHash = /*@__PURE__*/getDefaultExportFromCjs(isHash$1.exports);
 
-	var isBase64_1 = createCommonjsModule(function (module, exports) {
+	var isJWT$1 = {exports: {}};
+
+	var isBase64$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2631,9 +2729,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isBase64;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _merge = _interopRequireDefault(merge_1);
+	var _merge = _interopRequireDefault(merge$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2662,11 +2760,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isBase64$1, isBase64$1.exports));
 
-	var isBase64 = /*@__PURE__*/getDefaultExportFromCjs(isBase64_1);
+	var isBase64 = /*@__PURE__*/getDefaultExportFromCjs(isBase64$1.exports);
 
-	var isJWT_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2674,9 +2772,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isJWT;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _isBase = _interopRequireDefault(isBase64_1);
+	var _isBase = _interopRequireDefault(isBase64$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2698,11 +2796,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isJWT$1, isJWT$1.exports));
 
-	var isJWT = /*@__PURE__*/getDefaultExportFromCjs(isJWT_1);
+	var isJWT = /*@__PURE__*/getDefaultExportFromCjs(isJWT$1.exports);
 
-	var isJSON_1 = createCommonjsModule(function (module, exports) {
+	var isJSON$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2710,9 +2810,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isJSON;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _merge = _interopRequireDefault(merge_1);
+	var _merge = _interopRequireDefault(merge$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2744,11 +2844,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isJSON$1, isJSON$1.exports));
 
-	var isJSON = /*@__PURE__*/getDefaultExportFromCjs(isJSON_1);
+	var isJSON = /*@__PURE__*/getDefaultExportFromCjs(isJSON$1.exports);
 
-	var isEmpty_1 = createCommonjsModule(function (module, exports) {
+	var isEmpty$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2756,9 +2858,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isEmpty;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _merge = _interopRequireDefault(merge_1);
+	var _merge = _interopRequireDefault(merge$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2774,11 +2876,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isEmpty$1, isEmpty$1.exports));
 
-	var isEmpty = /*@__PURE__*/getDefaultExportFromCjs(isEmpty_1);
+	var isEmpty = /*@__PURE__*/getDefaultExportFromCjs(isEmpty$1.exports);
 
-	var isLength_1$1 = createCommonjsModule(function (module, exports) {
+	var isLength$4 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2786,7 +2890,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isLength;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2814,11 +2918,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isLength$4, isLength$4.exports));
 
-	var isLength$1 = /*@__PURE__*/getDefaultExportFromCjs(isLength_1$1);
+	var isLength$3 = /*@__PURE__*/getDefaultExportFromCjs(isLength$4.exports);
 
-	var isUUID_1 = createCommonjsModule(function (module, exports) {
+	var isUUID$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2826,7 +2932,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isUUID;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2846,11 +2952,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isUUID$1, isUUID$1.exports));
 
-	var isUUID = /*@__PURE__*/getDefaultExportFromCjs(isUUID_1);
+	var isUUID = /*@__PURE__*/getDefaultExportFromCjs(isUUID$1.exports);
 
-	var isMongoId_1 = createCommonjsModule(function (module, exports) {
+	var isMongoId$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2858,9 +2966,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isMongoId;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _isHexadecimal = _interopRequireDefault(isHexadecimal_1);
+	var _isHexadecimal = _interopRequireDefault(isHexadecimal$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2871,11 +2979,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isMongoId$1, isMongoId$1.exports));
 
-	var isMongoId = /*@__PURE__*/getDefaultExportFromCjs(isMongoId_1);
+	var isMongoId = /*@__PURE__*/getDefaultExportFromCjs(isMongoId$1.exports);
 
-	var isAfter_1 = createCommonjsModule(function (module, exports) {
+	var isAfter$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2883,9 +2993,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isAfter;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _toDate = _interopRequireDefault(toDate_1);
+	var _toDate = _interopRequireDefault(toDate$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2899,11 +3009,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isAfter$1, isAfter$1.exports));
 
-	var isAfter = /*@__PURE__*/getDefaultExportFromCjs(isAfter_1);
+	var isAfter = /*@__PURE__*/getDefaultExportFromCjs(isAfter$1.exports);
 
-	var isBefore_1 = createCommonjsModule(function (module, exports) {
+	var isBefore$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2911,9 +3023,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isBefore;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _toDate = _interopRequireDefault(toDate_1);
+	var _toDate = _interopRequireDefault(toDate$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2927,11 +3039,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isBefore$1, isBefore$1.exports));
 
-	var isBefore = /*@__PURE__*/getDefaultExportFromCjs(isBefore_1);
+	var isBefore = /*@__PURE__*/getDefaultExportFromCjs(isBefore$1.exports);
 
-	var isIn_1 = createCommonjsModule(function (module, exports) {
+	var isIn$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2939,9 +3053,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isIn;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _toString = _interopRequireDefault(toString_1);
+	var _toString = _interopRequireDefault(toString$2.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2974,11 +3088,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isIn$1, isIn$1.exports));
 
-	var isIn = /*@__PURE__*/getDefaultExportFromCjs(isIn_1);
+	var isIn = /*@__PURE__*/getDefaultExportFromCjs(isIn$1.exports);
 
-	var isCreditCard_1 = createCommonjsModule(function (module, exports) {
+	var isCreditCard$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -2986,7 +3102,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isCreditCard;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3031,11 +3147,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isCreditCard$1, isCreditCard$1.exports));
 
-	var isCreditCard = /*@__PURE__*/getDefaultExportFromCjs(isCreditCard_1);
+	var isCreditCard = /*@__PURE__*/getDefaultExportFromCjs(isCreditCard$1.exports);
 
-	var isIdentityCard_1 = createCommonjsModule(function (module, exports) {
+	var isIdentityCard$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -3043,7 +3161,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isIdentityCard;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3090,6 +3208,20 @@ var MolaMolaModule = (function (exports, sargasso) {
 	    });
 	    return c === 0;
 	  },
+	  IR: function IR(str) {
+	    if (!str.match(/^\d{10}$/)) return false;
+	    str = "0000".concat(str).substr(str.length - 6);
+	    if (parseInt(str.substr(3, 6), 10) === 0) return false;
+	    var lastNumber = parseInt(str.substr(9, 1), 10);
+	    var sum = 0;
+
+	    for (var i = 0; i < 9; i++) {
+	      sum += parseInt(str.substr(i, 1), 10) * (10 - i);
+	    }
+
+	    sum %= 11;
+	    return sum < 2 && lastNumber === sum || sum >= 2 && lastNumber === 11 - sum;
+	  },
 	  IT: function IT(str) {
 	    if (str.length !== 9) return false;
 	    if (str === 'CA00000AA') return false; // https://it.wikipedia.org/wiki/Carta_d%27identit%C3%A0_elettronica_italiana
@@ -3128,6 +3260,18 @@ var MolaMolaModule = (function (exports, sargasso) {
 	    }
 
 	    return sum % 10 === 0;
+	  },
+	  'ar-LY': function arLY(str) {
+	    // Libya National Identity Number NIN is 12 digits, the first digit is either 1 or 2
+	    var NIN = /^(1|2)\d{11}$/; // sanitize user input
+
+	    var sanitized = str.trim(); // validate the data structure
+
+	    if (!NIN.test(sanitized)) {
+	      return false;
+	    }
+
+	    return true;
 	  },
 	  'ar-TN': function arTN(str) {
 	    var DNI = /^\d{8}$/; // sanitize user input
@@ -3324,11 +3468,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isIdentityCard$1, isIdentityCard$1.exports));
 
-	var isIdentityCard = /*@__PURE__*/getDefaultExportFromCjs(isIdentityCard_1);
+	var isIdentityCard = /*@__PURE__*/getDefaultExportFromCjs(isIdentityCard$1.exports);
 
-	var isEAN_1 = createCommonjsModule(function (module, exports) {
+	var isEAN$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -3336,7 +3482,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isEAN;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3345,18 +3491,23 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * the thirteen-digit EAN-13, while the
 	 * less commonly used 8-digit EAN-8 barcode was
 	 * introduced for use on small packages.
+	 * Also EAN/UCC-14 is used for Grouping of individual
+	 * trade items above unit level(Intermediate, Carton or Pallet).
+	 * For more info about EAN-14 checkout: https://www.gtin.info/itf-14-barcodes/
 	 * EAN consists of:
 	 * GS1 prefix, manufacturer code, product code and check digit
 	 * Reference: https://en.wikipedia.org/wiki/International_Article_Number
+	 * Reference: https://www.gtin.info/
 	 */
 
 	/**
-	 * Define EAN Lenghts; 8 for EAN-8; 13 for EAN-13
-	 * and Regular Expression for valid EANs (EAN-8, EAN-13),
-	 * with exact numberic matching of 8 or 13 digits [0-9]
+	 * Define EAN Lenghts; 8 for EAN-8; 13 for EAN-13; 14 for EAN-14
+	 * and Regular Expression for valid EANs (EAN-8, EAN-13, EAN-14),
+	 * with exact numberic matching of 8 or 13 or 14 digits [0-9]
 	 */
 	var LENGTH_EAN_8 = 8;
-	var validEanRegex = /^(\d{8}|\d{13})$/;
+	var LENGTH_EAN_14 = 14;
+	var validEanRegex = /^(\d{8}|\d{13}|\d{14})$/;
 	/**
 	 * Get position weight given:
 	 * EAN length and digit index/position
@@ -3367,7 +3518,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 */
 
 	function getPositionWeightThroughLengthAndIndex(length, index) {
-	  if (length === LENGTH_EAN_8) {
+	  if (length === LENGTH_EAN_8 || length === LENGTH_EAN_14) {
 	    return index % 2 === 0 ? 3 : 1;
 	  }
 
@@ -3393,7 +3544,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	}
 	/**
 	 * Check if string is valid EAN:
-	 * Matches EAN-8/EAN-13 regex
+	 * Matches EAN-8/EAN-13/EAN-14 regex
 	 * Has valid check digit.
 	 *
 	 * @param {string} str
@@ -3409,11 +3560,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isEAN$1, isEAN$1.exports));
 
-	var isEAN = /*@__PURE__*/getDefaultExportFromCjs(isEAN_1);
+	var isEAN = /*@__PURE__*/getDefaultExportFromCjs(isEAN$1.exports);
 
-	var isISIN_1 = createCommonjsModule(function (module, exports) {
+	var isISIN$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -3421,11 +3574,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isISIN;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var isin = /^[A-Z]{2}[0-9A-Z]{9}[0-9]$/;
+	var isin = /^[A-Z]{2}[0-9A-Z]{9}[0-9]$/; // this link details how the check digit is calculated:
+	// https://www.isin.org/isin-format/. it is a little bit
+	// odd in that it works with digits, not numbers. in order
+	// to make only one pass through the ISIN characters, the
+	// each alpha character is handled as 2 characters within
+	// the loop.
 
 	function isISIN(str) {
 	  (0, _assertString.default)(str);
@@ -3434,43 +3592,61 @@ var MolaMolaModule = (function (exports, sargasso) {
 	    return false;
 	  }
 
-	  var checksumStr = str.replace(/[A-Z]/g, function (character) {
-	    return parseInt(character, 36);
-	  });
-	  var sum = 0;
-	  var digit;
-	  var tmpNum;
-	  var shouldDouble = true;
+	  var double = true;
+	  var sum = 0; // convert values
 
-	  for (var i = checksumStr.length - 2; i >= 0; i--) {
-	    digit = checksumStr.substring(i, i + 1);
-	    tmpNum = parseInt(digit, 10);
+	  for (var i = str.length - 2; i >= 0; i--) {
+	    if (str[i] >= 'A' && str[i] <= 'Z') {
+	      var value = str[i].charCodeAt(0) - 55;
+	      var lo = value % 10;
+	      var hi = Math.trunc(value / 10); // letters have two digits, so handle the low order
+	      // and high order digits separately.
 
-	    if (shouldDouble) {
-	      tmpNum *= 2;
+	      for (var _i = 0, _arr = [lo, hi]; _i < _arr.length; _i++) {
+	        var digit = _arr[_i];
 
-	      if (tmpNum >= 10) {
-	        sum += tmpNum + 1;
-	      } else {
-	        sum += tmpNum;
+	        if (double) {
+	          if (digit >= 5) {
+	            sum += 1 + (digit - 5) * 2;
+	          } else {
+	            sum += digit * 2;
+	          }
+	        } else {
+	          sum += digit;
+	        }
+
+	        double = !double;
 	      }
 	    } else {
-	      sum += tmpNum;
-	    }
+	      var _digit = str[i].charCodeAt(0) - '0'.charCodeAt(0);
 
-	    shouldDouble = !shouldDouble;
+	      if (double) {
+	        if (_digit >= 5) {
+	          sum += 1 + (_digit - 5) * 2;
+	        } else {
+	          sum += _digit * 2;
+	        }
+	      } else {
+	        sum += _digit;
+	      }
+
+	      double = !double;
+	    }
 	  }
 
-	  return parseInt(str.substr(str.length - 1), 10) === (10000 - sum) % 10;
+	  var check = Math.trunc((sum + 9) / 10) * 10 - sum;
+	  return +str[str.length - 1] === check;
 	}
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isISIN$1, isISIN$1.exports));
 
-	var isISIN = /*@__PURE__*/getDefaultExportFromCjs(isISIN_1);
+	var isISIN = /*@__PURE__*/getDefaultExportFromCjs(isISIN$1.exports);
 
-	var isISBN_1 = createCommonjsModule(function (module, exports) {
+	var isISBN$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -3478,7 +3654,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isISBN;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3536,11 +3712,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isISBN$1, isISBN$1.exports));
 
-	var isISBN = /*@__PURE__*/getDefaultExportFromCjs(isISBN_1);
+	var isISBN = /*@__PURE__*/getDefaultExportFromCjs(isISBN$1.exports);
 
-	var isISSN_1 = createCommonjsModule(function (module, exports) {
+	var isISSN$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -3548,7 +3726,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isISSN;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3578,17 +3756,23 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isISSN$1, isISSN$1.exports));
 
-	var isISSN = /*@__PURE__*/getDefaultExportFromCjs(isISSN_1);
+	var isISSN = /*@__PURE__*/getDefaultExportFromCjs(isISSN$1.exports);
+
+	var isTaxID$1 = {exports: {}};
+
+	var algorithms = {};
 
 	"use strict";
 
-
-	var iso7064Check_1 = iso7064Check;
-	var luhnCheck_1 = luhnCheck;
-	var reverseMultiplyAndSum_1 = reverseMultiplyAndSum;
-	var verhoeffCheck_1 = verhoeffCheck;
+	Object.defineProperty(algorithms, "__esModule", {
+	  value: true
+	});
+	var iso7064Check_1 = algorithms.iso7064Check = iso7064Check;
+	var luhnCheck_1 = algorithms.luhnCheck = luhnCheck;
+	var reverseMultiplyAndSum_1 = algorithms.reverseMultiplyAndSum = reverseMultiplyAndSum;
+	var verhoeffCheck_1 = algorithms.verhoeffCheck = verhoeffCheck;
 
 	/**
 	 * Algorithmic validation functions
@@ -3682,14 +3866,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return checksum === 0;
 	}
 
-	var algorithms = /*#__PURE__*/Object.defineProperty({
-		iso7064Check: iso7064Check_1,
-		luhnCheck: luhnCheck_1,
-		reverseMultiplyAndSum: reverseMultiplyAndSum_1,
-		verhoeffCheck: verhoeffCheck_1
-	}, '__esModule', {value: true});
-
-	var isTaxID_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -3699,11 +3876,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isTaxID;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	var algorithms$1 = _interopRequireWildcard(algorithms);
 
-	var _isDate = _interopRequireDefault(isDate_1);
+	var _isDate = _interopRequireDefault(isDate$1.exports);
 
 	function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -4073,7 +4250,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	    checksum += digits[i] * Math.pow(2, 8 - i);
 	  }
 
-	  return checksum % 11 === digits[8];
+	  return checksum % 11 % 10 === digits[8];
 	}
 	/*
 	 * en-GB validation function (should go here if needed)
@@ -4787,6 +4964,98 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return checksum === parseInt(tin[10], 10);
 	}
 	/*
+	* pt-BR validation function
+	* (Cadastro de Pessoas Físicas (CPF, persons)
+	* Cadastro Nacional de Pessoas Jurídicas (CNPJ, entities)
+	* Both inputs will be validated
+	*/
+
+
+	function ptBrCheck(tin) {
+	  tin = tin.replace(/[^\d]+/g, '');
+	  if (tin === '') return false;
+
+	  if (tin.length === 11) {
+	    var _sum;
+
+	    var ramainder;
+	    _sum = 0;
+	    tin = tin.replace(/[^\d]+/g, '');
+	    if ( // Reject known invalid CPFs
+	    tin === '11111111111' || tin === '22222222222' || tin === '33333333333' || tin === '44444444444' || tin === '55555555555' || tin === '66666666666' || tin === '77777777777' || tin === '88888888888' || tin === '99999999999' || tin === '00000000000') return false;
+
+	    for (var i = 1; i <= 9; i++) {
+	      _sum += parseInt(tin.substring(i - 1, i), 10) * (11 - i);
+	    }
+
+	    ramainder = _sum * 10 % 11;
+	    if (ramainder === 10 || ramainder === 11) ramainder = 0;
+	    if (ramainder !== parseInt(tin.substring(9, 10), 10)) return false;
+	    _sum = 0;
+
+	    for (var _i8 = 1; _i8 <= 10; _i8++) {
+	      _sum += parseInt(tin.substring(_i8 - 1, _i8), 10) * (12 - _i8);
+	    }
+
+	    ramainder = _sum * 10 % 11;
+	    if (ramainder === 10 || ramainder === 11) ramainder = 0;
+	    if (ramainder !== parseInt(tin.substring(10, 11), 10)) return false;
+	    return true;
+	  }
+
+	  if (tin.length !== 14) {
+	    return false;
+	  }
+
+	  if ( // Reject know invalid CNPJs
+	  tin === '00000000000000' || tin === '11111111111111' || tin === '22222222222222' || tin === '33333333333333' || tin === '44444444444444' || tin === '55555555555555' || tin === '66666666666666' || tin === '77777777777777' || tin === '88888888888888' || tin === '99999999999999') {
+	    return false;
+	  }
+
+	  var length = tin.length - 2;
+	  var identifiers = tin.substring(0, length);
+	  var verificators = tin.substring(length);
+	  var sum = 0;
+	  var pos = length - 7;
+
+	  for (var _i9 = length; _i9 >= 1; _i9--) {
+	    sum += identifiers.charAt(length - _i9) * pos;
+	    pos -= 1;
+
+	    if (pos < 2) {
+	      pos = 9;
+	    }
+	  }
+
+	  var result = sum % 11 < 2 ? 0 : 11 - sum % 11;
+
+	  if (result !== parseInt(verificators.charAt(0), 10)) {
+	    return false;
+	  }
+
+	  length += 1;
+	  identifiers = tin.substring(0, length);
+	  sum = 0;
+	  pos = length - 7;
+
+	  for (var _i10 = length; _i10 >= 1; _i10--) {
+	    sum += identifiers.charAt(length - _i10) * pos;
+	    pos -= 1;
+
+	    if (pos < 2) {
+	      pos = 9;
+	    }
+	  }
+
+	  result = sum % 11 < 2 ? 0 : 11 - sum % 11;
+
+	  if (result !== parseInt(verificators.charAt(1), 10)) {
+	    return false;
+	  }
+
+	  return true;
+	}
+	/*
 	 * pt-PT validation function
 	 * (Número de identificação fiscal (NIF), persons/entities)
 	 * Verify TIN validity by calculating check (last) digit (variant of MOD 11)
@@ -5044,6 +5313,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  'mt-MT': /^\d{3,7}[APMGLHBZ]$|^([1-8])\1\d{7}$/i,
 	  'nl-NL': /^\d{9}$/,
 	  'pl-PL': /^\d{10,11}$/,
+	  'pt-BR': /^\d{11,14}$/,
 	  'pt-PT': /^\d{9}$/,
 	  'ro-RO': /^\d{13}$/,
 	  'sk-SK': /^\d{6}\/{0,1}\d{3,4}$/,
@@ -5078,6 +5348,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  'mt-MT': mtMtCheck,
 	  'nl-NL': nlNlCheck,
 	  'pl-PL': plPlCheck,
+	  'pt-BR': ptBrCheck,
 	  'pt-PT': ptPtCheck,
 	  'ro-RO': roRoCheck,
 	  'sk-SK': skSkCheck,
@@ -5132,22 +5403,23 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isTaxID$1, isTaxID$1.exports));
 
-	var isTaxID = /*@__PURE__*/getDefaultExportFromCjs(isTaxID_1);
+	var isTaxID = /*@__PURE__*/getDefaultExportFromCjs(isTaxID$1.exports);
 
-	var isMobilePhone_1 = createCommonjsModule(function (module, exports) {
+	var isMobilePhone$1 = {};
+
 	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(isMobilePhone$1, "__esModule", {
 	  value: true
 	});
-	exports.default = isMobilePhone;
-	exports.locales = void 0;
+	var _default$2 = isMobilePhone$1.default = isMobilePhone;
+	var locales_1$1 = isMobilePhone$1.locales = void 0;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString$2 = _interopRequireDefault$2(assertString$1.exports);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault$2(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/* eslint-disable max-len */
 	var phones = {
@@ -5162,6 +5434,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  'ar-KW': /^(\+?965)[569]\d{7}$/,
 	  'ar-LY': /^((\+?218)|0)?(9[1-6]\d{7}|[1-8]\d{7,9})$/,
 	  'ar-MA': /^(?:(?:\+|00)212|0)[5-7]\d{8}$/,
+	  'ar-OM': /^((\+|00)968)?(9[1-9])\d{6}$/,
 	  'ar-SA': /^(!?(\+?966)|0)?5\d{8}$/,
 	  'ar-SY': /^(!?(\+?963)|0)?9\d{8}$/,
 	  'ar-TN': /^(\+?216)?[2459]\d{7}$/,
@@ -5175,13 +5448,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  'da-DK': /^(\+?45)?\s?\d{2}\s?\d{2}\s?\d{2}\s?\d{2}$/,
 	  'de-DE': /^(\+49)?0?[1|3]([0|5][0-45-9]\d|6([23]|0\d?)|7([0-57-9]|6\d))\d{7}$/,
 	  'de-AT': /^(\+43|0)\d{1,4}\d{3,12}$/,
-	  'de-CH': /^(\+41|0)(7[5-9])\d{1,7}$/,
+	  'de-CH': /^(\+41|0)([1-9])\d{1,9}$/,
 	  'de-LU': /^(\+352)?((6\d1)\d{6})$/,
 	  'el-GR': /^(\+?30|0)?(69\d{8})$/,
 	  'en-AU': /^(\+?61|0)4\d{8}$/,
 	  'en-GB': /^(\+?44|0)7\d{9}$/,
 	  'en-GG': /^(\+?44|0)1481\d{6}$/,
-	  'en-GH': /^(\+233|0)(20|50|24|54|27|57|26|56|23|28)\d{7}$/,
+	  'en-GH': /^(\+233|0)(20|50|24|54|27|57|26|56|23|28|55|59)\d{7}$/,
 	  'en-HK': /^(\+?852[-\s]?)?[456789]\d{3}[-\s]?\d{4}$/,
 	  'en-MO': /^(\+?853[-\s]?)?[6]\d{3}[-\s]?\d{4}$/,
 	  'en-IE': /^(\+?353|0)8[356789]\d{7}$/,
@@ -5194,8 +5467,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  'en-PK': /^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/,
 	  'en-PH': /^(09|\+639)\d{9}$/,
 	  'en-RW': /^(\+?250|0)?[7]\d{8}$/,
-	  'en-SG': /^(\+65)?[689]\d{7}$/,
-	  'en-SL': /^(?:0|94|\+94)?(7(0|1|2|5|6|7|8)( |-)?\d)\d{6}$/,
+	  'en-SG': /^(\+65)?[3689]\d{7}$/,
+	  'en-SL': /^(\+?232|0)\d{8}$/,
 	  'en-TZ': /^(\+?255|0)?[67]\d{8}$/,
 	  'en-UG': /^(\+?256|0)?[7]\d{8}$/,
 	  'en-US': /^((\+1|1)?( |-)?)?(\([2-9][0-9]{2}\)|[2-9][0-9]{2})( |-)?([2-9][0-9]{2}( |-)?[0-9]{4})$/,
@@ -5204,7 +5477,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  'en-ZW': /^(\+263)[0-9]{9}$/,
 	  'es-AR': /^\+?549(11|[2368]\d)\d{8}$/,
 	  'es-BO': /^(\+?591)?(6|7)\d{7}$/,
-	  'es-CO': /^(\+?57)?([1-8]{1}|3[0-9]{2})?[2-9]{1}\d{6}$/,
+	  'es-CO': /^(\+?57)?3(0(0|1|2|4|5)|1\d|2[0-4]|5(0|1))\d{7}$/,
 	  'es-CL': /^(\+?56|0)[2-9]\d{1}\d{7}$/,
 	  'es-CR': /^(\+506)?[2-8]\d{7}$/,
 	  'es-DO': /^(\+?1)?8[024]9\d{7}$/,
@@ -5237,7 +5510,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  'kl-GL': /^(\+?299)?\s?\d{2}\s?\d{2}\s?\d{2}$/,
 	  'ko-KR': /^((\+?82)[ \-]?)?0?1([0|1|6|7|8|9]{1})[ \-]?\d{3,4}[ \-]?\d{4}$/,
 	  'lt-LT': /^(\+370|8)\d{8}$/,
+	  'lv-LV': /^(\+?371)2\d{7}$/,
 	  'ms-MY': /^(\+?6?01){1}(([0145]{1}(\-|\s)?\d{7,8})|([236789]{1}(\s|\-)?\d{7}))$/,
+	  'mz-MZ': /^(\+?258)?8[234567]\d{7}$/,
 	  'nb-NO': /^(\+?47)?[49]\d{7}$/,
 	  'ne-NP': /^(\+?977)?9[78]\d{8}$/,
 	  'nl-BE': /^(\+?32|0)4?\d{8}$/,
@@ -5246,8 +5521,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  'pl-PL': /^(\+?48)? ?[5-8]\d ?\d{3} ?\d{2} ?\d{2}$/,
 	  'pt-BR': /^((\+?55\ ?[1-9]{2}\ ?)|(\+?55\ ?\([1-9]{2}\)\ ?)|(0[1-9]{2}\ ?)|(\([1-9]{2}\)\ ?)|([1-9]{2}\ ?))((\d{4}\-?\d{4})|(9[2-9]{1}\d{3}\-?\d{4}))$/,
 	  'pt-PT': /^(\+?351)?9[1236]\d{7}$/,
+	  'pt-AO': /^(\+244)\d{9}$/,
 	  'ro-RO': /^(\+?4?0)\s?7\d{2}(\/|\s|\.|\-)?\d{3}(\s|\.|\-)?\d{3}$/,
 	  'ru-RU': /^(\+?7|8)?9\d{9}$/,
+	  'si-LK': /^(?:0|94|\+94)?(7(0|1|2|5|6|7|8)( |-)?\d)\d{6}$/,
 	  'sl-SI': /^(\+386\s?|0)(\d{1}\s?\d{3}\s?\d{2}\s?\d{2}|\d{2}\s?\d{3}\s?\d{3})$/,
 	  'sk-SK': /^(\+?421)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$/,
 	  'sq-AL': /^(\+355|0)6[789]\d{6}$/,
@@ -5257,8 +5534,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  'tr-TR': /^(\+?90|0)?5\d{9}$/,
 	  'uk-UA': /^(\+?38|8)?0\d{9}$/,
 	  'uz-UZ': /^(\+?998)?(6[125-79]|7[1-69]|88|9\d)\d{7}$/,
-	  'vi-VN': /^(\+?84|0)((3([2-9]))|(5([2689]))|(7([0|6-9]))|(8([1-6|89]))|(9([0-9])))([0-9]{7})$/,
-	  'zh-CN': /^((\+|00)86)?1([3568][0-9]|4[579]|6[67]|7[01235678]|9[012356789])[0-9]{8}$/,
+	  'vi-VN': /^(\+?84|0)((3([2-9]))|(5([2689]))|(7([0|6-9]))|(8([1-9]))|(9([0-9])))([0-9]{7})$/,
+	  'zh-CN': /^((\+|00)86)?1([3456789][0-9]|4[579]|6[67]|7[01235678]|9[012356789])[0-9]{8}$/,
 	  'zh-TW': /^(\+?886\-?|0)?9\d{8}$/
 	};
 	/* eslint-enable max-len */
@@ -5270,9 +5547,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	phones['zh-HK'] = phones['en-HK'];
 	phones['zh-MO'] = phones['en-MO'];
 	phones['ga-IE'] = phones['en-IE'];
+	phones['fr-CH'] = phones['de-CH'];
+	phones['it-CH'] = phones['fr-CH'];
 
 	function isMobilePhone(str, locale, options) {
-	  (0, _assertString.default)(str);
+	  (0, _assertString$2.default)(str);
 
 	  if (options && options.strictMode && !str.startsWith('+')) {
 	    return false;
@@ -5312,13 +5591,12 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  throw new Error("Invalid locale '".concat(locale, "'"));
 	}
 
-	var locales = Object.keys(phones);
-	exports.locales = locales;
-	});
+	var locales$1 = Object.keys(phones);
+	locales_1$1 = isMobilePhone$1.locales = locales$1;
 
-	var isMobilePhone = /*@__PURE__*/getDefaultExportFromCjs(isMobilePhone_1);
+	var isEthereumAddress$1 = {exports: {}};
 
-	var isEthereumAddress_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5326,7 +5604,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isEthereumAddress;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5339,11 +5617,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isEthereumAddress$1, isEthereumAddress$1.exports));
 
-	var isEthereumAddress = /*@__PURE__*/getDefaultExportFromCjs(isEthereumAddress_1);
+	var isEthereumAddress = /*@__PURE__*/getDefaultExportFromCjs(isEthereumAddress$1.exports);
 
-	var isCurrency_1 = createCommonjsModule(function (module, exports) {
+	var isCurrency$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5351,9 +5631,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isCurrency;
 
-	var _merge = _interopRequireDefault(merge_1);
+	var _merge = _interopRequireDefault(merge$1.exports);
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5435,11 +5715,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isCurrency$1, isCurrency$1.exports));
 
-	var isCurrency = /*@__PURE__*/getDefaultExportFromCjs(isCurrency_1);
+	var isCurrency = /*@__PURE__*/getDefaultExportFromCjs(isCurrency$1.exports);
 
-	var isBtcAddress_1 = createCommonjsModule(function (module, exports) {
+	var isBtcAddress$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5447,25 +5729,33 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isBtcAddress;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// supports Bech32 addresses
-	var btc = /^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}$/;
+	var bech32 = /^(bc1)[a-z0-9]{25,39}$/;
+	var base58 = /^(1|3)[A-HJ-NP-Za-km-z1-9]{25,39}$/;
 
 	function isBtcAddress(str) {
-	  (0, _assertString.default)(str);
-	  return btc.test(str);
+	  (0, _assertString.default)(str); // check for bech32
+
+	  if (str.startsWith('bc1')) {
+	    return bech32.test(str);
+	  }
+
+	  return base58.test(str);
 	}
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isBtcAddress$1, isBtcAddress$1.exports));
 
-	var isBtcAddress = /*@__PURE__*/getDefaultExportFromCjs(isBtcAddress_1);
+	var isBtcAddress = /*@__PURE__*/getDefaultExportFromCjs(isBtcAddress$1.exports);
 
-	var isISO8601_1 = createCommonjsModule(function (module, exports) {
+	var isISO8601$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5473,7 +5763,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isISO8601;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5525,11 +5815,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isISO8601$1, isISO8601$1.exports));
 
-	var isISO8601 = /*@__PURE__*/getDefaultExportFromCjs(isISO8601_1);
+	var isISO8601 = /*@__PURE__*/getDefaultExportFromCjs(isISO8601$1.exports);
 
-	var isRFC3339_1 = createCommonjsModule(function (module, exports) {
+	var isRFC3339$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5537,7 +5829,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isRFC3339;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5563,39 +5855,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isRFC3339$1, isRFC3339$1.exports));
 
-	var isRFC3339 = /*@__PURE__*/getDefaultExportFromCjs(isRFC3339_1);
+	var isRFC3339 = /*@__PURE__*/getDefaultExportFromCjs(isRFC3339$1.exports);
 
-	var isISO31661Alpha2_1 = createCommonjsModule(function (module, exports) {
-	"use strict";
+	var isISO31661Alpha3$1 = {exports: {}};
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = isISO31661Alpha2;
-
-	var _assertString = _interopRequireDefault(assertString_1);
-
-	var _includes = _interopRequireDefault(includes_1);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// from https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-	var validISO31661Alpha2CountriesCodes = ['AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CU', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH', 'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FM', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HM', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IO', 'IQ', 'IR', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KP', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MH', 'MK', 'ML', 'MM', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NF', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU', 'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PW', 'PY', 'QA', 'RE', 'RO', 'RS', 'RU', 'RW', 'SA', 'SB', 'SC', 'SD', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'SS', 'ST', 'SV', 'SX', 'SY', 'SZ', 'TC', 'TD', 'TF', 'TG', 'TH', 'TJ', 'TK', 'TL', 'TM', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI', 'VN', 'VU', 'WF', 'WS', 'YE', 'YT', 'ZA', 'ZM', 'ZW'];
-
-	function isISO31661Alpha2(str) {
-	  (0, _assertString.default)(str);
-	  return (0, _includes.default)(validISO31661Alpha2CountriesCodes, str.toUpperCase());
-	}
-
-	module.exports = exports.default;
-	module.exports.default = exports.default;
-	});
-
-	var isISO31661Alpha2 = /*@__PURE__*/getDefaultExportFromCjs(isISO31661Alpha2_1);
-
-	var isISO31661Alpha3_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5603,9 +5869,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isISO31661Alpha3;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _includes = _interopRequireDefault(includes_1);
+	var _includes = _interopRequireDefault(includes$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5619,11 +5885,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isISO31661Alpha3$1, isISO31661Alpha3$1.exports));
 
-	var isISO31661Alpha3 = /*@__PURE__*/getDefaultExportFromCjs(isISO31661Alpha3_1);
+	var isISO31661Alpha3 = /*@__PURE__*/getDefaultExportFromCjs(isISO31661Alpha3$1.exports);
 
-	var isBase32_1 = createCommonjsModule(function (module, exports) {
+	var isBase32$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5631,7 +5899,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isBase32;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5650,11 +5918,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isBase32$1, isBase32$1.exports));
 
-	var isBase32 = /*@__PURE__*/getDefaultExportFromCjs(isBase32_1);
+	var isBase32 = /*@__PURE__*/getDefaultExportFromCjs(isBase32$1.exports);
 
-	var isBase58_1 = createCommonjsModule(function (module, exports) {
+	var isBase58$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5662,7 +5932,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isBase58;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5681,11 +5951,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isBase58$1, isBase58$1.exports));
 
-	var isBase58 = /*@__PURE__*/getDefaultExportFromCjs(isBase58_1);
+	var isBase58 = /*@__PURE__*/getDefaultExportFromCjs(isBase58$1.exports);
 
-	var isDataURI_1 = createCommonjsModule(function (module, exports) {
+	var isDataURI$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5693,7 +5965,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isDataURI;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5723,8 +5995,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  }
 
 	  for (var i = 0; i < attributes.length; i++) {
-	    if (i === attributes.length - 1 && attributes[i].toLowerCase() === 'base64') {// ok
-	    } else if (!validAttribute.test(attributes[i])) {
+	    if (!(i === attributes.length - 1 && attributes[i].toLowerCase() === 'base64') && !validAttribute.test(attributes[i])) {
 	      return false;
 	    }
 	  }
@@ -5740,11 +6011,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isDataURI$1, isDataURI$1.exports));
 
-	var isDataURI = /*@__PURE__*/getDefaultExportFromCjs(isDataURI_1);
+	var isDataURI = /*@__PURE__*/getDefaultExportFromCjs(isDataURI$1.exports);
 
-	var isMagnetURI_1 = createCommonjsModule(function (module, exports) {
+	var isMagnetURI$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5752,7 +6025,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isMagnetURI;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5765,11 +6038,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isMagnetURI$1, isMagnetURI$1.exports));
 
-	var isMagnetURI = /*@__PURE__*/getDefaultExportFromCjs(isMagnetURI_1);
+	var isMagnetURI = /*@__PURE__*/getDefaultExportFromCjs(isMagnetURI$1.exports);
 
-	var isMimeType_1 = createCommonjsModule(function (module, exports) {
+	var isMimeType$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5777,7 +6052,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isMimeType;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5821,11 +6096,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isMimeType$1, isMimeType$1.exports));
 
-	var isMimeType = /*@__PURE__*/getDefaultExportFromCjs(isMimeType_1);
+	var isMimeType = /*@__PURE__*/getDefaultExportFromCjs(isMimeType$1.exports);
 
-	var isLatLong_1 = createCommonjsModule(function (module, exports) {
+	var isLatLong$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5833,9 +6110,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isLatLong;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _merge = _interopRequireDefault(merge_1);
+	var _merge = _interopRequireDefault(merge$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5863,22 +6140,23 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isLatLong$1, isLatLong$1.exports));
 
-	var isLatLong = /*@__PURE__*/getDefaultExportFromCjs(isLatLong_1);
+	var isLatLong = /*@__PURE__*/getDefaultExportFromCjs(isLatLong$1.exports);
 
-	var isPostalCode_1 = createCommonjsModule(function (module, exports) {
+	var isPostalCode$1 = {};
+
 	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(isPostalCode$1, "__esModule", {
 	  value: true
 	});
-	exports.default = isPostalCode;
-	exports.locales = void 0;
+	var _default$1 = isPostalCode$1.default = isPostalCode;
+	var locales_1 = isPostalCode$1.locales = void 0;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString$1 = _interopRequireDefault$1(assertString$1.exports);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault$1(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// common patterns
 	var threeDigit = /^\d{3}$/;
@@ -5912,7 +6190,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  HT: /^HT\d{4}$/,
 	  HU: fourDigit,
 	  ID: fiveDigit,
-	  IE: /^(?!.*(?:o))[A-z]\d[\dw]\s\w{4}$/i,
+	  IE: /^(?!.*(?:o))[A-Za-z]\d[\dw]\s\w{4}$/i,
 	  IL: /^(\d{5}|\d{7})$/,
 	  IN: /^((?!10|29|35|54|55|65|66|86|87|88|89)[1-9][0-9]{5})$/,
 	  IR: /\b(?!(\d)\1{3})[13-9]{4}[1346-9][013-9]{5}\b/,
@@ -5920,6 +6198,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  IT: fiveDigit,
 	  JP: /^\d{3}\-\d{4}$/,
 	  KE: fiveDigit,
+	  KR: /^(\d{5}|\d{6})$/,
 	  LI: /^(948[5-9]|949[0-7])$/,
 	  LT: /^LT\-\d{5}$/,
 	  LU: fourDigit,
@@ -5950,10 +6229,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  ZM: fiveDigit
 	};
 	var locales = Object.keys(patterns);
-	exports.locales = locales;
+	locales_1 = isPostalCode$1.locales = locales;
 
 	function isPostalCode(str, locale) {
-	  (0, _assertString.default)(str);
+	  (0, _assertString$1.default)(str);
 
 	  if (locale in patterns) {
 	    return patterns[locale].test(str);
@@ -5975,11 +6254,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	  throw new Error("Invalid locale '".concat(locale, "'"));
 	}
-	});
 
-	var isPostalCode = /*@__PURE__*/getDefaultExportFromCjs(isPostalCode_1);
+	var ltrim$1 = {exports: {}};
 
-	var ltrim_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5987,7 +6265,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = ltrim;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6000,11 +6278,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(ltrim$1, ltrim$1.exports));
 
-	var ltrim = /*@__PURE__*/getDefaultExportFromCjs(ltrim_1);
+	var ltrim = /*@__PURE__*/getDefaultExportFromCjs(ltrim$1.exports);
 
-	var rtrim_1 = createCommonjsModule(function (module, exports) {
+	var rtrim$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -6012,24 +6292,26 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = rtrim;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function rtrim(str, chars) {
 	  (0, _assertString.default)(str); // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Escaping
 
-	  var pattern = chars ? new RegExp("[".concat(chars.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), "]+$"), 'g') : /\s+$/g;
+	  var pattern = chars ? new RegExp("[".concat(chars.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), "]+$"), 'g') : /(\s)+$/g;
 	  return str.replace(pattern, '');
 	}
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(rtrim$1, rtrim$1.exports));
 
-	var rtrim = /*@__PURE__*/getDefaultExportFromCjs(rtrim_1);
+	var rtrim = /*@__PURE__*/getDefaultExportFromCjs(rtrim$1.exports);
 
-	var trim_1 = createCommonjsModule(function (module, exports) {
+	var trim$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -6037,9 +6319,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = trim;
 
-	var _rtrim = _interopRequireDefault(rtrim_1);
+	var _rtrim = _interopRequireDefault(rtrim$1.exports);
 
-	var _ltrim = _interopRequireDefault(ltrim_1);
+	var _ltrim = _interopRequireDefault(ltrim$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6049,11 +6331,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(trim$1, trim$1.exports));
 
-	var trim = /*@__PURE__*/getDefaultExportFromCjs(trim_1);
+	var trim = /*@__PURE__*/getDefaultExportFromCjs(trim$1.exports);
 
-	var _escape = createCommonjsModule(function (module, exports) {
+	var _escape$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -6061,7 +6345,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = escape;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6072,11 +6356,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(_escape$1, _escape$1.exports));
 
-	var _escape$1 = /*@__PURE__*/getDefaultExportFromCjs(_escape);
+	var _escape = /*@__PURE__*/getDefaultExportFromCjs(_escape$1.exports);
 
-	var _unescape = createCommonjsModule(function (module, exports) {
+	var _unescape$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -6084,7 +6370,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = unescape;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6095,11 +6381,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(_unescape$1, _unescape$1.exports));
 
-	var _unescape$1 = /*@__PURE__*/getDefaultExportFromCjs(_unescape);
+	var _unescape = /*@__PURE__*/getDefaultExportFromCjs(_unescape$1.exports);
 
-	var blacklist_1 = createCommonjsModule(function (module, exports) {
+	var stripLow$1 = {exports: {}};
+
+	var blacklist$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -6107,7 +6397,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = blacklist;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6118,11 +6408,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(blacklist$1, blacklist$1.exports));
 
-	var blacklist = /*@__PURE__*/getDefaultExportFromCjs(blacklist_1);
+	var blacklist = /*@__PURE__*/getDefaultExportFromCjs(blacklist$1.exports);
 
-	var stripLow_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -6130,9 +6420,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = stripLow;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var _blacklist = _interopRequireDefault(blacklist_1);
+	var _blacklist = _interopRequireDefault(blacklist$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6144,11 +6434,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(stripLow$1, stripLow$1.exports));
 
-	var stripLow = /*@__PURE__*/getDefaultExportFromCjs(stripLow_1);
+	var stripLow = /*@__PURE__*/getDefaultExportFromCjs(stripLow$1.exports);
 
-	var whitelist_1 = createCommonjsModule(function (module, exports) {
+	var whitelist$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -6156,7 +6448,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = whitelist;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6167,11 +6459,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(whitelist$1, whitelist$1.exports));
 
-	var whitelist = /*@__PURE__*/getDefaultExportFromCjs(whitelist_1);
+	var whitelist = /*@__PURE__*/getDefaultExportFromCjs(whitelist$1.exports);
 
-	var isWhitelisted_1 = createCommonjsModule(function (module, exports) {
+	var isWhitelisted$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -6179,7 +6473,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isWhitelisted;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6197,11 +6491,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isWhitelisted$1, isWhitelisted$1.exports));
 
-	var isWhitelisted = /*@__PURE__*/getDefaultExportFromCjs(isWhitelisted_1);
+	var isWhitelisted = /*@__PURE__*/getDefaultExportFromCjs(isWhitelisted$1.exports);
 
-	var normalizeEmail_1 = createCommonjsModule(function (module, exports) {
+	var normalizeEmail$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -6209,7 +6505,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = normalizeEmail;
 
-	var _merge = _interopRequireDefault(merge_1);
+	var _merge = _interopRequireDefault(merge$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6353,11 +6649,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(normalizeEmail$1, normalizeEmail$1.exports));
 
-	var normalizeEmail = /*@__PURE__*/getDefaultExportFromCjs(normalizeEmail_1);
+	var normalizeEmail = /*@__PURE__*/getDefaultExportFromCjs(normalizeEmail$1.exports);
 
-	var isSlug_1 = createCommonjsModule(function (module, exports) {
+	var isSlug$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -6365,11 +6663,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isSlug;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var charsetRegex = /^[^\s-_](?!.*?[-_]{2,})([a-z0-9-\\]{1,})[^\s]*[^-_\s]$/;
+	var charsetRegex = /^[^\s-_](?!.*?[-_]{2,})[a-z0-9-\\][^\s]*[^-_\s]$/;
 
 	function isSlug(str) {
 	  (0, _assertString.default)(str);
@@ -6378,11 +6676,72 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
+	}(isSlug$1, isSlug$1.exports));
+
+	var isSlug = /*@__PURE__*/getDefaultExportFromCjs(isSlug$1.exports);
+
+	var isLicensePlate$1 = {exports: {}};
+
+	(function (module, exports) {
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
 	});
+	exports.default = isLicensePlate;
 
-	var isSlug = /*@__PURE__*/getDefaultExportFromCjs(isSlug_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
-	var isStrongPassword_1 = createCommonjsModule(function (module, exports) {
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var validators = {
+	  'de-DE': function deDE(str) {
+	    return /^((AW|UL|AK|GA|AÖ|LF|AZ|AM|AS|ZE|AN|AB|A|KG|KH|BA|EW|BZ|HY|KM|BT|HP|B|BC|BI|BO|FN|TT|ÜB|BN|AH|BS|FR|HB|ZZ|BB|BK|BÖ|OC|OK|CW|CE|C|CO|LH|CB|KW|LC|LN|DA|DI|DE|DH|SY|NÖ|DO|DD|DU|DN|D|EI|EA|EE|FI|EM|EL|EN|PF|ED|EF|ER|AU|ZP|E|ES|NT|EU|FL|FO|FT|FF|F|FS|FD|FÜ|GE|G|GI|GF|GS|ZR|GG|GP|GR|NY|ZI|GÖ|GZ|GT|HA|HH|HM|HU|WL|HZ|WR|RN|HK|HD|HN|HS|GK|HE|HF|RZ|HI|HG|HO|HX|IK|IL|IN|J|JL|KL|KA|KS|KF|KE|KI|KT|KO|KN|KR|KC|KU|K|LD|LL|LA|L|OP|LM|LI|LB|LU|LÖ|HL|LG|MD|GN|MZ|MA|ML|MR|MY|AT|DM|MC|NZ|RM|RG|MM|ME|MB|MI|FG|DL|HC|MW|RL|MK|MG|MÜ|WS|MH|M|MS|NU|NB|ND|NM|NK|NW|NR|NI|NF|DZ|EB|OZ|TG|TO|N|OA|GM|OB|CA|EH|FW|OF|OL|OE|OG|BH|LR|OS|AA|GD|OH|KY|NP|WK|PB|PA|PE|PI|PS|P|PM|PR|RA|RV|RE|R|H|SB|WN|RS|RD|RT|BM|NE|GV|RP|SU|GL|RO|GÜ|RH|EG|RW|PN|SK|MQ|RU|SZ|RI|SL|SM|SC|HR|FZ|VS|SW|SN|CR|SE|SI|SO|LP|SG|NH|SP|IZ|ST|BF|TE|HV|OD|SR|S|AC|DW|ZW|TF|TS|TR|TÜ|UM|PZ|TP|UE|UN|UH|MN|KK|VB|V|AE|PL|RC|VG|GW|PW|VR|VK|KB|WA|WT|BE|WM|WE|AP|MO|WW|FB|WZ|WI|WB|JE|WF|WO|W|WÜ|BL|Z|GC)[- ]?[A-Z]{1,2}[- ]?\d{1,4}|(AIC|FDB|ABG|SLN|SAW|KLZ|BUL|ESB|NAB|SUL|WST|ABI|AZE|BTF|KÖT|DKB|FEU|ROT|ALZ|SMÜ|WER|AUR|NOR|DÜW|BRK|HAB|TÖL|WOR|BAD|BAR|BER|BIW|EBS|KEM|MÜB|PEG|BGL|BGD|REI|WIL|BKS|BIR|WAT|BOR|BOH|BOT|BRB|BLK|HHM|NEB|NMB|WSF|LEO|HDL|WMS|WZL|BÜS|CHA|KÖZ|ROD|WÜM|CLP|NEC|COC|ZEL|COE|CUX|DAH|LDS|DEG|DEL|RSL|DLG|DGF|LAN|HEI|MED|DON|KIB|ROK|JÜL|MON|SLE|EBE|EIC|HIG|WBS|BIT|PRÜ|LIB|EMD|WIT|ERH|HÖS|ERZ|ANA|ASZ|MAB|MEK|STL|SZB|FDS|HCH|HOR|WOL|FRG|GRA|WOS|FRI|FFB|GAP|GER|BRL|CLZ|GTH|NOH|HGW|GRZ|LÖB|NOL|WSW|DUD|HMÜ|OHA|KRU|HAL|HAM|HBS|QLB|HVL|NAU|HAS|EBN|GEO|HOH|HDH|ERK|HER|WAN|HEF|ROF|HBN|ALF|HSK|USI|NAI|REH|SAN|KÜN|ÖHR|HOL|WAR|ARN|BRG|GNT|HOG|WOH|KEH|MAI|PAR|RID|ROL|KLE|GEL|KUS|KYF|ART|SDH|LDK|DIL|MAL|VIB|LER|BNA|GHA|GRM|MTL|WUR|LEV|LIF|STE|WEL|LIP|VAI|LUP|HGN|LBZ|LWL|PCH|STB|DAN|MKK|SLÜ|MSP|TBB|MGH|MTK|BIN|MSH|EIL|HET|SGH|BID|MYK|MSE|MST|MÜR|WRN|MEI|GRH|RIE|MZG|MIL|OBB|BED|FLÖ|MOL|FRW|SEE|SRB|AIB|MOS|BCH|ILL|SOB|NMS|NEA|SEF|UFF|NEW|VOH|NDH|TDO|NWM|GDB|GVM|WIS|NOM|EIN|GAN|LAU|HEB|OHV|OSL|SFB|ERB|LOS|BSK|KEL|BSB|MEL|WTL|OAL|FÜS|MOD|OHZ|OPR|BÜR|PAF|PLÖ|CAS|GLA|REG|VIT|ECK|SIM|GOA|EMS|DIZ|GOH|RÜD|SWA|NES|KÖN|MET|LRO|BÜZ|DBR|ROS|TET|HRO|ROW|BRV|HIP|PAN|GRI|SHK|EIS|SRO|SOK|LBS|SCZ|MER|QFT|SLF|SLS|HOM|SLK|ASL|BBG|SBK|SFT|SHG|MGN|MEG|ZIG|SAD|NEN|OVI|SHA|BLB|SIG|SON|SPN|FOR|GUB|SPB|IGB|WND|STD|STA|SDL|OBG|HST|BOG|SHL|PIR|FTL|SEB|SÖM|SÜW|TIR|SAB|TUT|ANG|SDT|LÜN|LSZ|MHL|VEC|VER|VIE|OVL|ANK|OVP|SBG|UEM|UER|WLG|GMN|NVP|RDG|RÜG|DAU|FKB|WAF|WAK|SLZ|WEN|SOG|APD|WUG|GUN|ESW|WIZ|WES|DIN|BRA|BÜD|WHV|HWI|GHC|WTM|WOB|WUN|MAK|SEL|OCH|HOT|WDA)[- ]?(([A-Z][- ]?\d{1,4})|([A-Z]{2}[- ]?\d{1,3})))[- ]?(E|H)?$/.test(str);
+	  },
+	  'de-LI': function deLI(str) {
+	    return /^FL[- ]?\d{1,5}[UZ]?$/.test(str);
+	  },
+	  'pt-PT': function ptPT(str) {
+	    return /^([A-Z]{2}|[0-9]{2})[ -·]?([A-Z]{2}|[0-9]{2})[ -·]?([A-Z]{2}|[0-9]{2})$/.test(str);
+	  },
+	  'sq-AL': function sqAL(str) {
+	    return /^[A-Z]{2}[- ]?((\d{3}[- ]?(([A-Z]{2})|T))|(R[- ]?\d{3}))$/.test(str);
+	  },
+	  'pt-BR': function ptBR(str) {
+	    return /^[A-Z]{3}[ -]?[0-9][A-Z][0-9]{2}|[A-Z]{3}[ -]?[0-9]{4}$/.test(str);
+	  }
+	};
+
+	function isLicensePlate(str, locale) {
+	  (0, _assertString.default)(str);
+
+	  if (locale in validators) {
+	    return validators[locale](str);
+	  } else if (locale === 'any') {
+	    for (var key in validators) {
+	      /* eslint guard-for-in: 0 */
+	      var validator = validators[key];
+
+	      if (validator(str)) {
+	        return true;
+	      }
+	    }
+
+	    return false;
+	  }
+
+	  throw new Error("Invalid locale '".concat(locale, "'"));
+	}
+
+	module.exports = exports.default;
+	module.exports.default = exports.default;
+	}(isLicensePlate$1, isLicensePlate$1.exports));
+
+	var isLicensePlate = /*@__PURE__*/getDefaultExportFromCjs(isLicensePlate$1.exports);
+
+	var isStrongPassword$1 = {exports: {}};
+
+	(function (module, exports) {
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -6390,16 +6749,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = isStrongPassword;
 
-	var _merge = _interopRequireDefault(merge_1);
+	var _merge = _interopRequireDefault(merge$1.exports);
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var upperCaseRegex = /^[A-Z]$/;
 	var lowerCaseRegex = /^[a-z]$/;
 	var numberRegex = /^[0-9]$/;
-	var symbolRegex = /^[-#!$%^&*()_+|~=`{}\[\]:";'<>?,.\/ ]$/;
+	var symbolRegex = /^[-#!$@%^&*()_+|~=`{}\[\]:";'<>?,.\/ ]$/;
 	var defaultOptions = {
 	  minLength: 8,
 	  minLowercase: 1,
@@ -6445,6 +6804,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	    symbolCount: 0
 	  };
 	  Object.keys(charMap).forEach(function (char) {
+	    /* istanbul ignore else */
 	    if (upperCaseRegex.test(char)) {
 	      analysis.uppercaseCount += charMap[char];
 	    } else if (lowerCaseRegex.test(char)) {
@@ -6497,27 +6857,29 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(isStrongPassword$1, isStrongPassword$1.exports));
 
-	var isStrongPassword = /*@__PURE__*/getDefaultExportFromCjs(isStrongPassword_1);
+	var isStrongPassword = /*@__PURE__*/getDefaultExportFromCjs(isStrongPassword$1.exports);
 
-	var isVAT_1 = createCommonjsModule(function (module, exports) {
+	var isVAT$1 = {};
+
 	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(isVAT$1, "__esModule", {
 	  value: true
 	});
-	exports.default = isVAT;
-	exports.vatMatchers = void 0;
+	var _default = isVAT$1.default = isVAT;
+	var vatMatchers_1 = isVAT$1.vatMatchers = void 0;
 
-	var _assertString = _interopRequireDefault(assertString_1);
+	var _assertString = _interopRequireDefault(assertString$1.exports);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var vatMatchers = {
-	  GB: /^GB((\d{3} \d{4} ([0-8][0-9]|9[0-6]))|(\d{9} \d{3})|(((GD[0-4])|(HA[5-9]))[0-9]{2}))$/
+	  GB: /^GB((\d{3} \d{4} ([0-8][0-9]|9[0-6]))|(\d{9} \d{3})|(((GD[0-4])|(HA[5-9]))[0-9]{2}))$/,
+	  IT: /^(IT)?[0-9]{11}$/
 	};
-	exports.vatMatchers = vatMatchers;
+	vatMatchers_1 = isVAT$1.vatMatchers = vatMatchers;
 
 	function isVAT(str, countryCode) {
 	  (0, _assertString.default)(str);
@@ -6529,11 +6891,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	  throw new Error("Invalid country code: '".concat(countryCode, "'"));
 	}
-	});
 
-	var isVAT = /*@__PURE__*/getDefaultExportFromCjs(isVAT_1);
-
-	var validator_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
 	"use strict";
 
 	function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -6543,187 +6902,189 @@ var MolaMolaModule = (function (exports, sargasso) {
 	});
 	exports.default = void 0;
 
-	var _toDate = _interopRequireDefault(toDate_1);
+	var _toDate = _interopRequireDefault(toDate$1.exports);
 
-	var _toFloat = _interopRequireDefault(toFloat_1);
+	var _toFloat = _interopRequireDefault(toFloat$1.exports);
 
-	var _toInt = _interopRequireDefault(toInt_1);
+	var _toInt = _interopRequireDefault(toInt$1.exports);
 
-	var _toBoolean = _interopRequireDefault(toBoolean_1);
+	var _toBoolean = _interopRequireDefault(toBoolean$1.exports);
 
-	var _equals = _interopRequireDefault(equals_1);
+	var _equals = _interopRequireDefault(equals$1.exports);
 
-	var _contains = _interopRequireDefault(contains_1);
+	var _contains = _interopRequireDefault(contains$1.exports);
 
-	var _matches = _interopRequireDefault(matches_1);
+	var _matches = _interopRequireDefault(matches$1.exports);
 
-	var _isEmail = _interopRequireDefault(isEmail_1);
+	var _isEmail = _interopRequireDefault(isEmail$1.exports);
 
-	var _isURL = _interopRequireDefault(isURL_1);
+	var _isURL = _interopRequireDefault(isURL$1.exports);
 
-	var _isMACAddress = _interopRequireDefault(isMACAddress_1);
+	var _isMACAddress = _interopRequireDefault(isMACAddress$1.exports);
 
-	var _isIP = _interopRequireDefault(isIP_1);
+	var _isIP = _interopRequireDefault(isIP$1.exports);
 
-	var _isIPRange = _interopRequireDefault(isIPRange_1);
+	var _isIPRange = _interopRequireDefault(isIPRange$1.exports);
 
-	var _isFQDN = _interopRequireDefault(isFQDN_1);
+	var _isFQDN = _interopRequireDefault(isFQDN$1.exports);
 
-	var _isDate = _interopRequireDefault(isDate_1);
+	var _isDate = _interopRequireDefault(isDate$1.exports);
 
-	var _isBoolean = _interopRequireDefault(isBoolean_1);
+	var _isBoolean = _interopRequireDefault(isBoolean$1.exports);
 
-	var _isLocale = _interopRequireDefault(isLocale_1);
+	var _isLocale = _interopRequireDefault(isLocale$1.exports);
 
-	var _isAlpha = _interopRequireWildcard(isAlpha_1);
+	var _isAlpha = _interopRequireWildcard(isAlpha$1);
 
-	var _isAlphanumeric = _interopRequireWildcard(isAlphanumeric_1);
+	var _isAlphanumeric = _interopRequireWildcard(isAlphanumeric$1);
 
-	var _isNumeric = _interopRequireDefault(isNumeric_1);
+	var _isNumeric = _interopRequireDefault(isNumeric$1.exports);
 
-	var _isPassportNumber = _interopRequireDefault(isPassportNumber_1);
+	var _isPassportNumber = _interopRequireDefault(isPassportNumber$1.exports);
 
-	var _isPort = _interopRequireDefault(isPort_1);
+	var _isPort = _interopRequireDefault(isPort$1.exports);
 
-	var _isLowercase = _interopRequireDefault(isLowercase_1);
+	var _isLowercase = _interopRequireDefault(isLowercase$1.exports);
 
-	var _isUppercase = _interopRequireDefault(isUppercase_1);
+	var _isUppercase = _interopRequireDefault(isUppercase$1.exports);
 
-	var _isIMEI = _interopRequireDefault(isIMEI_1);
+	var _isIMEI = _interopRequireDefault(isIMEI$1.exports);
 
-	var _isAscii = _interopRequireDefault(isAscii_1);
+	var _isAscii = _interopRequireDefault(isAscii$1.exports);
 
-	var _isFullWidth = _interopRequireDefault(isFullWidth_1);
+	var _isFullWidth = _interopRequireDefault(isFullWidth$1);
 
-	var _isHalfWidth = _interopRequireDefault(isHalfWidth_1);
+	var _isHalfWidth = _interopRequireDefault(isHalfWidth$1);
 
-	var _isVariableWidth = _interopRequireDefault(isVariableWidth_1);
+	var _isVariableWidth = _interopRequireDefault(isVariableWidth$1.exports);
 
-	var _isMultibyte = _interopRequireDefault(isMultibyte_1);
+	var _isMultibyte = _interopRequireDefault(isMultibyte$1.exports);
 
-	var _isSemVer = _interopRequireDefault(isSemVer_1);
+	var _isSemVer = _interopRequireDefault(isSemVer$1.exports);
 
-	var _isSurrogatePair = _interopRequireDefault(isSurrogatePair_1);
+	var _isSurrogatePair = _interopRequireDefault(isSurrogatePair$1.exports);
 
-	var _isInt = _interopRequireDefault(isInt_1);
+	var _isInt = _interopRequireDefault(isInt$1.exports);
 
-	var _isFloat = _interopRequireWildcard(isFloat_1);
+	var _isFloat = _interopRequireWildcard(isFloat$1);
 
-	var _isDecimal = _interopRequireDefault(isDecimal_1);
+	var _isDecimal = _interopRequireDefault(isDecimal$1.exports);
 
-	var _isHexadecimal = _interopRequireDefault(isHexadecimal_1);
+	var _isHexadecimal = _interopRequireDefault(isHexadecimal$1.exports);
 
-	var _isOctal = _interopRequireDefault(isOctal_1);
+	var _isOctal = _interopRequireDefault(isOctal$1.exports);
 
-	var _isDivisibleBy = _interopRequireDefault(isDivisibleBy_1);
+	var _isDivisibleBy = _interopRequireDefault(isDivisibleBy$1.exports);
 
-	var _isHexColor = _interopRequireDefault(isHexColor_1);
+	var _isHexColor = _interopRequireDefault(isHexColor$1.exports);
 
-	var _isRgbColor = _interopRequireDefault(isRgbColor_1);
+	var _isRgbColor = _interopRequireDefault(isRgbColor$1.exports);
 
-	var _isHSL = _interopRequireDefault(isHSL_1);
+	var _isHSL = _interopRequireDefault(isHSL$1.exports);
 
-	var _isISRC = _interopRequireDefault(isISRC_1);
+	var _isISRC = _interopRequireDefault(isISRC$1.exports);
 
-	var _isIBAN = _interopRequireDefault(isIBAN_1);
+	var _isIBAN = _interopRequireDefault(isIBAN$1.exports);
 
-	var _isBIC = _interopRequireDefault(isBIC_1);
+	var _isBIC = _interopRequireDefault(isBIC$1.exports);
 
-	var _isMD = _interopRequireDefault(isMD5_1);
+	var _isMD = _interopRequireDefault(isMD5$1.exports);
 
-	var _isHash = _interopRequireDefault(isHash_1);
+	var _isHash = _interopRequireDefault(isHash$1.exports);
 
-	var _isJWT = _interopRequireDefault(isJWT_1);
+	var _isJWT = _interopRequireDefault(isJWT$1.exports);
 
-	var _isJSON = _interopRequireDefault(isJSON_1);
+	var _isJSON = _interopRequireDefault(isJSON$1.exports);
 
-	var _isEmpty = _interopRequireDefault(isEmpty_1);
+	var _isEmpty = _interopRequireDefault(isEmpty$1.exports);
 
-	var _isLength = _interopRequireDefault(isLength_1$1);
+	var _isLength = _interopRequireDefault(isLength$4.exports);
 
-	var _isByteLength = _interopRequireDefault(isByteLength_1);
+	var _isByteLength = _interopRequireDefault(isByteLength$1.exports);
 
-	var _isUUID = _interopRequireDefault(isUUID_1);
+	var _isUUID = _interopRequireDefault(isUUID$1.exports);
 
-	var _isMongoId = _interopRequireDefault(isMongoId_1);
+	var _isMongoId = _interopRequireDefault(isMongoId$1.exports);
 
-	var _isAfter = _interopRequireDefault(isAfter_1);
+	var _isAfter = _interopRequireDefault(isAfter$1.exports);
 
-	var _isBefore = _interopRequireDefault(isBefore_1);
+	var _isBefore = _interopRequireDefault(isBefore$1.exports);
 
-	var _isIn = _interopRequireDefault(isIn_1);
+	var _isIn = _interopRequireDefault(isIn$1.exports);
 
-	var _isCreditCard = _interopRequireDefault(isCreditCard_1);
+	var _isCreditCard = _interopRequireDefault(isCreditCard$1.exports);
 
-	var _isIdentityCard = _interopRequireDefault(isIdentityCard_1);
+	var _isIdentityCard = _interopRequireDefault(isIdentityCard$1.exports);
 
-	var _isEAN = _interopRequireDefault(isEAN_1);
+	var _isEAN = _interopRequireDefault(isEAN$1.exports);
 
-	var _isISIN = _interopRequireDefault(isISIN_1);
+	var _isISIN = _interopRequireDefault(isISIN$1.exports);
 
-	var _isISBN = _interopRequireDefault(isISBN_1);
+	var _isISBN = _interopRequireDefault(isISBN$1.exports);
 
-	var _isISSN = _interopRequireDefault(isISSN_1);
+	var _isISSN = _interopRequireDefault(isISSN$1.exports);
 
-	var _isTaxID = _interopRequireDefault(isTaxID_1);
+	var _isTaxID = _interopRequireDefault(isTaxID$1.exports);
 
-	var _isMobilePhone = _interopRequireWildcard(isMobilePhone_1);
+	var _isMobilePhone = _interopRequireWildcard(isMobilePhone$1);
 
-	var _isEthereumAddress = _interopRequireDefault(isEthereumAddress_1);
+	var _isEthereumAddress = _interopRequireDefault(isEthereumAddress$1.exports);
 
-	var _isCurrency = _interopRequireDefault(isCurrency_1);
+	var _isCurrency = _interopRequireDefault(isCurrency$1.exports);
 
-	var _isBtcAddress = _interopRequireDefault(isBtcAddress_1);
+	var _isBtcAddress = _interopRequireDefault(isBtcAddress$1.exports);
 
-	var _isISO = _interopRequireDefault(isISO8601_1);
+	var _isISO = _interopRequireDefault(isISO8601$1.exports);
 
-	var _isRFC = _interopRequireDefault(isRFC3339_1);
+	var _isRFC = _interopRequireDefault(isRFC3339$1.exports);
 
-	var _isISO31661Alpha = _interopRequireDefault(isISO31661Alpha2_1);
+	var _isISO31661Alpha = _interopRequireDefault(isISO31661Alpha2$1);
 
-	var _isISO31661Alpha2 = _interopRequireDefault(isISO31661Alpha3_1);
+	var _isISO31661Alpha2 = _interopRequireDefault(isISO31661Alpha3$1.exports);
 
-	var _isBase = _interopRequireDefault(isBase32_1);
+	var _isBase = _interopRequireDefault(isBase32$1.exports);
 
-	var _isBase2 = _interopRequireDefault(isBase58_1);
+	var _isBase2 = _interopRequireDefault(isBase58$1.exports);
 
-	var _isBase3 = _interopRequireDefault(isBase64_1);
+	var _isBase3 = _interopRequireDefault(isBase64$1.exports);
 
-	var _isDataURI = _interopRequireDefault(isDataURI_1);
+	var _isDataURI = _interopRequireDefault(isDataURI$1.exports);
 
-	var _isMagnetURI = _interopRequireDefault(isMagnetURI_1);
+	var _isMagnetURI = _interopRequireDefault(isMagnetURI$1.exports);
 
-	var _isMimeType = _interopRequireDefault(isMimeType_1);
+	var _isMimeType = _interopRequireDefault(isMimeType$1.exports);
 
-	var _isLatLong = _interopRequireDefault(isLatLong_1);
+	var _isLatLong = _interopRequireDefault(isLatLong$1.exports);
 
-	var _isPostalCode = _interopRequireWildcard(isPostalCode_1);
+	var _isPostalCode = _interopRequireWildcard(isPostalCode$1);
 
-	var _ltrim = _interopRequireDefault(ltrim_1);
+	var _ltrim = _interopRequireDefault(ltrim$1.exports);
 
-	var _rtrim = _interopRequireDefault(rtrim_1);
+	var _rtrim = _interopRequireDefault(rtrim$1.exports);
 
-	var _trim = _interopRequireDefault(trim_1);
+	var _trim = _interopRequireDefault(trim$1.exports);
 
-	var _escape$1 = _interopRequireDefault(_escape);
+	var _escape = _interopRequireDefault(_escape$1.exports);
 
-	var _unescape$1 = _interopRequireDefault(_unescape);
+	var _unescape = _interopRequireDefault(_unescape$1.exports);
 
-	var _stripLow = _interopRequireDefault(stripLow_1);
+	var _stripLow = _interopRequireDefault(stripLow$1.exports);
 
-	var _whitelist = _interopRequireDefault(whitelist_1);
+	var _whitelist = _interopRequireDefault(whitelist$1.exports);
 
-	var _blacklist = _interopRequireDefault(blacklist_1);
+	var _blacklist = _interopRequireDefault(blacklist$1.exports);
 
-	var _isWhitelisted = _interopRequireDefault(isWhitelisted_1);
+	var _isWhitelisted = _interopRequireDefault(isWhitelisted$1.exports);
 
-	var _normalizeEmail = _interopRequireDefault(normalizeEmail_1);
+	var _normalizeEmail = _interopRequireDefault(normalizeEmail$1.exports);
 
-	var _isSlug = _interopRequireDefault(isSlug_1);
+	var _isSlug = _interopRequireDefault(isSlug$1.exports);
 
-	var _isStrongPassword = _interopRequireDefault(isStrongPassword_1);
+	var _isLicensePlate = _interopRequireDefault(isLicensePlate$1.exports);
 
-	var _isVAT = _interopRequireDefault(isVAT_1);
+	var _isStrongPassword = _interopRequireDefault(isStrongPassword$1.exports);
+
+	var _isVAT = _interopRequireDefault(isVAT$1);
 
 	function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -6731,7 +7092,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var version = '13.5.2';
+	var version = '13.6.0';
 	var validator = {
 	  version: version,
 	  toDate: _toDate.default,
@@ -6818,8 +7179,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  ltrim: _ltrim.default,
 	  rtrim: _rtrim.default,
 	  trim: _trim.default,
-	  escape: _escape$1.default,
-	  unescape: _unescape$1.default,
+	  escape: _escape.default,
+	  unescape: _unescape.default,
 	  stripLow: _stripLow.default,
 	  whitelist: _whitelist.default,
 	  blacklist: _blacklist.default,
@@ -6830,15 +7191,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  isStrongPassword: _isStrongPassword.default,
 	  isTaxID: _isTaxID.default,
 	  isDate: _isDate.default,
+	  isLicensePlate: _isLicensePlate.default,
 	  isVAT: _isVAT.default
 	};
 	var _default = validator;
 	exports.default = _default;
 	module.exports = exports.default;
 	module.exports.default = exports.default;
-	});
+	}(validator, validator.exports));
 
-	var Validator = /*@__PURE__*/getDefaultExportFromCjs(validator_1);
+	var Validator = /*@__PURE__*/getDefaultExportFromCjs(validator.exports);
 
 	/**
 	 * Removes all key-value entries from the list cache.
@@ -6847,12 +7209,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @name clear
 	 * @memberOf ListCache
 	 */
-	function listCacheClear() {
+
+	function listCacheClear$1() {
 	  this.__data__ = [];
 	  this.size = 0;
 	}
 
-	var _listCacheClear = listCacheClear;
+	var _listCacheClear = listCacheClear$1;
 
 	/**
 	 * Performs a
@@ -6886,11 +7249,14 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.eq(NaN, NaN);
 	 * // => true
 	 */
-	function eq(value, other) {
+
+	function eq$2(value, other) {
 	  return value === other || (value !== value && other !== other);
 	}
 
-	var eq_1 = eq;
+	var eq_1 = eq$2;
+
+	var eq$1 = eq_1;
 
 	/**
 	 * Gets the index at which the `key` is found in `array` of key-value pairs.
@@ -6900,17 +7266,19 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} key The key to search for.
 	 * @returns {number} Returns the index of the matched value, else `-1`.
 	 */
-	function assocIndexOf(array, key) {
+	function assocIndexOf$4(array, key) {
 	  var length = array.length;
 	  while (length--) {
-	    if (eq_1(array[length][0], key)) {
+	    if (eq$1(array[length][0], key)) {
 	      return length;
 	    }
 	  }
 	  return -1;
 	}
 
-	var _assocIndexOf = assocIndexOf;
+	var _assocIndexOf = assocIndexOf$4;
+
+	var assocIndexOf$3 = _assocIndexOf;
 
 	/** Used for built-in method references. */
 	var arrayProto = Array.prototype;
@@ -6927,9 +7295,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the value to remove.
 	 * @returns {boolean} Returns `true` if the entry was removed, else `false`.
 	 */
-	function listCacheDelete(key) {
+	function listCacheDelete$1(key) {
 	  var data = this.__data__,
-	      index = _assocIndexOf(data, key);
+	      index = assocIndexOf$3(data, key);
 
 	  if (index < 0) {
 	    return false;
@@ -6944,7 +7312,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return true;
 	}
 
-	var _listCacheDelete = listCacheDelete;
+	var _listCacheDelete = listCacheDelete$1;
+
+	var assocIndexOf$2 = _assocIndexOf;
 
 	/**
 	 * Gets the list cache value for `key`.
@@ -6955,14 +7325,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the value to get.
 	 * @returns {*} Returns the entry value.
 	 */
-	function listCacheGet(key) {
+	function listCacheGet$1(key) {
 	  var data = this.__data__,
-	      index = _assocIndexOf(data, key);
+	      index = assocIndexOf$2(data, key);
 
 	  return index < 0 ? undefined : data[index][1];
 	}
 
-	var _listCacheGet = listCacheGet;
+	var _listCacheGet = listCacheGet$1;
+
+	var assocIndexOf$1 = _assocIndexOf;
 
 	/**
 	 * Checks if a list cache value for `key` exists.
@@ -6973,11 +7345,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the entry to check.
 	 * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
 	 */
-	function listCacheHas(key) {
-	  return _assocIndexOf(this.__data__, key) > -1;
+	function listCacheHas$1(key) {
+	  return assocIndexOf$1(this.__data__, key) > -1;
 	}
 
-	var _listCacheHas = listCacheHas;
+	var _listCacheHas = listCacheHas$1;
+
+	var assocIndexOf = _assocIndexOf;
 
 	/**
 	 * Sets the list cache `key` to `value`.
@@ -6989,9 +7363,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to set.
 	 * @returns {Object} Returns the list cache instance.
 	 */
-	function listCacheSet(key, value) {
+	function listCacheSet$1(key, value) {
 	  var data = this.__data__,
-	      index = _assocIndexOf(data, key);
+	      index = assocIndexOf(data, key);
 
 	  if (index < 0) {
 	    ++this.size;
@@ -7002,7 +7376,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return this;
 	}
 
-	var _listCacheSet = listCacheSet;
+	var _listCacheSet = listCacheSet$1;
+
+	var listCacheClear = _listCacheClear,
+	    listCacheDelete = _listCacheDelete,
+	    listCacheGet = _listCacheGet,
+	    listCacheHas = _listCacheHas,
+	    listCacheSet = _listCacheSet;
 
 	/**
 	 * Creates an list cache object.
@@ -7011,7 +7391,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @constructor
 	 * @param {Array} [entries] The key-value pairs to cache.
 	 */
-	function ListCache(entries) {
+	function ListCache$4(entries) {
 	  var index = -1,
 	      length = entries == null ? 0 : entries.length;
 
@@ -7023,13 +7403,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 	}
 
 	// Add methods to `ListCache`.
-	ListCache.prototype.clear = _listCacheClear;
-	ListCache.prototype['delete'] = _listCacheDelete;
-	ListCache.prototype.get = _listCacheGet;
-	ListCache.prototype.has = _listCacheHas;
-	ListCache.prototype.set = _listCacheSet;
+	ListCache$4.prototype.clear = listCacheClear;
+	ListCache$4.prototype['delete'] = listCacheDelete;
+	ListCache$4.prototype.get = listCacheGet;
+	ListCache$4.prototype.has = listCacheHas;
+	ListCache$4.prototype.set = listCacheSet;
 
-	var _ListCache = ListCache;
+	var _ListCache = ListCache$4;
+
+	var ListCache$3 = _ListCache;
 
 	/**
 	 * Removes all key-value entries from the stack.
@@ -7038,12 +7420,12 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @name clear
 	 * @memberOf Stack
 	 */
-	function stackClear() {
-	  this.__data__ = new _ListCache;
+	function stackClear$1() {
+	  this.__data__ = new ListCache$3;
 	  this.size = 0;
 	}
 
-	var _stackClear = stackClear;
+	var _stackClear = stackClear$1;
 
 	/**
 	 * Removes `key` and its value from the stack.
@@ -7054,7 +7436,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the value to remove.
 	 * @returns {boolean} Returns `true` if the entry was removed, else `false`.
 	 */
-	function stackDelete(key) {
+
+	function stackDelete$1(key) {
 	  var data = this.__data__,
 	      result = data['delete'](key);
 
@@ -7062,7 +7445,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return result;
 	}
 
-	var _stackDelete = stackDelete;
+	var _stackDelete = stackDelete$1;
 
 	/**
 	 * Gets the stack value for `key`.
@@ -7073,11 +7456,12 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the value to get.
 	 * @returns {*} Returns the entry value.
 	 */
-	function stackGet(key) {
+
+	function stackGet$1(key) {
 	  return this.__data__.get(key);
 	}
 
-	var _stackGet = stackGet;
+	var _stackGet = stackGet$1;
 
 	/**
 	 * Checks if a stack value for `key` exists.
@@ -7088,30 +7472,37 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the entry to check.
 	 * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
 	 */
-	function stackHas(key) {
+
+	function stackHas$1(key) {
 	  return this.__data__.has(key);
 	}
 
-	var _stackHas = stackHas;
+	var _stackHas = stackHas$1;
 
 	/** Detect free variable `global` from Node.js. */
 
-	var freeGlobal = typeof commonjsGlobal == 'object' && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
+	var freeGlobal$1 = typeof commonjsGlobal == 'object' && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
 
-	var _freeGlobal = freeGlobal;
+	var _freeGlobal = freeGlobal$1;
+
+	var freeGlobal = _freeGlobal;
 
 	/** Detect free variable `self`. */
 	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
 
 	/** Used as a reference to the global object. */
-	var root = _freeGlobal || freeSelf || Function('return this')();
+	var root$9 = freeGlobal || freeSelf || Function('return this')();
 
-	var _root = root;
+	var _root = root$9;
+
+	var root$8 = _root;
 
 	/** Built-in value references. */
-	var Symbol$1 = _root.Symbol;
+	var Symbol$4 = root$8.Symbol;
 
-	var _Symbol = Symbol$1;
+	var _Symbol = Symbol$4;
+
+	var Symbol$3 = _Symbol;
 
 	/** Used for built-in method references. */
 	var objectProto$c = Object.prototype;
@@ -7127,7 +7518,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	var nativeObjectToString$1 = objectProto$c.toString;
 
 	/** Built-in value references. */
-	var symToStringTag$1 = _Symbol ? _Symbol.toStringTag : undefined;
+	var symToStringTag$1 = Symbol$3 ? Symbol$3.toStringTag : undefined;
 
 	/**
 	 * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
@@ -7136,7 +7527,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to query.
 	 * @returns {string} Returns the raw `toStringTag`.
 	 */
-	function getRawTag(value) {
+	function getRawTag$1(value) {
 	  var isOwn = hasOwnProperty$9.call(value, symToStringTag$1),
 	      tag = value[symToStringTag$1];
 
@@ -7156,9 +7547,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return result;
 	}
 
-	var _getRawTag = getRawTag;
+	var _getRawTag = getRawTag$1;
 
 	/** Used for built-in method references. */
+
 	var objectProto$b = Object.prototype;
 
 	/**
@@ -7175,18 +7567,22 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to convert.
 	 * @returns {string} Returns the converted string.
 	 */
-	function objectToString(value) {
+	function objectToString$1(value) {
 	  return nativeObjectToString.call(value);
 	}
 
-	var _objectToString = objectToString;
+	var _objectToString = objectToString$1;
+
+	var Symbol$2 = _Symbol,
+	    getRawTag = _getRawTag,
+	    objectToString = _objectToString;
 
 	/** `Object#toString` result references. */
 	var nullTag = '[object Null]',
 	    undefinedTag = '[object Undefined]';
 
 	/** Built-in value references. */
-	var symToStringTag = _Symbol ? _Symbol.toStringTag : undefined;
+	var symToStringTag = Symbol$2 ? Symbol$2.toStringTag : undefined;
 
 	/**
 	 * The base implementation of `getTag` without fallbacks for buggy environments.
@@ -7195,16 +7591,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to query.
 	 * @returns {string} Returns the `toStringTag`.
 	 */
-	function baseGetTag(value) {
+	function baseGetTag$5(value) {
 	  if (value == null) {
 	    return value === undefined ? undefinedTag : nullTag;
 	  }
 	  return (symToStringTag && symToStringTag in Object(value))
-	    ? _getRawTag(value)
-	    : _objectToString(value);
+	    ? getRawTag(value)
+	    : objectToString(value);
 	}
 
-	var _baseGetTag = baseGetTag;
+	var _baseGetTag = baseGetTag$5;
 
 	/**
 	 * Checks if `value` is the
@@ -7231,12 +7627,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.isObject(null);
 	 * // => false
 	 */
-	function isObject(value) {
+
+	function isObject$7(value) {
 	  var type = typeof value;
 	  return value != null && (type == 'object' || type == 'function');
 	}
 
-	var isObject_1 = isObject;
+	var isObject_1 = isObject$7;
+
+	var baseGetTag$4 = _baseGetTag,
+	    isObject$6 = isObject_1;
 
 	/** `Object#toString` result references. */
 	var asyncTag = '[object AsyncFunction]',
@@ -7261,26 +7661,30 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.isFunction(/abc/);
 	 * // => false
 	 */
-	function isFunction(value) {
-	  if (!isObject_1(value)) {
+	function isFunction$2(value) {
+	  if (!isObject$6(value)) {
 	    return false;
 	  }
 	  // The use of `Object#toString` avoids issues with the `typeof` operator
 	  // in Safari 9 which returns 'object' for typed arrays and other constructors.
-	  var tag = _baseGetTag(value);
+	  var tag = baseGetTag$4(value);
 	  return tag == funcTag$2 || tag == genTag$1 || tag == asyncTag || tag == proxyTag;
 	}
 
-	var isFunction_1 = isFunction;
+	var isFunction_1 = isFunction$2;
+
+	var root$7 = _root;
 
 	/** Used to detect overreaching core-js shims. */
-	var coreJsData = _root['__core-js_shared__'];
+	var coreJsData$1 = root$7['__core-js_shared__'];
 
-	var _coreJsData = coreJsData;
+	var _coreJsData = coreJsData$1;
+
+	var coreJsData = _coreJsData;
 
 	/** Used to detect methods masquerading as native. */
 	var maskSrcKey = (function() {
-	  var uid = /[^.]+$/.exec(_coreJsData && _coreJsData.keys && _coreJsData.keys.IE_PROTO || '');
+	  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
 	  return uid ? ('Symbol(src)_1.' + uid) : '';
 	}());
 
@@ -7291,13 +7695,14 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Function} func The function to check.
 	 * @returns {boolean} Returns `true` if `func` is masked, else `false`.
 	 */
-	function isMasked(func) {
+	function isMasked$1(func) {
 	  return !!maskSrcKey && (maskSrcKey in func);
 	}
 
-	var _isMasked = isMasked;
+	var _isMasked = isMasked$1;
 
 	/** Used for built-in method references. */
+
 	var funcProto$1 = Function.prototype;
 
 	/** Used to resolve the decompiled source of functions. */
@@ -7310,7 +7715,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Function} func The function to convert.
 	 * @returns {string} Returns the source code.
 	 */
-	function toSource(func) {
+	function toSource$2(func) {
 	  if (func != null) {
 	    try {
 	      return funcToString$1.call(func);
@@ -7322,7 +7727,12 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return '';
 	}
 
-	var _toSource = toSource;
+	var _toSource = toSource$2;
+
+	var isFunction$1 = isFunction_1,
+	    isMasked = _isMasked,
+	    isObject$5 = isObject_1,
+	    toSource$1 = _toSource;
 
 	/**
 	 * Used to match `RegExp`
@@ -7357,15 +7767,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @returns {boolean} Returns `true` if `value` is a native function,
 	 *  else `false`.
 	 */
-	function baseIsNative(value) {
-	  if (!isObject_1(value) || _isMasked(value)) {
+	function baseIsNative$1(value) {
+	  if (!isObject$5(value) || isMasked(value)) {
 	    return false;
 	  }
-	  var pattern = isFunction_1(value) ? reIsNative : reIsHostCtor;
-	  return pattern.test(_toSource(value));
+	  var pattern = isFunction$1(value) ? reIsNative : reIsHostCtor;
+	  return pattern.test(toSource$1(value));
 	}
 
-	var _baseIsNative = baseIsNative;
+	var _baseIsNative = baseIsNative$1;
 
 	/**
 	 * Gets the value at `key` of `object`.
@@ -7375,11 +7785,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the property to get.
 	 * @returns {*} Returns the property value.
 	 */
-	function getValue(object, key) {
+
+	function getValue$1(object, key) {
 	  return object == null ? undefined : object[key];
 	}
 
-	var _getValue = getValue;
+	var _getValue = getValue$1;
+
+	var baseIsNative = _baseIsNative,
+	    getValue = _getValue;
 
 	/**
 	 * Gets the native function at `key` of `object`.
@@ -7389,22 +7803,29 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the method to get.
 	 * @returns {*} Returns the function if it's native, else `undefined`.
 	 */
-	function getNative(object, key) {
-	  var value = _getValue(object, key);
-	  return _baseIsNative(value) ? value : undefined;
+	function getNative$7(object, key) {
+	  var value = getValue(object, key);
+	  return baseIsNative(value) ? value : undefined;
 	}
 
-	var _getNative = getNative;
+	var _getNative = getNative$7;
+
+	var getNative$6 = _getNative,
+	    root$6 = _root;
 
 	/* Built-in method references that are verified to be native. */
-	var Map = _getNative(_root, 'Map');
+	var Map$3 = getNative$6(root$6, 'Map');
 
-	var _Map = Map;
+	var _Map = Map$3;
+
+	var getNative$5 = _getNative;
 
 	/* Built-in method references that are verified to be native. */
-	var nativeCreate = _getNative(Object, 'create');
+	var nativeCreate$4 = getNative$5(Object, 'create');
 
-	var _nativeCreate = nativeCreate;
+	var _nativeCreate = nativeCreate$4;
+
+	var nativeCreate$3 = _nativeCreate;
 
 	/**
 	 * Removes all key-value entries from the hash.
@@ -7413,12 +7834,12 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @name clear
 	 * @memberOf Hash
 	 */
-	function hashClear() {
-	  this.__data__ = _nativeCreate ? _nativeCreate(null) : {};
+	function hashClear$1() {
+	  this.__data__ = nativeCreate$3 ? nativeCreate$3(null) : {};
 	  this.size = 0;
 	}
 
-	var _hashClear = hashClear;
+	var _hashClear = hashClear$1;
 
 	/**
 	 * Removes `key` and its value from the hash.
@@ -7430,13 +7851,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the value to remove.
 	 * @returns {boolean} Returns `true` if the entry was removed, else `false`.
 	 */
-	function hashDelete(key) {
+
+	function hashDelete$1(key) {
 	  var result = this.has(key) && delete this.__data__[key];
 	  this.size -= result ? 1 : 0;
 	  return result;
 	}
 
-	var _hashDelete = hashDelete;
+	var _hashDelete = hashDelete$1;
+
+	var nativeCreate$2 = _nativeCreate;
 
 	/** Used to stand-in for `undefined` hash values. */
 	var HASH_UNDEFINED$1 = '__lodash_hash_undefined__';
@@ -7456,16 +7880,18 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the value to get.
 	 * @returns {*} Returns the entry value.
 	 */
-	function hashGet(key) {
+	function hashGet$1(key) {
 	  var data = this.__data__;
-	  if (_nativeCreate) {
+	  if (nativeCreate$2) {
 	    var result = data[key];
 	    return result === HASH_UNDEFINED$1 ? undefined : result;
 	  }
 	  return hasOwnProperty$7.call(data, key) ? data[key] : undefined;
 	}
 
-	var _hashGet = hashGet;
+	var _hashGet = hashGet$1;
+
+	var nativeCreate$1 = _nativeCreate;
 
 	/** Used for built-in method references. */
 	var objectProto$8 = Object.prototype;
@@ -7482,12 +7908,14 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the entry to check.
 	 * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
 	 */
-	function hashHas(key) {
+	function hashHas$1(key) {
 	  var data = this.__data__;
-	  return _nativeCreate ? (data[key] !== undefined) : hasOwnProperty$6.call(data, key);
+	  return nativeCreate$1 ? (data[key] !== undefined) : hasOwnProperty$6.call(data, key);
 	}
 
-	var _hashHas = hashHas;
+	var _hashHas = hashHas$1;
+
+	var nativeCreate = _nativeCreate;
 
 	/** Used to stand-in for `undefined` hash values. */
 	var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -7502,14 +7930,20 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to set.
 	 * @returns {Object} Returns the hash instance.
 	 */
-	function hashSet(key, value) {
+	function hashSet$1(key, value) {
 	  var data = this.__data__;
 	  this.size += this.has(key) ? 0 : 1;
-	  data[key] = (_nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
+	  data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
 	  return this;
 	}
 
-	var _hashSet = hashSet;
+	var _hashSet = hashSet$1;
+
+	var hashClear = _hashClear,
+	    hashDelete = _hashDelete,
+	    hashGet = _hashGet,
+	    hashHas = _hashHas,
+	    hashSet = _hashSet;
 
 	/**
 	 * Creates a hash object.
@@ -7518,7 +7952,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @constructor
 	 * @param {Array} [entries] The key-value pairs to cache.
 	 */
-	function Hash(entries) {
+	function Hash$1(entries) {
 	  var index = -1,
 	      length = entries == null ? 0 : entries.length;
 
@@ -7530,13 +7964,17 @@ var MolaMolaModule = (function (exports, sargasso) {
 	}
 
 	// Add methods to `Hash`.
-	Hash.prototype.clear = _hashClear;
-	Hash.prototype['delete'] = _hashDelete;
-	Hash.prototype.get = _hashGet;
-	Hash.prototype.has = _hashHas;
-	Hash.prototype.set = _hashSet;
+	Hash$1.prototype.clear = hashClear;
+	Hash$1.prototype['delete'] = hashDelete;
+	Hash$1.prototype.get = hashGet;
+	Hash$1.prototype.has = hashHas;
+	Hash$1.prototype.set = hashSet;
 
-	var _Hash = Hash;
+	var _Hash = Hash$1;
+
+	var Hash = _Hash,
+	    ListCache$2 = _ListCache,
+	    Map$2 = _Map;
 
 	/**
 	 * Removes all key-value entries from the map.
@@ -7545,16 +7983,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @name clear
 	 * @memberOf MapCache
 	 */
-	function mapCacheClear() {
+	function mapCacheClear$1() {
 	  this.size = 0;
 	  this.__data__ = {
-	    'hash': new _Hash,
-	    'map': new (_Map || _ListCache),
-	    'string': new _Hash
+	    'hash': new Hash,
+	    'map': new (Map$2 || ListCache$2),
+	    'string': new Hash
 	  };
 	}
 
-	var _mapCacheClear = mapCacheClear;
+	var _mapCacheClear = mapCacheClear$1;
 
 	/**
 	 * Checks if `value` is suitable for use as unique object key.
@@ -7563,14 +8001,17 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to check.
 	 * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
 	 */
-	function isKeyable(value) {
+
+	function isKeyable$1(value) {
 	  var type = typeof value;
 	  return (type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean')
 	    ? (value !== '__proto__')
 	    : (value === null);
 	}
 
-	var _isKeyable = isKeyable;
+	var _isKeyable = isKeyable$1;
+
+	var isKeyable = _isKeyable;
 
 	/**
 	 * Gets the data for `map`.
@@ -7580,14 +8021,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The reference key.
 	 * @returns {*} Returns the map data.
 	 */
-	function getMapData(map, key) {
+	function getMapData$4(map, key) {
 	  var data = map.__data__;
-	  return _isKeyable(key)
+	  return isKeyable(key)
 	    ? data[typeof key == 'string' ? 'string' : 'hash']
 	    : data.map;
 	}
 
-	var _getMapData = getMapData;
+	var _getMapData = getMapData$4;
+
+	var getMapData$3 = _getMapData;
 
 	/**
 	 * Removes `key` and its value from the map.
@@ -7598,13 +8041,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the value to remove.
 	 * @returns {boolean} Returns `true` if the entry was removed, else `false`.
 	 */
-	function mapCacheDelete(key) {
-	  var result = _getMapData(this, key)['delete'](key);
+	function mapCacheDelete$1(key) {
+	  var result = getMapData$3(this, key)['delete'](key);
 	  this.size -= result ? 1 : 0;
 	  return result;
 	}
 
-	var _mapCacheDelete = mapCacheDelete;
+	var _mapCacheDelete = mapCacheDelete$1;
+
+	var getMapData$2 = _getMapData;
 
 	/**
 	 * Gets the map value for `key`.
@@ -7615,11 +8060,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the value to get.
 	 * @returns {*} Returns the entry value.
 	 */
-	function mapCacheGet(key) {
-	  return _getMapData(this, key).get(key);
+	function mapCacheGet$1(key) {
+	  return getMapData$2(this, key).get(key);
 	}
 
-	var _mapCacheGet = mapCacheGet;
+	var _mapCacheGet = mapCacheGet$1;
+
+	var getMapData$1 = _getMapData;
 
 	/**
 	 * Checks if a map value for `key` exists.
@@ -7630,11 +8077,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the entry to check.
 	 * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
 	 */
-	function mapCacheHas(key) {
-	  return _getMapData(this, key).has(key);
+	function mapCacheHas$1(key) {
+	  return getMapData$1(this, key).has(key);
 	}
 
-	var _mapCacheHas = mapCacheHas;
+	var _mapCacheHas = mapCacheHas$1;
+
+	var getMapData = _getMapData;
 
 	/**
 	 * Sets the map `key` to `value`.
@@ -7646,8 +8095,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to set.
 	 * @returns {Object} Returns the map cache instance.
 	 */
-	function mapCacheSet(key, value) {
-	  var data = _getMapData(this, key),
+	function mapCacheSet$1(key, value) {
+	  var data = getMapData(this, key),
 	      size = data.size;
 
 	  data.set(key, value);
@@ -7655,7 +8104,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return this;
 	}
 
-	var _mapCacheSet = mapCacheSet;
+	var _mapCacheSet = mapCacheSet$1;
+
+	var mapCacheClear = _mapCacheClear,
+	    mapCacheDelete = _mapCacheDelete,
+	    mapCacheGet = _mapCacheGet,
+	    mapCacheHas = _mapCacheHas,
+	    mapCacheSet = _mapCacheSet;
 
 	/**
 	 * Creates a map cache object to store key-value pairs.
@@ -7664,7 +8119,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @constructor
 	 * @param {Array} [entries] The key-value pairs to cache.
 	 */
-	function MapCache(entries) {
+	function MapCache$1(entries) {
 	  var index = -1,
 	      length = entries == null ? 0 : entries.length;
 
@@ -7676,13 +8131,17 @@ var MolaMolaModule = (function (exports, sargasso) {
 	}
 
 	// Add methods to `MapCache`.
-	MapCache.prototype.clear = _mapCacheClear;
-	MapCache.prototype['delete'] = _mapCacheDelete;
-	MapCache.prototype.get = _mapCacheGet;
-	MapCache.prototype.has = _mapCacheHas;
-	MapCache.prototype.set = _mapCacheSet;
+	MapCache$1.prototype.clear = mapCacheClear;
+	MapCache$1.prototype['delete'] = mapCacheDelete;
+	MapCache$1.prototype.get = mapCacheGet;
+	MapCache$1.prototype.has = mapCacheHas;
+	MapCache$1.prototype.set = mapCacheSet;
 
-	var _MapCache = MapCache;
+	var _MapCache = MapCache$1;
+
+	var ListCache$1 = _ListCache,
+	    Map$1 = _Map,
+	    MapCache = _MapCache;
 
 	/** Used as the size to enable large array optimizations. */
 	var LARGE_ARRAY_SIZE = 200;
@@ -7697,23 +8156,30 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to set.
 	 * @returns {Object} Returns the stack cache instance.
 	 */
-	function stackSet(key, value) {
+	function stackSet$1(key, value) {
 	  var data = this.__data__;
-	  if (data instanceof _ListCache) {
+	  if (data instanceof ListCache$1) {
 	    var pairs = data.__data__;
-	    if (!_Map || (pairs.length < LARGE_ARRAY_SIZE - 1)) {
+	    if (!Map$1 || (pairs.length < LARGE_ARRAY_SIZE - 1)) {
 	      pairs.push([key, value]);
 	      this.size = ++data.size;
 	      return this;
 	    }
-	    data = this.__data__ = new _MapCache(pairs);
+	    data = this.__data__ = new MapCache(pairs);
 	  }
 	  data.set(key, value);
 	  this.size = data.size;
 	  return this;
 	}
 
-	var _stackSet = stackSet;
+	var _stackSet = stackSet$1;
+
+	var ListCache = _ListCache,
+	    stackClear = _stackClear,
+	    stackDelete = _stackDelete,
+	    stackGet = _stackGet,
+	    stackHas = _stackHas,
+	    stackSet = _stackSet;
 
 	/**
 	 * Creates a stack cache object to store key-value pairs.
@@ -7722,19 +8188,19 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @constructor
 	 * @param {Array} [entries] The key-value pairs to cache.
 	 */
-	function Stack(entries) {
-	  var data = this.__data__ = new _ListCache(entries);
+	function Stack$1(entries) {
+	  var data = this.__data__ = new ListCache(entries);
 	  this.size = data.size;
 	}
 
 	// Add methods to `Stack`.
-	Stack.prototype.clear = _stackClear;
-	Stack.prototype['delete'] = _stackDelete;
-	Stack.prototype.get = _stackGet;
-	Stack.prototype.has = _stackHas;
-	Stack.prototype.set = _stackSet;
+	Stack$1.prototype.clear = stackClear;
+	Stack$1.prototype['delete'] = stackDelete;
+	Stack$1.prototype.get = stackGet;
+	Stack$1.prototype.has = stackHas;
+	Stack$1.prototype.set = stackSet;
 
-	var _Stack = Stack;
+	var _Stack = Stack$1;
 
 	/**
 	 * A specialized version of `_.forEach` for arrays without support for
@@ -7745,7 +8211,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Function} iteratee The function invoked per iteration.
 	 * @returns {Array} Returns `array`.
 	 */
-	function arrayEach(array, iteratee) {
+
+	function arrayEach$2(array, iteratee) {
 	  var index = -1,
 	      length = array == null ? 0 : array.length;
 
@@ -7757,17 +8224,21 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return array;
 	}
 
-	var _arrayEach = arrayEach;
+	var _arrayEach = arrayEach$2;
 
-	var defineProperty = (function() {
+	var getNative$4 = _getNative;
+
+	var defineProperty$1 = (function() {
 	  try {
-	    var func = _getNative(Object, 'defineProperty');
+	    var func = getNative$4(Object, 'defineProperty');
 	    func({}, '', {});
 	    return func;
 	  } catch (e) {}
 	}());
 
-	var _defineProperty = defineProperty;
+	var _defineProperty = defineProperty$1;
+
+	var defineProperty = _defineProperty;
 
 	/**
 	 * The base implementation of `assignValue` and `assignMergeValue` without
@@ -7778,9 +8249,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the property to assign.
 	 * @param {*} value The value to assign.
 	 */
-	function baseAssignValue(object, key, value) {
-	  if (key == '__proto__' && _defineProperty) {
-	    _defineProperty(object, key, {
+	function baseAssignValue$2(object, key, value) {
+	  if (key == '__proto__' && defineProperty) {
+	    defineProperty(object, key, {
 	      'configurable': true,
 	      'enumerable': true,
 	      'value': value,
@@ -7791,7 +8262,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  }
 	}
 
-	var _baseAssignValue = baseAssignValue;
+	var _baseAssignValue = baseAssignValue$2;
+
+	var baseAssignValue$1 = _baseAssignValue,
+	    eq = eq_1;
 
 	/** Used for built-in method references. */
 	var objectProto$7 = Object.prototype;
@@ -7809,15 +8283,18 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} key The key of the property to assign.
 	 * @param {*} value The value to assign.
 	 */
-	function assignValue(object, key, value) {
+	function assignValue$2(object, key, value) {
 	  var objValue = object[key];
-	  if (!(hasOwnProperty$5.call(object, key) && eq_1(objValue, value)) ||
+	  if (!(hasOwnProperty$5.call(object, key) && eq(objValue, value)) ||
 	      (value === undefined && !(key in object))) {
-	    _baseAssignValue(object, key, value);
+	    baseAssignValue$1(object, key, value);
 	  }
 	}
 
-	var _assignValue = assignValue;
+	var _assignValue = assignValue$2;
+
+	var assignValue$1 = _assignValue,
+	    baseAssignValue = _baseAssignValue;
 
 	/**
 	 * Copies properties of `source` to `object`.
@@ -7829,7 +8306,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Function} [customizer] The function to customize copied values.
 	 * @returns {Object} Returns `object`.
 	 */
-	function copyObject(source, props, object, customizer) {
+	function copyObject$4(source, props, object, customizer) {
 	  var isNew = !object;
 	  object || (object = {});
 
@@ -7847,15 +8324,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 	      newValue = source[key];
 	    }
 	    if (isNew) {
-	      _baseAssignValue(object, key, newValue);
+	      baseAssignValue(object, key, newValue);
 	    } else {
-	      _assignValue(object, key, newValue);
+	      assignValue$1(object, key, newValue);
 	    }
 	  }
 	  return object;
 	}
 
-	var _copyObject = copyObject;
+	var _copyObject = copyObject$4;
 
 	/**
 	 * The base implementation of `_.times` without support for iteratee shorthands
@@ -7866,7 +8343,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Function} iteratee The function invoked per iteration.
 	 * @returns {Array} Returns the array of results.
 	 */
-	function baseTimes(n, iteratee) {
+
+	function baseTimes$1(n, iteratee) {
 	  var index = -1,
 	      result = Array(n);
 
@@ -7876,7 +8354,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return result;
 	}
 
-	var _baseTimes = baseTimes;
+	var _baseTimes = baseTimes$1;
 
 	/**
 	 * Checks if `value` is object-like. A value is object-like if it's not `null`
@@ -7902,11 +8380,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.isObjectLike(null);
 	 * // => false
 	 */
-	function isObjectLike(value) {
+
+	function isObjectLike$6(value) {
 	  return value != null && typeof value == 'object';
 	}
 
-	var isObjectLike_1 = isObjectLike;
+	var isObjectLike_1 = isObjectLike$6;
+
+	var baseGetTag$3 = _baseGetTag,
+	    isObjectLike$5 = isObjectLike_1;
 
 	/** `Object#toString` result references. */
 	var argsTag$2 = '[object Arguments]';
@@ -7918,11 +8400,14 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to check.
 	 * @returns {boolean} Returns `true` if `value` is an `arguments` object,
 	 */
-	function baseIsArguments(value) {
-	  return isObjectLike_1(value) && _baseGetTag(value) == argsTag$2;
+	function baseIsArguments$1(value) {
+	  return isObjectLike$5(value) && baseGetTag$3(value) == argsTag$2;
 	}
 
-	var _baseIsArguments = baseIsArguments;
+	var _baseIsArguments = baseIsArguments$1;
+
+	var baseIsArguments = _baseIsArguments,
+	    isObjectLike$4 = isObjectLike_1;
 
 	/** Used for built-in method references. */
 	var objectProto$6 = Object.prototype;
@@ -7951,12 +8436,12 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.isArguments([1, 2, 3]);
 	 * // => false
 	 */
-	var isArguments = _baseIsArguments(function() { return arguments; }()) ? _baseIsArguments : function(value) {
-	  return isObjectLike_1(value) && hasOwnProperty$4.call(value, 'callee') &&
+	var isArguments$1 = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
+	  return isObjectLike$4(value) && hasOwnProperty$4.call(value, 'callee') &&
 	    !propertyIsEnumerable$1.call(value, 'callee');
 	};
 
-	var isArguments_1 = isArguments;
+	var isArguments_1 = isArguments$1;
 
 	/**
 	 * Checks if `value` is classified as an `Array` object.
@@ -7981,9 +8466,12 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.isArray(_.noop);
 	 * // => false
 	 */
-	var isArray = Array.isArray;
 
-	var isArray_1 = isArray;
+	var isArray$4 = Array.isArray;
+
+	var isArray_1 = isArray$4;
+
+	var isBuffer$2 = {exports: {}};
 
 	/**
 	 * This method returns `false`.
@@ -7998,13 +8486,17 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.times(2, _.stubFalse);
 	 * // => [false, false]
 	 */
+
 	function stubFalse() {
 	  return false;
 	}
 
 	var stubFalse_1 = stubFalse;
 
-	var isBuffer_1 = createCommonjsModule(function (module, exports) {
+	(function (module, exports) {
+	var root = _root,
+	    stubFalse = stubFalse_1;
+
 	/** Detect free variable `exports`. */
 	var freeExports = 'object' == 'object' && exports && !exports.nodeType && exports;
 
@@ -8015,7 +8507,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	var moduleExports = freeModule && freeModule.exports === freeExports;
 
 	/** Built-in value references. */
-	var Buffer = moduleExports ? _root.Buffer : undefined;
+	var Buffer = moduleExports ? root.Buffer : undefined;
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
 	var nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined;
@@ -8037,12 +8529,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.isBuffer(new Uint8Array(2));
 	 * // => false
 	 */
-	var isBuffer = nativeIsBuffer || stubFalse_1;
+	var isBuffer = nativeIsBuffer || stubFalse;
 
 	module.exports = isBuffer;
-	});
+	}(isBuffer$2, isBuffer$2.exports));
+
+	var isBuffer_1 = isBuffer$2.exports;
 
 	/** Used as references for various `Number` constants. */
+
 	var MAX_SAFE_INTEGER$1 = 9007199254740991;
 
 	/** Used to detect unsigned integer values. */
@@ -8056,7 +8551,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
 	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
 	 */
-	function isIndex(value, length) {
+	function isIndex$1(value, length) {
 	  var type = typeof value;
 	  length = length == null ? MAX_SAFE_INTEGER$1 : length;
 
@@ -8066,9 +8561,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 	        (value > -1 && value % 1 == 0 && value < length);
 	}
 
-	var _isIndex = isIndex;
+	var _isIndex = isIndex$1;
 
 	/** Used as references for various `Number` constants. */
+
 	var MAX_SAFE_INTEGER = 9007199254740991;
 
 	/**
@@ -8097,12 +8593,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.isLength('3');
 	 * // => false
 	 */
-	function isLength(value) {
+	function isLength$2(value) {
 	  return typeof value == 'number' &&
 	    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
 	}
 
-	var isLength_1 = isLength;
+	var isLength_1 = isLength$2;
+
+	var baseGetTag$2 = _baseGetTag,
+	    isLength$1 = isLength_1,
+	    isObjectLike$3 = isObjectLike_1;
 
 	/** `Object#toString` result references. */
 	var argsTag$1 = '[object Arguments]',
@@ -8154,12 +8654,12 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to check.
 	 * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
 	 */
-	function baseIsTypedArray(value) {
-	  return isObjectLike_1(value) &&
-	    isLength_1(value.length) && !!typedArrayTags[_baseGetTag(value)];
+	function baseIsTypedArray$1(value) {
+	  return isObjectLike$3(value) &&
+	    isLength$1(value.length) && !!typedArrayTags[baseGetTag$2(value)];
 	}
 
-	var _baseIsTypedArray = baseIsTypedArray;
+	var _baseIsTypedArray = baseIsTypedArray$1;
 
 	/**
 	 * The base implementation of `_.unary` without support for storing metadata.
@@ -8168,15 +8668,20 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Function} func The function to cap arguments for.
 	 * @returns {Function} Returns the new capped function.
 	 */
-	function baseUnary(func) {
+
+	function baseUnary$3(func) {
 	  return function(value) {
 	    return func(value);
 	  };
 	}
 
-	var _baseUnary = baseUnary;
+	var _baseUnary = baseUnary$3;
 
-	var _nodeUtil = createCommonjsModule(function (module, exports) {
+	var _nodeUtil$1 = {exports: {}};
+
+	(function (module, exports) {
+	var freeGlobal = _freeGlobal;
+
 	/** Detect free variable `exports`. */
 	var freeExports = 'object' == 'object' && exports && !exports.nodeType && exports;
 
@@ -8187,7 +8692,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	var moduleExports = freeModule && freeModule.exports === freeExports;
 
 	/** Detect free variable `process` from Node.js. */
-	var freeProcess = moduleExports && _freeGlobal.process;
+	var freeProcess = moduleExports && freeGlobal.process;
 
 	/** Used to access faster Node.js helpers. */
 	var nodeUtil = (function() {
@@ -8205,10 +8710,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	}());
 
 	module.exports = nodeUtil;
-	});
+	}(_nodeUtil$1, _nodeUtil$1.exports));
+
+	var _nodeUtil = _nodeUtil$1.exports;
+
+	var baseIsTypedArray = _baseIsTypedArray,
+	    baseUnary$2 = _baseUnary,
+	    nodeUtil$2 = _nodeUtil$1.exports;
 
 	/* Node.js helper references. */
-	var nodeIsTypedArray = _nodeUtil && _nodeUtil.isTypedArray;
+	var nodeIsTypedArray = nodeUtil$2 && nodeUtil$2.isTypedArray;
 
 	/**
 	 * Checks if `value` is classified as a typed array.
@@ -8227,9 +8738,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.isTypedArray([]);
 	 * // => false
 	 */
-	var isTypedArray = nodeIsTypedArray ? _baseUnary(nodeIsTypedArray) : _baseIsTypedArray;
+	var isTypedArray$1 = nodeIsTypedArray ? baseUnary$2(nodeIsTypedArray) : baseIsTypedArray;
 
-	var isTypedArray_1 = isTypedArray;
+	var isTypedArray_1 = isTypedArray$1;
+
+	var baseTimes = _baseTimes,
+	    isArguments = isArguments_1,
+	    isArray$3 = isArray_1,
+	    isBuffer$1 = isBuffer$2.exports,
+	    isIndex = _isIndex,
+	    isTypedArray = isTypedArray_1;
 
 	/** Used for built-in method references. */
 	var objectProto$5 = Object.prototype;
@@ -8245,13 +8763,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {boolean} inherited Specify returning inherited property names.
 	 * @returns {Array} Returns the array of property names.
 	 */
-	function arrayLikeKeys(value, inherited) {
-	  var isArr = isArray_1(value),
-	      isArg = !isArr && isArguments_1(value),
-	      isBuff = !isArr && !isArg && isBuffer_1(value),
-	      isType = !isArr && !isArg && !isBuff && isTypedArray_1(value),
+	function arrayLikeKeys$2(value, inherited) {
+	  var isArr = isArray$3(value),
+	      isArg = !isArr && isArguments(value),
+	      isBuff = !isArr && !isArg && isBuffer$1(value),
+	      isType = !isArr && !isArg && !isBuff && isTypedArray(value),
 	      skipIndexes = isArr || isArg || isBuff || isType,
-	      result = skipIndexes ? _baseTimes(value.length, String) : [],
+	      result = skipIndexes ? baseTimes(value.length, String) : [],
 	      length = result.length;
 
 	  for (var key in value) {
@@ -8264,7 +8782,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	           // PhantomJS 2 has enumerable non-index properties on typed arrays.
 	           (isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset')) ||
 	           // Skip index properties.
-	           _isIndex(key, length)
+	           isIndex(key, length)
 	        ))) {
 	      result.push(key);
 	    }
@@ -8272,9 +8790,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return result;
 	}
 
-	var _arrayLikeKeys = arrayLikeKeys;
+	var _arrayLikeKeys = arrayLikeKeys$2;
 
 	/** Used for built-in method references. */
+
 	var objectProto$4 = Object.prototype;
 
 	/**
@@ -8284,14 +8803,14 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to check.
 	 * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
 	 */
-	function isPrototype(value) {
+	function isPrototype$3(value) {
 	  var Ctor = value && value.constructor,
 	      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto$4;
 
 	  return value === proto;
 	}
 
-	var _isPrototype = isPrototype;
+	var _isPrototype = isPrototype$3;
 
 	/**
 	 * Creates a unary function that invokes `func` with its argument transformed.
@@ -8301,18 +8820,24 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Function} transform The argument transform.
 	 * @returns {Function} Returns the new function.
 	 */
-	function overArg(func, transform) {
+
+	function overArg$2(func, transform) {
 	  return function(arg) {
 	    return func(transform(arg));
 	  };
 	}
 
-	var _overArg = overArg;
+	var _overArg = overArg$2;
+
+	var overArg$1 = _overArg;
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
-	var nativeKeys = _overArg(Object.keys, Object);
+	var nativeKeys$1 = overArg$1(Object.keys, Object);
 
-	var _nativeKeys = nativeKeys;
+	var _nativeKeys = nativeKeys$1;
+
+	var isPrototype$2 = _isPrototype,
+	    nativeKeys = _nativeKeys;
 
 	/** Used for built-in method references. */
 	var objectProto$3 = Object.prototype;
@@ -8327,9 +8852,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} object The object to query.
 	 * @returns {Array} Returns the array of property names.
 	 */
-	function baseKeys(object) {
-	  if (!_isPrototype(object)) {
-	    return _nativeKeys(object);
+	function baseKeys$1(object) {
+	  if (!isPrototype$2(object)) {
+	    return nativeKeys(object);
 	  }
 	  var result = [];
 	  for (var key in Object(object)) {
@@ -8340,7 +8865,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return result;
 	}
 
-	var _baseKeys = baseKeys;
+	var _baseKeys = baseKeys$1;
+
+	var isFunction = isFunction_1,
+	    isLength = isLength_1;
 
 	/**
 	 * Checks if `value` is array-like. A value is considered array-like if it's
@@ -8367,11 +8895,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.isArrayLike(_.noop);
 	 * // => false
 	 */
-	function isArrayLike(value) {
-	  return value != null && isLength_1(value.length) && !isFunction_1(value);
+	function isArrayLike$3(value) {
+	  return value != null && isLength(value.length) && !isFunction(value);
 	}
 
-	var isArrayLike_1 = isArrayLike;
+	var isArrayLike_1 = isArrayLike$3;
+
+	var arrayLikeKeys$1 = _arrayLikeKeys,
+	    baseKeys = _baseKeys,
+	    isArrayLike$2 = isArrayLike_1;
 
 	/**
 	 * Creates an array of the own enumerable property names of `object`.
@@ -8401,11 +8933,14 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.keys('hi');
 	 * // => ['0', '1']
 	 */
-	function keys(object) {
-	  return isArrayLike_1(object) ? _arrayLikeKeys(object) : _baseKeys(object);
+	function keys$4(object) {
+	  return isArrayLike$2(object) ? arrayLikeKeys$1(object) : baseKeys(object);
 	}
 
-	var keys_1 = keys;
+	var keys_1 = keys$4;
+
+	var copyObject$3 = _copyObject,
+	    keys$3 = keys_1;
 
 	/**
 	 * The base implementation of `_.assign` without support for multiple sources
@@ -8416,11 +8951,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} source The source object.
 	 * @returns {Object} Returns `object`.
 	 */
-	function baseAssign(object, source) {
-	  return object && _copyObject(source, keys_1(source), object);
+	function baseAssign$1(object, source) {
+	  return object && copyObject$3(source, keys$3(source), object);
 	}
 
-	var _baseAssign = baseAssign;
+	var _baseAssign = baseAssign$1;
 
 	/**
 	 * This function is like
@@ -8431,7 +8966,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} object The object to query.
 	 * @returns {Array} Returns the array of property names.
 	 */
-	function nativeKeysIn(object) {
+
+	function nativeKeysIn$1(object) {
 	  var result = [];
 	  if (object != null) {
 	    for (var key in Object(object)) {
@@ -8441,7 +8977,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return result;
 	}
 
-	var _nativeKeysIn = nativeKeysIn;
+	var _nativeKeysIn = nativeKeysIn$1;
+
+	var isObject$4 = isObject_1,
+	    isPrototype$1 = _isPrototype,
+	    nativeKeysIn = _nativeKeysIn;
 
 	/** Used for built-in method references. */
 	var objectProto$2 = Object.prototype;
@@ -8456,11 +8996,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} object The object to query.
 	 * @returns {Array} Returns the array of property names.
 	 */
-	function baseKeysIn(object) {
-	  if (!isObject_1(object)) {
-	    return _nativeKeysIn(object);
+	function baseKeysIn$1(object) {
+	  if (!isObject$4(object)) {
+	    return nativeKeysIn(object);
 	  }
-	  var isProto = _isPrototype(object),
+	  var isProto = isPrototype$1(object),
 	      result = [];
 
 	  for (var key in object) {
@@ -8471,7 +9011,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return result;
 	}
 
-	var _baseKeysIn = baseKeysIn;
+	var _baseKeysIn = baseKeysIn$1;
+
+	var arrayLikeKeys = _arrayLikeKeys,
+	    baseKeysIn = _baseKeysIn,
+	    isArrayLike$1 = isArrayLike_1;
 
 	/**
 	 * Creates an array of the own and inherited enumerable property names of `object`.
@@ -8496,11 +9040,14 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.keysIn(new Foo);
 	 * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
 	 */
-	function keysIn(object) {
-	  return isArrayLike_1(object) ? _arrayLikeKeys(object, true) : _baseKeysIn(object);
+	function keysIn$3(object) {
+	  return isArrayLike$1(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
 	}
 
-	var keysIn_1 = keysIn;
+	var keysIn_1 = keysIn$3;
+
+	var copyObject$2 = _copyObject,
+	    keysIn$2 = keysIn_1;
 
 	/**
 	 * The base implementation of `_.assignIn` without support for multiple sources
@@ -8511,13 +9058,17 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} source The source object.
 	 * @returns {Object} Returns `object`.
 	 */
-	function baseAssignIn(object, source) {
-	  return object && _copyObject(source, keysIn_1(source), object);
+	function baseAssignIn$1(object, source) {
+	  return object && copyObject$2(source, keysIn$2(source), object);
 	}
 
-	var _baseAssignIn = baseAssignIn;
+	var _baseAssignIn = baseAssignIn$1;
 
-	var _cloneBuffer = createCommonjsModule(function (module, exports) {
+	var _cloneBuffer$1 = {exports: {}};
+
+	(function (module, exports) {
+	var root = _root;
+
 	/** Detect free variable `exports`. */
 	var freeExports = 'object' == 'object' && exports && !exports.nodeType && exports;
 
@@ -8528,7 +9079,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	var moduleExports = freeModule && freeModule.exports === freeExports;
 
 	/** Built-in value references. */
-	var Buffer = moduleExports ? _root.Buffer : undefined,
+	var Buffer = moduleExports ? root.Buffer : undefined,
 	    allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined;
 
 	/**
@@ -8551,7 +9102,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	}
 
 	module.exports = cloneBuffer;
-	});
+	}(_cloneBuffer$1, _cloneBuffer$1.exports));
+
+	var _cloneBuffer = _cloneBuffer$1.exports;
 
 	/**
 	 * Copies the values of `source` to `array`.
@@ -8561,7 +9114,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Array} [array=[]] The array to copy values to.
 	 * @returns {Array} Returns `array`.
 	 */
-	function copyArray(source, array) {
+
+	function copyArray$1(source, array) {
 	  var index = -1,
 	      length = source.length;
 
@@ -8572,7 +9126,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return array;
 	}
 
-	var _copyArray = copyArray;
+	var _copyArray = copyArray$1;
 
 	/**
 	 * A specialized version of `_.filter` for arrays without support for
@@ -8583,7 +9137,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Function} predicate The function invoked per iteration.
 	 * @returns {Array} Returns the new filtered array.
 	 */
-	function arrayFilter(array, predicate) {
+
+	function arrayFilter$1(array, predicate) {
 	  var index = -1,
 	      length = array == null ? 0 : array.length,
 	      resIndex = 0,
@@ -8598,7 +9153,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return result;
 	}
 
-	var _arrayFilter = arrayFilter;
+	var _arrayFilter = arrayFilter$1;
 
 	/**
 	 * This method returns a new empty array.
@@ -8618,11 +9173,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * console.log(arrays[0] === arrays[1]);
 	 * // => false
 	 */
-	function stubArray() {
+
+	function stubArray$2() {
 	  return [];
 	}
 
-	var stubArray_1 = stubArray;
+	var stubArray_1 = stubArray$2;
+
+	var arrayFilter = _arrayFilter,
+	    stubArray$1 = stubArray_1;
 
 	/** Used for built-in method references. */
 	var objectProto$1 = Object.prototype;
@@ -8640,17 +9199,20 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} object The object to query.
 	 * @returns {Array} Returns the array of symbols.
 	 */
-	var getSymbols = !nativeGetSymbols$1 ? stubArray_1 : function(object) {
+	var getSymbols$3 = !nativeGetSymbols$1 ? stubArray$1 : function(object) {
 	  if (object == null) {
 	    return [];
 	  }
 	  object = Object(object);
-	  return _arrayFilter(nativeGetSymbols$1(object), function(symbol) {
+	  return arrayFilter(nativeGetSymbols$1(object), function(symbol) {
 	    return propertyIsEnumerable.call(object, symbol);
 	  });
 	};
 
-	var _getSymbols = getSymbols;
+	var _getSymbols = getSymbols$3;
+
+	var copyObject$1 = _copyObject,
+	    getSymbols$2 = _getSymbols;
 
 	/**
 	 * Copies own symbols of `source` to `object`.
@@ -8660,11 +9222,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} [object={}] The object to copy symbols to.
 	 * @returns {Object} Returns `object`.
 	 */
-	function copySymbols(source, object) {
-	  return _copyObject(source, _getSymbols(source), object);
+	function copySymbols$1(source, object) {
+	  return copyObject$1(source, getSymbols$2(source), object);
 	}
 
-	var _copySymbols = copySymbols;
+	var _copySymbols = copySymbols$1;
 
 	/**
 	 * Appends the elements of `values` to `array`.
@@ -8674,7 +9236,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Array} values The values to append.
 	 * @returns {Array} Returns `array`.
 	 */
-	function arrayPush(array, values) {
+
+	function arrayPush$2(array, values) {
 	  var index = -1,
 	      length = values.length,
 	      offset = array.length;
@@ -8685,12 +9248,19 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return array;
 	}
 
-	var _arrayPush = arrayPush;
+	var _arrayPush = arrayPush$2;
+
+	var overArg = _overArg;
 
 	/** Built-in value references. */
-	var getPrototype = _overArg(Object.getPrototypeOf, Object);
+	var getPrototype$2 = overArg(Object.getPrototypeOf, Object);
 
-	var _getPrototype = getPrototype;
+	var _getPrototype = getPrototype$2;
+
+	var arrayPush$1 = _arrayPush,
+	    getPrototype$1 = _getPrototype,
+	    getSymbols$1 = _getSymbols,
+	    stubArray = stubArray_1;
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
 	var nativeGetSymbols = Object.getOwnPropertySymbols;
@@ -8702,16 +9272,19 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} object The object to query.
 	 * @returns {Array} Returns the array of symbols.
 	 */
-	var getSymbolsIn = !nativeGetSymbols ? stubArray_1 : function(object) {
+	var getSymbolsIn$2 = !nativeGetSymbols ? stubArray : function(object) {
 	  var result = [];
 	  while (object) {
-	    _arrayPush(result, _getSymbols(object));
-	    object = _getPrototype(object);
+	    arrayPush$1(result, getSymbols$1(object));
+	    object = getPrototype$1(object);
 	  }
 	  return result;
 	};
 
-	var _getSymbolsIn = getSymbolsIn;
+	var _getSymbolsIn = getSymbolsIn$2;
+
+	var copyObject = _copyObject,
+	    getSymbolsIn$1 = _getSymbolsIn;
 
 	/**
 	 * Copies own and inherited symbols of `source` to `object`.
@@ -8721,11 +9294,14 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} [object={}] The object to copy symbols to.
 	 * @returns {Object} Returns `object`.
 	 */
-	function copySymbolsIn(source, object) {
-	  return _copyObject(source, _getSymbolsIn(source), object);
+	function copySymbolsIn$1(source, object) {
+	  return copyObject(source, getSymbolsIn$1(source), object);
 	}
 
-	var _copySymbolsIn = copySymbolsIn;
+	var _copySymbolsIn = copySymbolsIn$1;
+
+	var arrayPush = _arrayPush,
+	    isArray$2 = isArray_1;
 
 	/**
 	 * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
@@ -8738,12 +9314,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Function} symbolsFunc The function to get the symbols of `object`.
 	 * @returns {Array} Returns the array of property names and symbols.
 	 */
-	function baseGetAllKeys(object, keysFunc, symbolsFunc) {
+	function baseGetAllKeys$2(object, keysFunc, symbolsFunc) {
 	  var result = keysFunc(object);
-	  return isArray_1(object) ? result : _arrayPush(result, symbolsFunc(object));
+	  return isArray$2(object) ? result : arrayPush(result, symbolsFunc(object));
 	}
 
-	var _baseGetAllKeys = baseGetAllKeys;
+	var _baseGetAllKeys = baseGetAllKeys$2;
+
+	var baseGetAllKeys$1 = _baseGetAllKeys,
+	    getSymbols = _getSymbols,
+	    keys$2 = keys_1;
 
 	/**
 	 * Creates an array of own enumerable property names and symbols of `object`.
@@ -8752,11 +9332,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} object The object to query.
 	 * @returns {Array} Returns the array of property names and symbols.
 	 */
-	function getAllKeys(object) {
-	  return _baseGetAllKeys(object, keys_1, _getSymbols);
+	function getAllKeys$1(object) {
+	  return baseGetAllKeys$1(object, keys$2, getSymbols);
 	}
 
-	var _getAllKeys = getAllKeys;
+	var _getAllKeys = getAllKeys$1;
+
+	var baseGetAllKeys = _baseGetAllKeys,
+	    getSymbolsIn = _getSymbolsIn,
+	    keysIn$1 = keysIn_1;
 
 	/**
 	 * Creates an array of own and inherited enumerable property names and
@@ -8766,31 +9350,51 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} object The object to query.
 	 * @returns {Array} Returns the array of property names and symbols.
 	 */
-	function getAllKeysIn(object) {
-	  return _baseGetAllKeys(object, keysIn_1, _getSymbolsIn);
+	function getAllKeysIn$1(object) {
+	  return baseGetAllKeys(object, keysIn$1, getSymbolsIn);
 	}
 
-	var _getAllKeysIn = getAllKeysIn;
+	var _getAllKeysIn = getAllKeysIn$1;
+
+	var getNative$3 = _getNative,
+	    root$5 = _root;
 
 	/* Built-in method references that are verified to be native. */
-	var DataView = _getNative(_root, 'DataView');
+	var DataView$1 = getNative$3(root$5, 'DataView');
 
-	var _DataView = DataView;
+	var _DataView = DataView$1;
 
-	/* Built-in method references that are verified to be native. */
-	var Promise$1 = _getNative(_root, 'Promise');
-
-	var _Promise = Promise$1;
+	var getNative$2 = _getNative,
+	    root$4 = _root;
 
 	/* Built-in method references that are verified to be native. */
-	var Set = _getNative(_root, 'Set');
+	var Promise$2 = getNative$2(root$4, 'Promise');
 
-	var _Set = Set;
+	var _Promise = Promise$2;
+
+	var getNative$1 = _getNative,
+	    root$3 = _root;
 
 	/* Built-in method references that are verified to be native. */
-	var WeakMap$1 = _getNative(_root, 'WeakMap');
+	var Set$1 = getNative$1(root$3, 'Set');
 
-	var _WeakMap = WeakMap$1;
+	var _Set = Set$1;
+
+	var getNative = _getNative,
+	    root$2 = _root;
+
+	/* Built-in method references that are verified to be native. */
+	var WeakMap$2 = getNative(root$2, 'WeakMap');
+
+	var _WeakMap = WeakMap$2;
+
+	var DataView = _DataView,
+	    Map = _Map,
+	    Promise$1 = _Promise,
+	    Set = _Set,
+	    WeakMap$1 = _WeakMap,
+	    baseGetTag$1 = _baseGetTag,
+	    toSource = _toSource;
 
 	/** `Object#toString` result references. */
 	var mapTag$3 = '[object Map]',
@@ -8802,11 +9406,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	var dataViewTag$2 = '[object DataView]';
 
 	/** Used to detect maps, sets, and weakmaps. */
-	var dataViewCtorString = _toSource(_DataView),
-	    mapCtorString = _toSource(_Map),
-	    promiseCtorString = _toSource(_Promise),
-	    setCtorString = _toSource(_Set),
-	    weakMapCtorString = _toSource(_WeakMap);
+	var dataViewCtorString = toSource(DataView),
+	    mapCtorString = toSource(Map),
+	    promiseCtorString = toSource(Promise$1),
+	    setCtorString = toSource(Set),
+	    weakMapCtorString = toSource(WeakMap$1);
 
 	/**
 	 * Gets the `toStringTag` of `value`.
@@ -8815,18 +9419,18 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to query.
 	 * @returns {string} Returns the `toStringTag`.
 	 */
-	var getTag = _baseGetTag;
+	var getTag$3 = baseGetTag$1;
 
 	// Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
-	if ((_DataView && getTag(new _DataView(new ArrayBuffer(1))) != dataViewTag$2) ||
-	    (_Map && getTag(new _Map) != mapTag$3) ||
-	    (_Promise && getTag(_Promise.resolve()) != promiseTag) ||
-	    (_Set && getTag(new _Set) != setTag$3) ||
-	    (_WeakMap && getTag(new _WeakMap) != weakMapTag$1)) {
-	  getTag = function(value) {
-	    var result = _baseGetTag(value),
+	if ((DataView && getTag$3(new DataView(new ArrayBuffer(1))) != dataViewTag$2) ||
+	    (Map && getTag$3(new Map) != mapTag$3) ||
+	    (Promise$1 && getTag$3(Promise$1.resolve()) != promiseTag) ||
+	    (Set && getTag$3(new Set) != setTag$3) ||
+	    (WeakMap$1 && getTag$3(new WeakMap$1) != weakMapTag$1)) {
+	  getTag$3 = function(value) {
+	    var result = baseGetTag$1(value),
 	        Ctor = result == objectTag$1 ? value.constructor : undefined,
-	        ctorString = Ctor ? _toSource(Ctor) : '';
+	        ctorString = Ctor ? toSource(Ctor) : '';
 
 	    if (ctorString) {
 	      switch (ctorString) {
@@ -8841,9 +9445,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  };
 	}
 
-	var _getTag = getTag;
+	var _getTag = getTag$3;
 
 	/** Used for built-in method references. */
+
 	var objectProto = Object.prototype;
 
 	/** Used to check objects for own properties. */
@@ -8856,7 +9461,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Array} array The array to clone.
 	 * @returns {Array} Returns the initialized clone.
 	 */
-	function initCloneArray(array) {
+	function initCloneArray$1(array) {
 	  var length = array.length,
 	      result = new array.constructor(length);
 
@@ -8868,12 +9473,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  return result;
 	}
 
-	var _initCloneArray = initCloneArray;
+	var _initCloneArray = initCloneArray$1;
+
+	var root$1 = _root;
 
 	/** Built-in value references. */
-	var Uint8Array = _root.Uint8Array;
+	var Uint8Array$1 = root$1.Uint8Array;
 
-	var _Uint8Array = Uint8Array;
+	var _Uint8Array = Uint8Array$1;
+
+	var Uint8Array = _Uint8Array;
 
 	/**
 	 * Creates a clone of `arrayBuffer`.
@@ -8882,13 +9491,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {ArrayBuffer} arrayBuffer The array buffer to clone.
 	 * @returns {ArrayBuffer} Returns the cloned array buffer.
 	 */
-	function cloneArrayBuffer(arrayBuffer) {
+	function cloneArrayBuffer$3(arrayBuffer) {
 	  var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
-	  new _Uint8Array(result).set(new _Uint8Array(arrayBuffer));
+	  new Uint8Array(result).set(new Uint8Array(arrayBuffer));
 	  return result;
 	}
 
-	var _cloneArrayBuffer = cloneArrayBuffer;
+	var _cloneArrayBuffer = cloneArrayBuffer$3;
+
+	var cloneArrayBuffer$2 = _cloneArrayBuffer;
 
 	/**
 	 * Creates a clone of `dataView`.
@@ -8898,14 +9509,15 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {boolean} [isDeep] Specify a deep clone.
 	 * @returns {Object} Returns the cloned data view.
 	 */
-	function cloneDataView(dataView, isDeep) {
-	  var buffer = isDeep ? _cloneArrayBuffer(dataView.buffer) : dataView.buffer;
+	function cloneDataView$1(dataView, isDeep) {
+	  var buffer = isDeep ? cloneArrayBuffer$2(dataView.buffer) : dataView.buffer;
 	  return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
 	}
 
-	var _cloneDataView = cloneDataView;
+	var _cloneDataView = cloneDataView$1;
 
 	/** Used to match `RegExp` flags from their coerced string values. */
+
 	var reFlags = /\w*$/;
 
 	/**
@@ -8915,16 +9527,18 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} regexp The regexp to clone.
 	 * @returns {Object} Returns the cloned regexp.
 	 */
-	function cloneRegExp(regexp) {
+	function cloneRegExp$1(regexp) {
 	  var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
 	  result.lastIndex = regexp.lastIndex;
 	  return result;
 	}
 
-	var _cloneRegExp = cloneRegExp;
+	var _cloneRegExp = cloneRegExp$1;
+
+	var Symbol$1 = _Symbol;
 
 	/** Used to convert symbols to primitives and strings. */
-	var symbolProto = _Symbol ? _Symbol.prototype : undefined,
+	var symbolProto = Symbol$1 ? Symbol$1.prototype : undefined,
 	    symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
 
 	/**
@@ -8934,11 +9548,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} symbol The symbol object to clone.
 	 * @returns {Object} Returns the cloned symbol object.
 	 */
-	function cloneSymbol(symbol) {
+	function cloneSymbol$1(symbol) {
 	  return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
 	}
 
-	var _cloneSymbol = cloneSymbol;
+	var _cloneSymbol = cloneSymbol$1;
+
+	var cloneArrayBuffer$1 = _cloneArrayBuffer;
 
 	/**
 	 * Creates a clone of `typedArray`.
@@ -8948,12 +9564,18 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {boolean} [isDeep] Specify a deep clone.
 	 * @returns {Object} Returns the cloned typed array.
 	 */
-	function cloneTypedArray(typedArray, isDeep) {
-	  var buffer = isDeep ? _cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
+	function cloneTypedArray$1(typedArray, isDeep) {
+	  var buffer = isDeep ? cloneArrayBuffer$1(typedArray.buffer) : typedArray.buffer;
 	  return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
 	}
 
-	var _cloneTypedArray = cloneTypedArray;
+	var _cloneTypedArray = cloneTypedArray$1;
+
+	var cloneArrayBuffer = _cloneArrayBuffer,
+	    cloneDataView = _cloneDataView,
+	    cloneRegExp = _cloneRegExp,
+	    cloneSymbol = _cloneSymbol,
+	    cloneTypedArray = _cloneTypedArray;
 
 	/** `Object#toString` result references. */
 	var boolTag$1 = '[object Boolean]',
@@ -8989,23 +9611,23 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {boolean} [isDeep] Specify a deep clone.
 	 * @returns {Object} Returns the initialized clone.
 	 */
-	function initCloneByTag(object, tag, isDeep) {
+	function initCloneByTag$1(object, tag, isDeep) {
 	  var Ctor = object.constructor;
 	  switch (tag) {
 	    case arrayBufferTag$1:
-	      return _cloneArrayBuffer(object);
+	      return cloneArrayBuffer(object);
 
 	    case boolTag$1:
 	    case dateTag$1:
 	      return new Ctor(+object);
 
 	    case dataViewTag$1:
-	      return _cloneDataView(object, isDeep);
+	      return cloneDataView(object, isDeep);
 
 	    case float32Tag$1: case float64Tag$1:
 	    case int8Tag$1: case int16Tag$1: case int32Tag$1:
 	    case uint8Tag$1: case uint8ClampedTag$1: case uint16Tag$1: case uint32Tag$1:
-	      return _cloneTypedArray(object, isDeep);
+	      return cloneTypedArray(object, isDeep);
 
 	    case mapTag$2:
 	      return new Ctor;
@@ -9015,17 +9637,19 @@ var MolaMolaModule = (function (exports, sargasso) {
 	      return new Ctor(object);
 
 	    case regexpTag$1:
-	      return _cloneRegExp(object);
+	      return cloneRegExp(object);
 
 	    case setTag$2:
 	      return new Ctor;
 
 	    case symbolTag$2:
-	      return _cloneSymbol(object);
+	      return cloneSymbol(object);
 	  }
 	}
 
-	var _initCloneByTag = initCloneByTag;
+	var _initCloneByTag = initCloneByTag$1;
+
+	var isObject$3 = isObject_1;
 
 	/** Built-in value references. */
 	var objectCreate = Object.create;
@@ -9038,10 +9662,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} proto The object to inherit from.
 	 * @returns {Object} Returns the new object.
 	 */
-	var baseCreate = (function() {
+	var baseCreate$1 = (function() {
 	  function object() {}
 	  return function(proto) {
-	    if (!isObject_1(proto)) {
+	    if (!isObject$3(proto)) {
 	      return {};
 	    }
 	    if (objectCreate) {
@@ -9054,7 +9678,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  };
 	}());
 
-	var _baseCreate = baseCreate;
+	var _baseCreate = baseCreate$1;
+
+	var baseCreate = _baseCreate,
+	    getPrototype = _getPrototype,
+	    isPrototype = _isPrototype;
 
 	/**
 	 * Initializes an object clone.
@@ -9063,13 +9691,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} object The object to clone.
 	 * @returns {Object} Returns the initialized clone.
 	 */
-	function initCloneObject(object) {
-	  return (typeof object.constructor == 'function' && !_isPrototype(object))
-	    ? _baseCreate(_getPrototype(object))
+	function initCloneObject$1(object) {
+	  return (typeof object.constructor == 'function' && !isPrototype(object))
+	    ? baseCreate(getPrototype(object))
 	    : {};
 	}
 
-	var _initCloneObject = initCloneObject;
+	var _initCloneObject = initCloneObject$1;
+
+	var getTag$2 = _getTag,
+	    isObjectLike$2 = isObjectLike_1;
 
 	/** `Object#toString` result references. */
 	var mapTag$1 = '[object Map]';
@@ -9081,14 +9712,18 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to check.
 	 * @returns {boolean} Returns `true` if `value` is a map, else `false`.
 	 */
-	function baseIsMap(value) {
-	  return isObjectLike_1(value) && _getTag(value) == mapTag$1;
+	function baseIsMap$1(value) {
+	  return isObjectLike$2(value) && getTag$2(value) == mapTag$1;
 	}
 
-	var _baseIsMap = baseIsMap;
+	var _baseIsMap = baseIsMap$1;
+
+	var baseIsMap = _baseIsMap,
+	    baseUnary$1 = _baseUnary,
+	    nodeUtil$1 = _nodeUtil$1.exports;
 
 	/* Node.js helper references. */
-	var nodeIsMap = _nodeUtil && _nodeUtil.isMap;
+	var nodeIsMap = nodeUtil$1 && nodeUtil$1.isMap;
 
 	/**
 	 * Checks if `value` is classified as a `Map` object.
@@ -9107,9 +9742,12 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.isMap(new WeakMap);
 	 * // => false
 	 */
-	var isMap = nodeIsMap ? _baseUnary(nodeIsMap) : _baseIsMap;
+	var isMap$1 = nodeIsMap ? baseUnary$1(nodeIsMap) : baseIsMap;
 
-	var isMap_1 = isMap;
+	var isMap_1 = isMap$1;
+
+	var getTag$1 = _getTag,
+	    isObjectLike$1 = isObjectLike_1;
 
 	/** `Object#toString` result references. */
 	var setTag$1 = '[object Set]';
@@ -9121,14 +9759,18 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to check.
 	 * @returns {boolean} Returns `true` if `value` is a set, else `false`.
 	 */
-	function baseIsSet(value) {
-	  return isObjectLike_1(value) && _getTag(value) == setTag$1;
+	function baseIsSet$1(value) {
+	  return isObjectLike$1(value) && getTag$1(value) == setTag$1;
 	}
 
-	var _baseIsSet = baseIsSet;
+	var _baseIsSet = baseIsSet$1;
+
+	var baseIsSet = _baseIsSet,
+	    baseUnary = _baseUnary,
+	    nodeUtil = _nodeUtil$1.exports;
 
 	/* Node.js helper references. */
-	var nodeIsSet = _nodeUtil && _nodeUtil.isSet;
+	var nodeIsSet = nodeUtil && nodeUtil.isSet;
 
 	/**
 	 * Checks if `value` is classified as a `Set` object.
@@ -9147,9 +9789,32 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.isSet(new WeakSet);
 	 * // => false
 	 */
-	var isSet = nodeIsSet ? _baseUnary(nodeIsSet) : _baseIsSet;
+	var isSet$1 = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
 
-	var isSet_1 = isSet;
+	var isSet_1 = isSet$1;
+
+	var Stack = _Stack,
+	    arrayEach$1 = _arrayEach,
+	    assignValue = _assignValue,
+	    baseAssign = _baseAssign,
+	    baseAssignIn = _baseAssignIn,
+	    cloneBuffer = _cloneBuffer$1.exports,
+	    copyArray = _copyArray,
+	    copySymbols = _copySymbols,
+	    copySymbolsIn = _copySymbolsIn,
+	    getAllKeys = _getAllKeys,
+	    getAllKeysIn = _getAllKeysIn,
+	    getTag = _getTag,
+	    initCloneArray = _initCloneArray,
+	    initCloneByTag = _initCloneByTag,
+	    initCloneObject = _initCloneObject,
+	    isArray$1 = isArray_1,
+	    isBuffer = isBuffer$2.exports,
+	    isMap = isMap_1,
+	    isObject$2 = isObject_1,
+	    isSet = isSet_1,
+	    keys$1 = keys_1,
+	    keysIn = keysIn_1;
 
 	/** Used to compose bitmasks for cloning. */
 	var CLONE_DEEP_FLAG$1 = 1,
@@ -9217,7 +9882,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Object} [stack] Tracks traversed objects and their clone counterparts.
 	 * @returns {*} Returns the cloned value.
 	 */
-	function baseClone(value, bitmask, customizer, key, object, stack) {
+	function baseClone$1(value, bitmask, customizer, key, object, stack) {
 	  var result,
 	      isDeep = bitmask & CLONE_DEEP_FLAG$1,
 	      isFlat = bitmask & CLONE_FLAT_FLAG,
@@ -9229,71 +9894,73 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  if (result !== undefined) {
 	    return result;
 	  }
-	  if (!isObject_1(value)) {
+	  if (!isObject$2(value)) {
 	    return value;
 	  }
-	  var isArr = isArray_1(value);
+	  var isArr = isArray$1(value);
 	  if (isArr) {
-	    result = _initCloneArray(value);
+	    result = initCloneArray(value);
 	    if (!isDeep) {
-	      return _copyArray(value, result);
+	      return copyArray(value, result);
 	    }
 	  } else {
-	    var tag = _getTag(value),
+	    var tag = getTag(value),
 	        isFunc = tag == funcTag || tag == genTag;
 
-	    if (isBuffer_1(value)) {
-	      return _cloneBuffer(value, isDeep);
+	    if (isBuffer(value)) {
+	      return cloneBuffer(value, isDeep);
 	    }
 	    if (tag == objectTag || tag == argsTag || (isFunc && !object)) {
-	      result = (isFlat || isFunc) ? {} : _initCloneObject(value);
+	      result = (isFlat || isFunc) ? {} : initCloneObject(value);
 	      if (!isDeep) {
 	        return isFlat
-	          ? _copySymbolsIn(value, _baseAssignIn(result, value))
-	          : _copySymbols(value, _baseAssign(result, value));
+	          ? copySymbolsIn(value, baseAssignIn(result, value))
+	          : copySymbols(value, baseAssign(result, value));
 	      }
 	    } else {
 	      if (!cloneableTags[tag]) {
 	        return object ? value : {};
 	      }
-	      result = _initCloneByTag(value, tag, isDeep);
+	      result = initCloneByTag(value, tag, isDeep);
 	    }
 	  }
 	  // Check for circular references and return its corresponding clone.
-	  stack || (stack = new _Stack);
+	  stack || (stack = new Stack);
 	  var stacked = stack.get(value);
 	  if (stacked) {
 	    return stacked;
 	  }
 	  stack.set(value, result);
 
-	  if (isSet_1(value)) {
+	  if (isSet(value)) {
 	    value.forEach(function(subValue) {
-	      result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
+	      result.add(baseClone$1(subValue, bitmask, customizer, subValue, value, stack));
 	    });
-	  } else if (isMap_1(value)) {
+	  } else if (isMap(value)) {
 	    value.forEach(function(subValue, key) {
-	      result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
+	      result.set(key, baseClone$1(subValue, bitmask, customizer, key, value, stack));
 	    });
 	  }
 
 	  var keysFunc = isFull
-	    ? (isFlat ? _getAllKeysIn : _getAllKeys)
-	    : (isFlat ? keysIn_1 : keys_1);
+	    ? (isFlat ? getAllKeysIn : getAllKeys)
+	    : (isFlat ? keysIn : keys$1);
 
 	  var props = isArr ? undefined : keysFunc(value);
-	  _arrayEach(props || value, function(subValue, key) {
+	  arrayEach$1(props || value, function(subValue, key) {
 	    if (props) {
 	      key = subValue;
 	      subValue = value[key];
 	    }
 	    // Recursively populate clone (susceptible to call stack limits).
-	    _assignValue(result, key, baseClone(subValue, bitmask, customizer, key, value, stack));
+	    assignValue(result, key, baseClone$1(subValue, bitmask, customizer, key, value, stack));
 	  });
 	  return result;
 	}
 
-	var _baseClone = baseClone;
+	var _baseClone = baseClone$1;
+
+	var baseClone = _baseClone;
 
 	/** Used to compose bitmasks for cloning. */
 	var CLONE_DEEP_FLAG = 1,
@@ -9318,7 +9985,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * // => false
 	 */
 	function cloneDeep(value) {
-	  return _baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG);
+	  return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG);
 	}
 
 	var cloneDeep_1 = cloneDeep;
@@ -9330,7 +9997,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {boolean} [fromRight] Specify iterating from right to left.
 	 * @returns {Function} Returns the new base function.
 	 */
-	function createBaseFor(fromRight) {
+
+	function createBaseFor$1(fromRight) {
 	  return function(object, iteratee, keysFunc) {
 	    var index = -1,
 	        iterable = Object(object),
@@ -9347,7 +10015,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  };
 	}
 
-	var _createBaseFor = createBaseFor;
+	var _createBaseFor = createBaseFor$1;
+
+	var createBaseFor = _createBaseFor;
 
 	/**
 	 * The base implementation of `baseForOwn` which iterates over `object`
@@ -9360,9 +10030,12 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Function} keysFunc The function to get the keys of `object`.
 	 * @returns {Object} Returns `object`.
 	 */
-	var baseFor = _createBaseFor();
+	var baseFor$1 = createBaseFor();
 
-	var _baseFor = baseFor;
+	var _baseFor = baseFor$1;
+
+	var baseFor = _baseFor,
+	    keys = keys_1;
 
 	/**
 	 * The base implementation of `_.forOwn` without support for iteratee shorthands.
@@ -9372,11 +10045,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Function} iteratee The function invoked per iteration.
 	 * @returns {Object} Returns `object`.
 	 */
-	function baseForOwn(object, iteratee) {
-	  return object && _baseFor(object, iteratee, keys_1);
+	function baseForOwn$1(object, iteratee) {
+	  return object && baseFor(object, iteratee, keys);
 	}
 
-	var _baseForOwn = baseForOwn;
+	var _baseForOwn = baseForOwn$1;
+
+	var isArrayLike = isArrayLike_1;
 
 	/**
 	 * Creates a `baseEach` or `baseEachRight` function.
@@ -9386,12 +10061,12 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {boolean} [fromRight] Specify iterating from right to left.
 	 * @returns {Function} Returns the new base function.
 	 */
-	function createBaseEach(eachFunc, fromRight) {
+	function createBaseEach$1(eachFunc, fromRight) {
 	  return function(collection, iteratee) {
 	    if (collection == null) {
 	      return collection;
 	    }
-	    if (!isArrayLike_1(collection)) {
+	    if (!isArrayLike(collection)) {
 	      return eachFunc(collection, iteratee);
 	    }
 	    var length = collection.length,
@@ -9407,7 +10082,10 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  };
 	}
 
-	var _createBaseEach = createBaseEach;
+	var _createBaseEach = createBaseEach$1;
+
+	var baseForOwn = _baseForOwn,
+	    createBaseEach = _createBaseEach;
 
 	/**
 	 * The base implementation of `_.forEach` without support for iteratee shorthands.
@@ -9417,9 +10095,9 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {Function} iteratee The function invoked per iteration.
 	 * @returns {Array|Object} Returns `collection`.
 	 */
-	var baseEach = _createBaseEach(_baseForOwn);
+	var baseEach$1 = createBaseEach(baseForOwn);
 
-	var _baseEach = baseEach;
+	var _baseEach = baseEach$1;
 
 	/**
 	 * This method returns the first argument it receives.
@@ -9437,11 +10115,14 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * console.log(_.identity(object) === object);
 	 * // => true
 	 */
-	function identity(value) {
+
+	function identity$1(value) {
 	  return value;
 	}
 
-	var identity_1 = identity;
+	var identity_1 = identity$1;
+
+	var identity = identity_1;
 
 	/**
 	 * Casts `value` to `identity` if it's not a function.
@@ -9450,11 +10131,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {*} value The value to inspect.
 	 * @returns {Function} Returns cast function.
 	 */
-	function castFunction(value) {
-	  return typeof value == 'function' ? value : identity_1;
+	function castFunction$1(value) {
+	  return typeof value == 'function' ? value : identity;
 	}
 
-	var _castFunction = castFunction;
+	var _castFunction = castFunction$1;
+
+	var arrayEach = _arrayEach,
+	    baseEach = _baseEach,
+	    castFunction = _castFunction,
+	    isArray = isArray_1;
 
 	/**
 	 * Iterates over elements of `collection` and invokes `iteratee` for each element.
@@ -9487,8 +10173,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * // => Logs 'a' then 'b' (iteration order is not guaranteed).
 	 */
 	function forEach(collection, iteratee) {
-	  var func = isArray_1(collection) ? _arrayEach : _baseEach;
-	  return func(collection, _castFunction(iteratee));
+	  var func = isArray(collection) ? arrayEach : baseEach;
+	  return func(collection, castFunction(iteratee));
 	}
 
 	var forEach_1 = forEach;
@@ -9621,6 +10307,8 @@ var MolaMolaModule = (function (exports, sargasso) {
 		return value
 	};
 
+	var root = _root;
+
 	/**
 	 * Gets the timestamp of the number of milliseconds that have elapsed since
 	 * the Unix epoch (1 January 1970 00:00:00 UTC).
@@ -9637,13 +10325,14 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * }, _.now());
 	 * // => Logs the number of milliseconds it took for the deferred invocation.
 	 */
-	var now = function() {
-	  return _root.Date.now();
+	var now$1 = function() {
+	  return root.Date.now();
 	};
 
-	var now_1 = now;
+	var now_1 = now$1;
 
 	/** Used to match a single whitespace character. */
+
 	var reWhitespace = /\s/;
 
 	/**
@@ -9654,14 +10343,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} string The string to inspect.
 	 * @returns {number} Returns the index of the last non-whitespace character.
 	 */
-	function trimmedEndIndex(string) {
+	function trimmedEndIndex$1(string) {
 	  var index = string.length;
 
 	  while (index-- && reWhitespace.test(string.charAt(index))) {}
 	  return index;
 	}
 
-	var _trimmedEndIndex = trimmedEndIndex;
+	var _trimmedEndIndex = trimmedEndIndex$1;
+
+	var trimmedEndIndex = _trimmedEndIndex;
 
 	/** Used to match leading whitespace. */
 	var reTrimStart = /^\s+/;
@@ -9673,13 +10364,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * @param {string} string The string to trim.
 	 * @returns {string} Returns the trimmed string.
 	 */
-	function baseTrim(string) {
+	function baseTrim$1(string) {
 	  return string
-	    ? string.slice(0, _trimmedEndIndex(string) + 1).replace(reTrimStart, '')
+	    ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '')
 	    : string;
 	}
 
-	var _baseTrim = baseTrim;
+	var _baseTrim = baseTrim$1;
+
+	var baseGetTag = _baseGetTag,
+	    isObjectLike = isObjectLike_1;
 
 	/** `Object#toString` result references. */
 	var symbolTag = '[object Symbol]';
@@ -9701,12 +10395,16 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.isSymbol('abc');
 	 * // => false
 	 */
-	function isSymbol(value) {
+	function isSymbol$1(value) {
 	  return typeof value == 'symbol' ||
-	    (isObjectLike_1(value) && _baseGetTag(value) == symbolTag);
+	    (isObjectLike(value) && baseGetTag(value) == symbolTag);
 	}
 
-	var isSymbol_1 = isSymbol;
+	var isSymbol_1 = isSymbol$1;
+
+	var baseTrim = _baseTrim,
+	    isObject$1 = isObject_1,
+	    isSymbol = isSymbol_1;
 
 	/** Used as references for various `Number` constants. */
 	var NAN = 0 / 0;
@@ -9746,28 +10444,32 @@ var MolaMolaModule = (function (exports, sargasso) {
 	 * _.toNumber('3.2');
 	 * // => 3.2
 	 */
-	function toNumber(value) {
+	function toNumber$1(value) {
 	  if (typeof value == 'number') {
 	    return value;
 	  }
-	  if (isSymbol_1(value)) {
+	  if (isSymbol(value)) {
 	    return NAN;
 	  }
-	  if (isObject_1(value)) {
+	  if (isObject$1(value)) {
 	    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
-	    value = isObject_1(other) ? (other + '') : other;
+	    value = isObject$1(other) ? (other + '') : other;
 	  }
 	  if (typeof value != 'string') {
 	    return value === 0 ? value : +value;
 	  }
-	  value = _baseTrim(value);
+	  value = baseTrim(value);
 	  var isBinary = reIsBinary.test(value);
 	  return (isBinary || reIsOctal.test(value))
 	    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
 	    : (reIsBadHex.test(value) ? NAN : +value);
 	}
 
-	var toNumber_1 = toNumber;
+	var toNumber_1 = toNumber$1;
+
+	var isObject = isObject_1,
+	    now = now_1,
+	    toNumber = toNumber_1;
 
 	/** Error message constants. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -9845,11 +10547,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  if (typeof func != 'function') {
 	    throw new TypeError(FUNC_ERROR_TEXT);
 	  }
-	  wait = toNumber_1(wait) || 0;
-	  if (isObject_1(options)) {
+	  wait = toNumber(wait) || 0;
+	  if (isObject(options)) {
 	    leading = !!options.leading;
 	    maxing = 'maxWait' in options;
-	    maxWait = maxing ? nativeMax(toNumber_1(options.maxWait) || 0, wait) : maxWait;
+	    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
 	    trailing = 'trailing' in options ? !!options.trailing : trailing;
 	  }
 
@@ -9894,7 +10596,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  }
 
 	  function timerExpired() {
-	    var time = now_1();
+	    var time = now();
 	    if (shouldInvoke(time)) {
 	      return trailingEdge(time);
 	    }
@@ -9923,11 +10625,11 @@ var MolaMolaModule = (function (exports, sargasso) {
 	  }
 
 	  function flush() {
-	    return timerId === undefined ? result : trailingEdge(now_1());
+	    return timerId === undefined ? result : trailingEdge(now());
 	  }
 
 	  function debounced() {
-	    var time = now_1(),
+	    var time = now(),
 	        isInvoking = shouldInvoke(time);
 
 	    lastArgs = arguments;
