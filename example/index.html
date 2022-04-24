@@ -71,11 +71,20 @@
 		<pre class="status"></pre>
 	</form>
 
-	<script src="https://cdn.jsdelivr.net/npm/@pelagiccreatures/sargasso/dist/sargasso.iife.js"></script>
-	<script src='/dist/molamola.iife.js'></script>
+	<script async src="https://unpkg.com/es-module-shims@0.13.1/dist/es-module-shims.js"></script>
+	<script type="importmap">
+	{
+		"imports": {
+			"@pelagiccreatures/sargasso": "https://unpkg.com/@pelagiccreatures/sargasso@2.0.0/dist/sargasso.mjs",
+			"@pelagiccreatures/molamola": "/dist/molamola.mjs"
+		}
+	}
+	</script>
 
-	<script defer>
-		class ExampleHelper extends MolaMolaModule.MolaMolaHelper {
+	<script type="module">
+		import { utils } from "@pelagiccreatures/sargasso"
+		import { MolaMolaHelper, molaMolaUtils } from "@pelagiccreatures/molamola"
+		class ExampleHelper extends MolaMolaHelper {
 
 			async preFlight() {
 				return new Promise((accept,reject)=>{
@@ -104,9 +113,9 @@
 			}
 		}
 
-		MolaMolaModule.molaMolaUtils.registerHelperClass('ExampleHelper', ExampleHelper)
+		molaMolaUtils.registerHelperClass('ExampleHelper', ExampleHelper)
 
-		let loadPage = SargassoModule.utils.bootSargasso()
+		let loadPage = utils.bootSargasso()
 	</script>
 
 	<div class="mdc-snackbar">

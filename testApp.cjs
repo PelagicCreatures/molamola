@@ -12,6 +12,15 @@ app.get('/', (req, res) => {
 	})
 })
 
+app.get('/dist/molamola.mjs', (req, res) => {
+	const file = path.join(__dirname, '/dist/molamola.mjs')
+	res.sendFile(file, {
+		headers: {
+			'Content-Type': 'application/javascript'
+		}
+	})
+})
+
 app.get('/dist/molamola.iife.js', (req, res) => {
 	const file = path.join(__dirname, '/dist/molamola.iife.js')
 	res.sendFile(file, {
