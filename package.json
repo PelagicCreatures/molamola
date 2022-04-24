@@ -1,11 +1,20 @@
 {
 	"name": "@pelagiccreatures/molamola",
-	"version": "1.3.0",
+	"version": "2.0.0",
 	"description": "Form Tools",
-	"browser": "index.js",
+	"type": "module",
+	"browser": "dist/molamola.mjs",
+	"targets": {
+		"browser": {
+			"includeNodeModules": {
+				"@pelagiccreatures/sargasso": false
+			}
+		}
+	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "npx rollup --no-treeshake -c rollup.config.js"
+		"build": "npx rollup --no-treeshake -c rollup.config.js",
+		"build-module": "npx parcel build index.mjs"
 	},
 	"repository": {
 		"type": "git",
@@ -18,22 +27,23 @@
 	},
 	"homepage": "https://github.com/PelagicCreatures/molamola#readme",
 	"dependencies": {
-		"@pelagiccreatures/sargasso": "^1.7.0",
+		"@pelagiccreatures/sargasso": "^2.0.0",
 		"lodash": "^4.17.21",
-		"validator": "^13.6.0"
+		"validator": "^13.7.0 "
 	},
 	"devDependencies": {
-		"@rollup/plugin-commonjs": "^19.0.0",
+		"@rollup/plugin-commonjs": "^22.0.0",
 		"@rollup/plugin-json": "^4.1.0",
-		"@rollup/plugin-node-resolve": "^13.0.0",
-		"eslint": "^7.29.0",
-		"eslint-config-standard": "^16.0.3",
-		"eslint-plugin-import": "^2.23.4",
+		"@rollup/plugin-node-resolve": "^13.2.1",
+		"eslint": "^8.14.0",
+		"eslint-config-standard": "^17.0.0",
+		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-node": "^11.1.0",
-		"eslint-plugin-promise": "^5.1.0",
+		"eslint-plugin-promise": "^6.0.0",
 		"eslint-plugin-standard": "^5.0.0",
-		"express": "^4.17.1",
-		"rollup": "^2.52.2",
+		"express": "^4.17.3",
+		"parcel": "^2.5.0",
+		"rollup": "^2.70.2",
 		"rollup-plugin-terser": "^7.0.2"
 	}
 }
