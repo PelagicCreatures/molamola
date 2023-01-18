@@ -9860,7 +9860,7 @@ const $1b6fd1da3aae8eb8$var$extensions = {
             );
             if (element.hasAttribute('multiple')) value = Array.from(values);
             else value = values[0];
-        } else value = element.value;
+        } else value = element.value || "";
     }
     return value;
 };

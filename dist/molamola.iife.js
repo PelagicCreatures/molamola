@@ -10495,7 +10495,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 					value = values[0];
 				}
 			} else {
-				value = element.value;
+				value = element.value || "";
 			}
 		}
 
