@@ -7174,6 +7174,7 @@ class $fd8e19d3df665c5b$export$8aa8137f80f3046b extends $d87ea66fef6f5b0e$export
     constructor(form){
         super(form);
         this.recaptcha = this.form.element.getAttribute('data-recaptcha');
+        this.action = this.form.element.getAttribute('data-recaptcha-action') || 'login';
     }
     pose() {
         $feOm8$utils.elementTools.addClass(document.body, 'show-recaptcha', this);
@@ -7182,7 +7183,7 @@ class $fd8e19d3df665c5b$export$8aa8137f80f3046b extends $d87ea66fef6f5b0e$export
         return new Promise((resolve, reject)=>{
             try {
                 grecaptcha.execute(this.recaptcha, {
-                    action: 'social'
+                    action: this.action
                 }).then((token)=>{
                     this.form.payload['g-recaptcha-response'] = token;
                     resolve();
@@ -7204,7 +7205,7 @@ class $fd8e19d3df665c5b$export$94cc19b4674ae4c extends $d87ea66fef6f5b0e$export$
         this.submitter = this.form.element.querySelector(this.form.element.getAttribute('data-submitter'));
         this.submitterContent = this.submitter.innerHTML;
         this.submitter.style.width = this.submitter.width;
-        this.submitter.setAttribute('disabled', true);
+    // this.submitter.setAttribute('disabled', true) TODO check this (for forms w/no validation maybe better to fix in validate helper?) 
     }
     preFlight() {
         this.disableSubmit();
@@ -10414,7 +10415,9 @@ class $79a35fc84dc376fa$export$c268308decdd4931 extends $feOm8$Sargasso {
                 }
                 return Promise.resolve(response);
             }).then((response)=>{
-                return response.json();
+                if (response.headers.get('Content-Type').includes('application/json')) return response.json();
+                if (response.headers.get('Content-Type').includes('audio/')) return response.blob();
+                return response.text();
             }).then((data)=>{
                 this.tellHelpers('success', [
                     data

@@ -51,6 +51,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 		constructor (form) {
 			super(form);
 			this.recaptcha = this.form.element.getAttribute('data-recaptcha');
+			this.action = this.form.element.getAttribute('data-recaptcha-action') || 'login';
 		}
 
 		pose () {
@@ -61,7 +62,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 			return new Promise((resolve, reject) => {
 				try {
 					grecaptcha.execute(this.recaptcha, {
-						action: 'social'
+						action: this.action
 					}).then((token) => {
 						this.form.payload['g-recaptcha-response'] = token;
 						resolve();
@@ -85,7 +86,7 @@ var MolaMolaModule = (function (exports, sargasso) {
 			this.submitter = this.form.element.querySelector(this.form.element.getAttribute('data-submitter'));
 			this.submitterContent = this.submitter.innerHTML;
 			this.submitter.style.width = this.submitter.width;
-			this.submitter.setAttribute('disabled', true);
+			// this.submitter.setAttribute('disabled', true) TODO check this (for forms w/no validation maybe better to fix in validate helper?) 
 		}
 
 		preFlight () {
@@ -11250,7 +11251,13 @@ var MolaMolaModule = (function (exports, sargasso) {
 						return Promise.resolve(response)
 					})
 					.then((response) => {
-						return response.json()
+						if(response.headers.get('Content-Type').includes('application/json')) {
+							return response.json()
+						}
+						if(response.headers.get('Content-Type').includes('audio/')) {
+							return response.blob()
+						}
+						return response.text()
 					})
 					.then((data) => {
 						this.tellHelpers('success', [data]);
